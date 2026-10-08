@@ -8,7 +8,8 @@ Publicado em https://ludus.avilaops.com enquanto o domínio da Ludus não aponta
 | `/` | Institucional: proposta, linhas, simulador, 3D, como funciona, contato |
 | `/loja/` | Os 94 equipamentos, com busca e filtros por linha e grupo muscular (refletidos na URL) |
 | `/loja/<slug>/` | Página do equipamento: foto, 3D, ficha, planta, cores, relacionados, WhatsApp. Endereço permanente (alvo do QR do catálogo) |
-| `/simulador/` | Planta em escala com arrastar e girar, visão 3D da sala, link compartilhável e pedido de orçamento |
+| `/kits/` e `/kits/<id>/` | Academias de 150, 300 e 600 m² com planta e lista |
+| `/simulador/` | Planta em escala com arrastar, giro livre e encaixe, obstáculos, sugestão de layout, edição no 3D, projetos salvos, PDF e PNG, link compartilhável e pedido de orçamento |
 
 Links antigos do QR (`/?id=LD-B004`) redirecionam para a página do equipamento.
 
@@ -32,8 +33,24 @@ Links antigos do QR (`/?id=LD-B004`) redirecionam para a página do equipamento.
 
 Astro (saída estática), TypeScript, Three.js via gerador 3D, fontes Barlow e Barlow Condensed hospedadas junto. Sem backend: o contato é por WhatsApp e e-mail.
 
+## Configuração por variável de ambiente (no build)
+
+| Variável | Para quê |
+| --- | --- |
+| `PUBLIC_GTM_ID` | ID do Google Tag Manager. Sem ele nada de medição é carregado e o aviso de cookies não aparece. Os eventos (`clique_whatsapp`, `interacao_3d`, `visita_qr`, `envio_formulario`, `abrir_ar`) já vão para `window.dataLayer`. |
+| `PUBLIC_LEAD_ENDPOINT` | Endereço que recebe o formulário (multipart, com a planta). Sem ele o formulário abre o WhatsApp com os dados preenchidos. |
+| `PUBLIC_INDEXAR=1` | Tira o noindex. Usar quando o domínio definitivo estiver no ar (ajustar também `SITE_URL` e `public/robots.txt`). |
+
+Os arquivos de AR (`public/modelos/*.glb` e `*.usdz`) saem do gerador com `npm run modelos` e não ficam no git.
+
+## Publicação automática
+
+O workflow `.github/workflows/ci.yml` checa e faz o build a cada push. Ele publica sozinho se o repositório tiver o segredo `DEPLOY_SSH_KEY`; sem o segredo, a publicação é manual (`npm run deploy`).
+
 ## Pendências conhecidas
 
-- Formulário com envio de planta, analytics (GA4, Pixel) e consentimento de cookies.
-- `sitemap.xml` e remoção do noindex quando o domínio definitivo entrar.
-- Dados "a confirmar" da Ludus.
+- Destino dos leads do formulário (`PUBLIC_LEAD_ENDPOINT`) e ID do Tag Manager.
+- AR não testado em aparelho real.
+- Kits de 300 e 600 m² são composição sugerida, a validar com a Ludus.
+- Endereço, garantia, prazo e pagamento: "a confirmar".
+- Domínio definitivo e remoção do noindex.

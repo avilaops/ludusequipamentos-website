@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ludus.avilaops.com/sitemap-index.xml

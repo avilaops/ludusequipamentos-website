@@ -2,6 +2,7 @@
 import type { ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import logoPreta from '../assets/marca/ludus-preta.png';
 import { empresa, FOLGA, kits, linhas, produtos } from '../data/site';
 
 const fotos = import.meta.glob<{ default: ImageMetadata }>('../assets/produtos/*.jpg', { eager: true });
@@ -10,12 +11,14 @@ const lista = await Promise.all(
     code: p.code,
     nome: p.nome,
     linha: p.linha,
+    grupo: p.grupo_muscular,
     slug: p.slug,
     c: p.dim[0] / 1000,
     l: p.dim[1] / 1000,
     foto: (await getImage({ src: fotos[`../assets/produtos/${p.code}.jpg`].default, width: 120, format: 'webp' })).src,
   }))
 );
+const logoFolha = await getImage({ src: logoPreta, width: 360, format: 'png' });
 const dados = { produtos: lista, kits, folga: FOLGA, whatsapp: empresa.whatsappNumero };
 ---
 
@@ -35,10 +38,14 @@ const dados = { produtos: lista, kits, folga: FOLGA, whatsapp: empresa.whatsappN
     <div class="barra">
       <label>Largura <span><input id="larg" type="number" min="3" max="60" step="0.5" value="15" inputmode="decimal" /> m</span></label>
       <label>Profundidade <span><input id="prof" type="number" min="3" max="60" step="0.5" value="10" inputmode="decimal" /> m</span></label>
+      <label class="proj">Projeto
+        <span><input id="nome" type="text" maxlength="40" placeholder="Nome do projeto" autocomplete="off" /><button type="button" class="chip" id="b-salvar">Salvar</button></span>
+      </label>
       <div class="acoes">
-        <button class="chip" id="b-kit">Começar pelo Kit Studio</button>
-        <button class="chip" id="b-limpar">Limpar</button>
-        <button class="chip" id="b-link">Copiar link do projeto</button>
+        <button type="button" class="chip forte" id="b-sug">Sugerir layout</button>
+        <button type="button" class="chip" id="b-kit">Começar pelo Kit Studio</button>
+        <button type="button" class="chip" id="b-limpar">Limpar</button>
+        <button type="button" class="chip" id="b-link">Copiar link do projeto</button>
       </div>
     </div>
 
@@ -46,29 +53,67 @@ const dados = { produtos: lista, kits, folga: FOLGA, whatsapp: empresa.whatsappN
       <aside class="cat" aria-label="Equipamentos para adicionar">
         <input type="search" id="q" placeholder="Buscar equipamento" aria-label="Buscar equipamento" />
         <div class="chips" id="linhas">
-          <button class="chip sm" data-v="" aria-pressed="true">Todos</button>
-          {linhas.map((l) => <button class="chip sm" data-v={l.id} aria-pressed="false">{l.titulo}</button>)}
+          <button type="button" class="chip sm" data-v="" aria-pressed="true">Todos</button>
+          {linhas.map((l) => <button type="button" class="chip sm" data-v={l.id} aria-pressed="false">{l.titulo}</button>)}
         </div>
         <ul id="lista"></ul>
       </aside>
 
-      <div class="palco">
-        <div class="modo" role="tablist" aria-label="Planta ou 3D">
-          <button class="chip on" data-modo="planta" role="tab" aria-selected="true">Planta</button>
-          <button class="chip" data-modo="3d" role="tab" aria-selected="false">Ver em 3D</button>
+      <div class="palco" id="palco">
+        <div class="topo">
+          <div class="modo" role="tablist" aria-label="Planta ou 3D">
+            <button type="button" class="chip on" data-modo="planta" role="tab" aria-selected="true">Planta</button>
+            <button type="button" class="chip" data-modo="3d" role="tab" aria-selected="false">Ver em 3D</button>
+          </div>
+          <div class="obst" id="grupo-obst" role="group" aria-label="Adicionar obstáculo da sala">
+            <span>Obstáculos</span>
+            <button type="button" class="chip sm" data-obst="pilar" aria-label="Adicionar pilar">+ Pilar</button>
+            <button type="button" class="chip sm" data-obst="porta" aria-label="Adicionar porta">+ Porta</button>
+            <button type="button" class="chip sm" data-obst="bloco" aria-label="Adicionar área bloqueada">+ Área bloqueada</button>
+          </div>
+          <p class="obst" id="dica-3d" hidden>Toque num equipamento e arraste para mover. Arraste o fundo para girar a vista.</p>
         </div>
         <div class="tela">
-          <svg id="planta" role="application" aria-label="Planta da sala. Arraste os equipamentos para posicionar."></svg>
-          <div id="cena" hidden></div>
+          <svg id="planta" role="application" aria-label="Planta da sala. Arraste os equipamentos e os obstáculos para posicionar."></svg>
+          <div id="cena" tabindex="0" role="application" aria-label="Sala em 3D. Clique num equipamento para selecionar e arraste para mover." hidden></div>
           <p class="dica" id="dica">Adicione um equipamento da lista para começar.</p>
         </div>
+        <p class="status" id="status" role="status" aria-live="polite" hidden></p>
         <div class="sel" id="sel" hidden>
           <b id="sel-nome"></b>
-          <button class="chip sm" id="b-girar">Girar 90°</button>
-          <button class="chip sm" id="b-dup">Duplicar</button>
-          <button class="chip sm" id="b-rem">Remover</button>
-          <a class="chip sm" id="b-ver" target="_blank" rel="noopener">Ver ficha</a>
+          <div class="grupo" role="group" aria-label="Girar o equipamento">
+            <button type="button" class="chip sm" id="b-girar-menos" aria-label="Girar 15 graus para a esquerda">Girar −15°</button>
+            <button type="button" class="chip sm" id="b-girar-mais" aria-label="Girar 15 graus para a direita">Girar +15°</button>
+            <button type="button" class="chip sm" id="b-girar" aria-label="Girar 90 graus">Girar 90°</button>
+          </div>
+          <div class="grupo">
+            <button type="button" class="chip sm" id="b-dup">Duplicar</button>
+            <button type="button" class="chip sm" id="b-rem">Remover</button>
+            <a class="chip sm" id="b-ver" target="_blank" rel="noopener">Ver ficha</a>
+          </div>
         </div>
+        <div class="sel" id="sel-obst" hidden>
+          <b id="obst-nome"></b>
+          <div class="grupo">
+            <label><span id="o-larg-rot">Largura</span> <input id="o-larg" type="number" min="0.1" max="60" step="0.1" inputmode="decimal" /> m</label>
+            <label id="o-prof-campo">Profundidade <input id="o-prof" type="number" min="0.1" max="60" step="0.1" inputmode="decimal" /> m</label>
+            <button type="button" class="chip sm" id="b-rem-obst">Remover</button>
+          </div>
+          <small id="obst-nota"></small>
+        </div>
+        <details class="atalhos">
+          <summary>Atalhos de teclado</summary>
+          <ul>
+            <li><kbd>Tab</kbd> percorre equipamentos e obstáculos da planta</li>
+            <li><kbd>←</kbd> <kbd>↑</kbd> <kbd>↓</kbd> <kbd>→</kbd> movem 10 cm (com <kbd>Shift</kbd>, 50 cm)</li>
+            <li><kbd>R</kbd> gira 90°</li>
+            <li><kbd>Q</kbd> e <kbd>E</kbd> giram 15° para a esquerda e para a direita</li>
+            <li><kbd>D</kbd> duplica o equipamento</li>
+            <li><kbd>Delete</kbd> remove o selecionado</li>
+            <li><kbd>Esc</kbd> tira a seleção</li>
+            <li>Segurar <kbd>Alt</kbd> ao arrastar desliga o encaixe</li>
+          </ul>
+        </details>
       </div>
 
       <aside class="res" aria-label="Resumo do projeto">
@@ -82,9 +127,54 @@ const dados = { produtos: lista, kits, folga: FOLGA, whatsapp: empresa.whatsappN
         <p class="aviso" id="aviso" hidden></p>
         <ol id="itens"></ol>
         <a class="btn wa" id="b-wa" target="_blank" rel="noopener">Pedir orçamento deste projeto</a>
+        <div class="exportar">
+          <button type="button" class="chip" id="b-pdf">Baixar PDF da planta</button>
+          <button type="button" class="chip" id="b-png">Baixar imagem (PNG)</button>
+        </div>
+        <details class="salvos">
+          <summary>Projetos salvos (<span id="n-projetos">0</span>)</summary>
+          <ul id="projetos"></ul>
+        </details>
         <p class="nota">O pedido abre o WhatsApp da Ludus com a lista dos equipamentos e o link da sua planta. Modelos 3D representativos; a Ludus confere o layout na planta real antes de fechar.</p>
       </aside>
     </div>
+  </section>
+
+  <dialog id="dlg-sug" aria-labelledby="sug-titulo">
+    <form id="form-sug" method="dialog">
+      <h2 id="sug-titulo">Sugerir layout</h2>
+      <p>O simulador escolhe os equipamentos para a sua sala (<span id="sug-area"></span>) e posiciona tudo, respeitando a folga de circulação, os obstáculos e as portas.</p>
+      <fieldset>
+        <legend>Perfil da academia</legend>
+        <label><input type="radio" name="perfil" value="studio" /> <span><b>Studio compacto</b><small>Máquinas de bateria de pesos, troca de carga rápida</small></span></label>
+        <label><input type="radio" name="perfil" value="completa" checked /> <span><b>Musculação completa</b><small>Bateria nas paredes, peso livre e bancos no meio</small></span></label>
+        <label><input type="radio" name="perfil" value="livre" /> <span><b>Foco em peso livre</b><small>Máquinas articuladas com anilhas e mais bancos</small></span></label>
+      </fieldset>
+      <div class="dlg-acoes">
+        <button type="button" class="chip" id="sug-cancelar">Cancelar</button>
+        <button type="submit" class="btn sm" id="sug-ok">Gerar layout</button>
+      </div>
+    </form>
+  </dialog>
+
+  <section id="folha" aria-hidden="true">
+    <header>
+      <img src={logoFolha.src} alt="" width="120" height="35" />
+      <h1>Ludus Equipamentos · Projeto <span id="f-nome"></span></h1>
+      <p id="f-data"></p>
+    </header>
+    <div class="f-corpo">
+      <div id="f-planta"></div>
+      <div class="f-lado">
+        <dl id="f-resumo"></dl>
+        <ol id="f-legenda"></ol>
+      </div>
+    </div>
+    <footer>
+      <span>WhatsApp {empresa.whatsapp}</span>
+      <span>{empresa.email}</span>
+      <span>Planta em escala, malha de 1 m. Layout sujeito à conferência na planta real.</span>
+    </footer>
   </section>
 
   <script type="application/json" id="dados" set:html={JSON.stringify(dados)} />
@@ -119,10 +209,9 @@ const dados = { produtos: lista, kits, folga: FOLGA, whatsapp: empresa.whatsappN
   .tela { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 10px; }
   #planta { width: 100%; height: auto; display: block; touch-action: none; user-select: none; max-height: 72vh; }
   #cena { aspect-ratio: 3 / 2; border-radius: 12px; overflow: hidden; background: var(--stage); }
-  #cena :global(canvas) { width: 100%; height: 100%; display: block; cursor: grab; }
-  .dica { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); background: rgba(255, 255, 255, 0.9); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 13px; color: var(--muted); pointer-events: none; white-space: nowrap; }
+  #cena :global(canvas) { width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
+  .dica { position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); background: rgba(255, 255, 255, 0.9); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: 13px; color: var(--muted); pointer-events: none; text-align: center; max-width: calc(100% - 24px); width: max-content; }
   .sel { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px; }
-  .sel b { margin-right: auto; }
   .chip.sm { padding: 8px 13px; font-size: 13px; }
   .res h2 { font-size: 28px; }
   .res dl { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -135,18 +224,55 @@ const dados = { produtos: lista, kits, folga: FOLGA, whatsapp: empresa.whatsappN
   .res .btn { width: 100%; }
   .nota { font-size: 12px; color: var(--muted); line-height: 1.45; }
 
-  #planta :global(.parede) { fill: #141413; }
-  #planta :global(.piso) { fill: #fbfaf7; }
-  #planta :global(.grade) { stroke: #ebe8e1; stroke-width: 0.012; }
-  #planta :global(.zona) { fill: #ebe4d7; }
-  #planta :global(.item) { cursor: grab; }
-  #planta :global(.item .corpo) { fill: transparent; }
-  #planta :global(.item polygon), #planta :global(.item .bloco) { fill: #141413; }
-  #planta :global(.item.ruim polygon), #planta :global(.item.ruim .bloco) { fill: #c0392b; }
-  #planta :global(.item.sel .corpo) { stroke: #96764a; stroke-width: 0.05; stroke-dasharray: 0.12 0.08; }
-  #planta :global(.dot) { fill: #fff; stroke: #141413; stroke-width: 0.03; }
-  #planta :global(.n) { font: 600 0.26px Barlow, sans-serif; text-anchor: middle; fill: #141413; pointer-events: none; }
-  #planta :global(.cota) { font: 500 0.3px Barlow, sans-serif; text-anchor: middle; fill: #6d6a63; }
+  /* Os estilos do desenho da planta ficam dentro do próprio SVG (simulador.ts), para valerem no PDF e no PNG. */
+  .barra .proj { flex: 1 1 260px; max-width: 420px; }
+  .barra .proj span { display: flex; gap: 8px; align-items: center; }
+  .barra #nome { flex: 1 1 auto; width: auto; min-width: 0; font-weight: 500; font-size: 16px; padding: 11px 12px; }
+  .chip.forte { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  .topo { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; }
+  .obst { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 13px; color: var(--muted); }
+  .obst[hidden] { display: none; }
+  .obst span { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; margin-right: 2px; }
+  .status { background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 12px; padding: 9px 14px; font-size: 14px; }
+  .sel[hidden] { display: none; }
+  .sel .grupo { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .sel b { flex: 1 1 180px; font-size: 15px; line-height: 1.25; }
+  .sel label { font-size: 13px; color: var(--muted); display: inline-flex; align-items: center; gap: 6px; }
+  .sel label[hidden] { display: none; }
+  .sel input { font: 600 15px/1 var(--body); width: 74px; padding: 7px 8px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); }
+  .sel small { flex-basis: 100%; font-size: 12px; color: var(--muted); }
+  .sel small:empty { display: none; }
+  .atalhos, .salvos { font-size: 13px; color: var(--muted); }
+  .atalhos summary, .salvos summary { cursor: pointer; font-weight: 600; color: var(--ink); padding: 6px 2px; width: fit-content; border-radius: 8px; }
+  .atalhos ul { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 6px 18px; padding: 8px 2px; }
+  kbd { font: 600 12px/1 var(--body); background: var(--surface); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 6px; padding: 3px 6px; color: var(--ink); }
+  .exportar { display: flex; flex-wrap: wrap; gap: 8px; }
+  .exportar .chip { flex: 1 1 130px; text-align: center; }
+  .salvos :global(ul) { list-style: none; display: grid; gap: 8px; padding-top: 6px; max-height: 280px; overflow: auto; }
+  .salvos :global(li) { border: 1px solid var(--line); border-radius: 12px; padding: 10px; display: grid; gap: 8px; }
+  .salvos :global(li.vazio) { border-style: dashed; }
+  .salvos :global(li b) { display: block; color: var(--ink); font-size: 14px; overflow-wrap: anywhere; }
+  .salvos :global(li small) { font-size: 12px; }
+  .salvos :global(.pa) { display: flex; flex-wrap: wrap; gap: 6px; }
+  .salvos :global(.pa .chip) { padding: 7px 11px; font-size: 12px; }
+  #cena:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  #cena :global(.espera) { padding: 24px; color: var(--muted); font-size: 14px; }
+
+  dialog { border: 1px solid var(--line); border-radius: 18px; padding: 0; width: min(460px, calc(100vw - 24px)); margin: auto; background: var(--surface); color: var(--ink); }
+  dialog::backdrop { background: rgba(20, 20, 19, 0.55); }
+  dialog form { display: grid; gap: 14px; padding: 22px; }
+  dialog h2 { font-size: 30px; }
+  dialog p { font-size: 14px; color: var(--muted); line-height: 1.45; }
+  dialog fieldset { border: 0; display: grid; gap: 8px; }
+  dialog legend { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin-bottom: 8px; }
+  dialog fieldset label { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; border: 1px solid var(--line); border-radius: 12px; padding: 11px 12px; cursor: pointer; }
+  dialog fieldset label:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+  dialog fieldset input { margin-top: 4px; accent-color: var(--accent); }
+  dialog fieldset b { display: block; font-size: 15px; line-height: 1.2; }
+  dialog fieldset small { display: block; font-size: 12.5px; line-height: 1.35; margin-top: 3px; color: var(--muted); }
+  .dlg-acoes { display: flex; justify-content: flex-end; gap: 8px; flex-wrap: wrap; }
+
+  #folha { display: none; }
 
   @media (max-width: 1180px) {
     .area { grid-template-columns: 260px minmax(0, 1fr); }
@@ -157,5 +283,57 @@ const dados = { produtos: lista, kits, folga: FOLGA, whatsapp: empresa.whatsappN
     .palco { order: -1; }
     .cat :global(ul) { max-height: 300px; }
     .acoes { margin-left: 0; }
+  }
+  @media (max-width: 760px) {
+    .barra { gap: 12px 14px; }
+    .barra .proj { flex-basis: 100%; max-width: none; }
+    .acoes .chip { flex: 1 1 auto; text-align: center; }
+    #cena { aspect-ratio: 4 / 5; }
+    .sel b { flex-basis: 100%; }
+    .sel .chip.sm { padding: 10px 12px; }
+  }
+
+  /* Impressão: só a folha do projeto, em A4 paisagem. */
+  @page { size: A4 landscape; margin: 9mm; }
+  @media print {
+    :global(.top), :global(.foot), .cab, .sim, dialog { display: none !important; }
+    :global(html), :global(body) { background: #fff !important; }
+    #folha { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; gap: 4mm; height: 190mm; width: 100%; color: #141413; font-family: var(--body); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    #folha header { display: flex; align-items: center; gap: 5mm; border-bottom: 0.5mm solid #141413; padding-bottom: 3mm; }
+    #folha header img { height: 9mm; width: auto; }
+    #folha h1 { font-size: 20pt; text-transform: uppercase; flex: 1; overflow-wrap: anywhere; }
+    #folha header p { font-size: 10pt; color: #55524c; white-space: nowrap; }
+    .f-corpo { display: grid; grid-template-columns: minmax(0, 1fr) 78mm; gap: 6mm; min-height: 0; }
+    #f-planta { min-height: 0; min-width: 0; display: flex; }
+    #f-planta :global(svg) { width: 100%; height: 100%; }
+    .f-lado { display: grid; grid-template-rows: auto minmax(0, 1fr); gap: 4mm; min-height: 0; }
+    #f-resumo { display: grid; gap: 1mm; font-size: 9.5pt; border: 0.3mm solid #cfcac0; border-radius: 2mm; padding: 3mm; }
+    #f-resumo :global(div) { display: flex; justify-content: space-between; gap: 3mm; }
+    #f-resumo :global(dt) { color: #55524c; }
+    #f-resumo :global(dd) { font-weight: 600; text-align: right; }
+    #f-legenda { list-style: none; font-size: 8.5pt; line-height: 1.25; overflow: hidden; column-count: 1; column-gap: 4mm; }
+    #f-legenda :global(li) { display: grid; grid-template-columns: 5mm 13mm 1fr; gap: 1mm; padding: 0.55mm 0; border-bottom: 0.15mm solid #e2dfd8; break-inside: avoid; }
+    #f-legenda :global(li span) { font-weight: 700; color: #96764a; }
+    #f-legenda :global(li small) { color: #55524c; }
+    #f-legenda :global(li b) { font-weight: 500; }
+    /* Legendas longas: mais colunas, letra menor e coluna lateral mais larga. */
+    #folha[data-tam='m'] .f-corpo { grid-template-columns: minmax(0, 1fr) 100mm; }
+    #folha[data-tam='p'] .f-corpo { grid-template-columns: minmax(0, 1fr) 112mm; }
+    #f-legenda[data-tam='m'] { font-size: 7pt; column-count: 2; column-gap: 3mm; }
+    #f-legenda[data-tam='p'] { font-size: 5.8pt; column-count: 3; column-gap: 2.5mm; }
+    #f-legenda[data-tam='m'] :global(li) { grid-template-columns: 4mm 10.5mm 1fr; gap: 0.6mm; padding: 0.4mm 0; }
+    #f-legenda[data-tam='p'] :global(li) { grid-template-columns: 3.4mm 8.6mm 1fr; gap: 0.5mm; padding: 0.3mm 0; }
+    /* Acima de 80 itens a legenda ocupa a segunda página inteira. */
+    #folha[data-longa] { display: block; height: auto; }
+    #folha[data-longa] header { margin-bottom: 4mm; }
+    #folha[data-longa] .f-corpo { display: block; }
+    #folha[data-longa] #f-planta { height: 132mm; }
+    #folha[data-longa] .f-lado { display: block; }
+    #folha[data-longa] #f-resumo { grid-template-columns: repeat(5, auto); gap: 6mm; margin: 4mm 0; }
+    #folha[data-longa] #f-legenda { break-before: page; overflow: visible; column-count: 4; font-size: 7pt; margin-bottom: 5mm; }
+    #folha[data-longa] #f-legenda :global(li) { grid-template-columns: 6mm 11mm 1fr; }
+    #folha footer { display: flex; flex-wrap: wrap; gap: 2mm 8mm; font-size: 9pt; border-top: 0.3mm solid #cfcac0; padding-top: 2.5mm; }
+    #folha footer span:nth-child(-n + 2) { font-weight: 600; }
+    #folha footer span:last-child { color: #55524c; margin-left: auto; }
   }
 </style>

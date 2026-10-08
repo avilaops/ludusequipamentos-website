@@ -1,0 +1,80 @@
+---
+import Base from '../../layouts/Base.astro';
+import PlantaKit from '../../components/PlantaKit.astro';
+import { FOLGA, fmt, kits, porCodigo, whatsapp, type Kit } from '../../data/site';
+
+export function getStaticPaths() {
+  return kits.map((kit) => ({ params: { id: kit.id }, props: { kit } }));
+}
+const { kit } = Astro.props as { kit: Kit };
+const area = kit.largura * kit.profundidade;
+const ocupado = kit.itens.reduce((a, i) => {
+  const p = porCodigo.get(i.code)!;
+  return a + (p.dim[0] / 1000) * (p.dim[1] / 1000);
+}, 0);
+const lista = kit.itens.map((i, k) => ({ n: k + 1, p: porCodigo.get(i.code)! }));
+const wa = whatsapp(`Olá! Quero um orçamento do ${kit.nome} (${kit.itens.length} equipamentos) que vi no site.`);
+---
+
+<Base title={`${kit.nome} · Ludus Equipamentos`} description={kit.resumo}>
+  <article class="wrap kit">
+    <nav class="crumb" aria-label="Você está em"><a href="/kits/">Kits prontos</a> / {kit.nome.split(' · ')[0]}</nav>
+    <header>
+      <div>
+        <span class="kicker">{kit.nome.split(' · ')[0]}</span>
+        <h1>{kit.titulo}</h1>
+        <p class="lead">{kit.resumo}</p>
+        <div class="cta">
+          <a class="btn" href={`/simulador/?kit=${kit.id}`}>Abrir no simulador</a>
+          <a class="btn wa" href={wa} target="_blank" rel="noopener" data-wa={`kit-${kit.id}`}>Pedir orçamento do kit</a>
+        </div>
+      </div>
+      <dl>
+        <div><dt>{kit.itens.length}</dt><dd>equipamentos</dd></div>
+        <div><dt>{fmt(area, 0)} m²</dt><dd>{kit.largura} × {kit.profundidade} m</dd></div>
+        <div><dt>{fmt(ocupado, 0)} m²</dt><dd>ocupados pelas máquinas</dd></div>
+      </dl>
+    </header>
+
+    <div class="planta"><PlantaKit kit={kit} /></div>
+    <p class="nota">
+      Planta gerada com a silhueta de cada equipamento em escala e {FOLGA * 100} cm de área de treino em volta. A Ludus entrega este estudo adaptado à planta real do cliente.
+      {kit.sugerido && <> Composição sugerida a partir do catálogo: <span class="tbd">a validar com a Ludus</span>.</>}
+    </p>
+
+    <ol class="itens">
+      {
+        lista.map(({ n, p }) => (
+          <li>
+            <span class="n">{n}</span>
+            <a href={`/loja/${p.slug}/`}><b>{p.nome}</b> <small>{p.code}</small></a>
+            <span class="g">{p.grupo_muscular}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </article>
+</Base>
+
+<style>
+  .kit { padding-block: 20px 96px; }
+  .crumb { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); padding-block: 8px 20px; }
+  .crumb a { text-decoration: none; }
+  header { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr); gap: 32px; align-items: end; margin-bottom: 28px; }
+  header > div { display: grid; gap: 14px; }
+  h1 { font-size: clamp(42px, 6.5vw, 80px); }
+  .cta { display: flex; flex-wrap: wrap; gap: 10px; }
+  dl { display: grid; gap: 14px; border-left: 1px solid var(--line); padding-left: 24px; }
+  dt { font: 700 34px/1 var(--display); }
+  dd { font-size: 13px; color: var(--muted); }
+  .planta { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: clamp(10px, 2vw, 24px); }
+  .nota { font-size: 13px; color: var(--muted); margin-top: 12px; max-width: 80ch; }
+  .itens { list-style: none; columns: 3 260px; column-gap: 32px; margin-top: 32px; }
+  .itens li { display: grid; grid-template-columns: 30px 1fr auto; gap: 8px; padding: 9px 0; border-bottom: 1px solid var(--line); break-inside: avoid; align-items: baseline; }
+  .itens a { text-decoration: none; }
+  .itens a:hover b { text-decoration: underline; }
+  .itens small { color: var(--accent); font-weight: 600; letter-spacing: 0.06em; }
+  .n { color: var(--accent); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .g { font-size: 12px; color: var(--muted); }
+  @media (max-width: 800px) { header { grid-template-columns: 1fr; } dl { border-left: 0; padding-left: 0; grid-template-columns: repeat(3, auto); justify-content: start; gap: 24px; } }
+</style>

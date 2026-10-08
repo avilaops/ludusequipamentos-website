@@ -1,0 +1,84 @@
+---
+import { empresa } from '../data/site';
+// Endpoint que recebe o formulário (multipart, com a planta). Sem ele, o envio abre o WhatsApp com os dados.
+const endpoint = import.meta.env.PUBLIC_LEAD_ENDPOINT ?? '';
+---
+
+<form class="form" id="contato-form" data-endpoint={endpoint} data-whatsapp={empresa.whatsappNumero} novalidate>
+  <div class="lin">
+    <label>Nome<input name="nome" autocomplete="name" required /></label>
+    <label>WhatsApp<input name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" placeholder="(00) 00000-0000" required /></label>
+  </div>
+  <div class="lin">
+    <label>E-mail<input name="email" type="email" autocomplete="email" /></label>
+    <label>Cidade e estado<input name="cidade" autocomplete="address-level2" /></label>
+  </div>
+  <div class="lin">
+    <label>Tipo de espaço
+      <select name="tipo">
+        <option>Academia</option>
+        <option>Estúdio</option>
+        <option>Condomínio</option>
+        <option>Clube ou hotel</option>
+        <option>Outro</option>
+      </select>
+    </label>
+    <label>Área aproximada (m²)<input name="area" type="number" min="10" max="5000" inputmode="numeric" /></label>
+  </div>
+  <label>O que você precisa<textarea name="mensagem" placeholder="Ex.: sala de 12 × 9 m, foco em musculação, abertura em março."></textarea></label>
+  {endpoint && <label>Planta do espaço (PDF, DWG ou imagem, até 10 MB)<input name="planta" type="file" accept=".pdf,.dwg,.dxf,image/*" /></label>}
+  <input class="hp" name="site" tabindex="-1" autocomplete="off" aria-hidden="true" />
+  <button class="btn" type="submit">{endpoint ? 'Enviar para a Ludus' : 'Enviar pelo WhatsApp'}</button>
+  {!endpoint && <p class="nota" style="font-size:13px;color:var(--muted)">O envio abre o WhatsApp da Ludus com os dados preenchidos. Se tiver a planta, mande na mesma conversa.</p>}
+  <p class="ret" id="contato-ret" hidden aria-live="polite"></p>
+</form>
+
+<script>
+  const form = document.getElementById('contato-form') as HTMLFormElement | null;
+  const ret = document.getElementById('contato-ret')!;
+  const avisar = (texto: string, erro = false) => {
+    ret.hidden = false;
+    ret.textContent = texto;
+    ret.classList.toggle('erro', erro);
+  };
+  form?.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    const d = new FormData(form);
+    if (d.get('site')) return; // isca para robôs
+    const nome = String(d.get('nome') ?? '').trim();
+    const fone = String(d.get('whatsapp') ?? '').replace(/\D/g, '');
+    if (nome.length < 2 || fone.length < 10) return avisar('Informe seu nome e um WhatsApp com DDD.', true);
+    const planta = d.get('planta');
+    if (planta instanceof File && planta.size > 10 * 1024 * 1024) return avisar('A planta passa de 10 MB. Envie um arquivo menor.', true);
+    const w = window as unknown as { ludusEvento?: (e: string, d?: object) => void };
+    if (form.dataset.endpoint) {
+      const botao = form.querySelector('button')!;
+      botao.disabled = true;
+      try {
+        const r = await fetch(form.dataset.endpoint, { method: 'POST', body: d });
+        if (!r.ok) throw new Error(String(r.status));
+        form.reset();
+        avisar('Recebido. A Ludus responde pelo WhatsApp informado.');
+        w.ludusEvento?.('envio_formulario', { canal: 'site' });
+      } catch {
+        avisar('Não foi possível enviar agora. Tente de novo ou chame no WhatsApp.', true);
+      } finally {
+        botao.disabled = false;
+      }
+      return;
+    }
+    const linhas = [
+      'Olá! Quero um orçamento da Ludus.',
+      '',
+      `Nome: ${nome}`,
+      `WhatsApp: ${d.get('whatsapp')}`,
+      d.get('email') ? `E-mail: ${d.get('email')}` : '',
+      d.get('cidade') ? `Cidade: ${d.get('cidade')}` : '',
+      `Espaço: ${d.get('tipo')}${d.get('area') ? `, ${d.get('area')} m²` : ''}`,
+      d.get('mensagem') ? `\n${d.get('mensagem')}` : '',
+    ].filter((l, i) => l || i === 1);
+    w.ludusEvento?.('envio_formulario', { canal: 'whatsapp' });
+    window.open(`https://wa.me/${form.dataset.whatsapp}?text=${encodeURIComponent(linhas.join('\n'))}`, '_blank', 'noopener');
+    avisar('Abrimos o WhatsApp com os seus dados. É só enviar a mensagem.');
+  });
+</script>

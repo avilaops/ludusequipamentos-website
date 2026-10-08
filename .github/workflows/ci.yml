@@ -1,0 +1,51 @@
+name: CI e deploy
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run modelos
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: dist
+          retention-days: 3
+
+  # Publica em ludus.avilaops.com a cada push na main. Só roda se o repositório tiver
+  # o segredo DEPLOY_SSH_KEY (chave com acesso ao servidor "applications").
+  deploy:
+    needs: build
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    env:
+      DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+      DEPLOY_HOST: ${{ vars.DEPLOY_HOST || '178.105.82.48' }}
+    steps:
+      - name: Sem chave de deploy, nada a publicar
+        if: env.DEPLOY_SSH_KEY == ''
+        run: echo "Segredo DEPLOY_SSH_KEY ausente; publicação manual com npm run deploy."
+      - uses: actions/download-artifact@v4
+        if: env.DEPLOY_SSH_KEY != ''
+        with:
+          name: site
+          path: dist
+      - name: Enviar para o servidor
+        if: env.DEPLOY_SSH_KEY != ''
+        run: |
+          mkdir -p ~/.ssh
+          echo "$DEPLOY_SSH_KEY" > ~/.ssh/deploy && chmod 600 ~/.ssh/deploy
+          ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+          DIR=/var/www/ludus.avilaops.com
+          tar -C dist -cf - . | ssh -i ~/.ssh/deploy "root@$DEPLOY_HOST" "mkdir -p $DIR.novo && tar -C $DIR.novo -xf - && rm -rf $DIR && mv $DIR.novo $DIR"
+          curl -fsS -o /dev/null https://ludus.avilaops.com/

@@ -6,6 +6,7 @@ set -euo pipefail
 HOST="${DEPLOY_HOST:-applications}"
 DIR=/var/www/ludus.avilaops.com
 
+[ -d public/modelos ] || bash scripts/modelos.sh
 npx astro build
 tar -C dist -cf - . | ssh -o BatchMode=yes "$HOST" "mkdir -p $DIR.novo && tar -C $DIR.novo -xf - && rm -rf $DIR && mv $DIR.novo $DIR"
 for path in / /loja/ /simulador/; do

@@ -22,6 +22,8 @@ const path = Astro.url.pathname;
 const logo = await getImage({ src: logoBranca, width: 360, format: 'webp' });
 const icon = await getImage({ src: capacete, width: 96, format: 'png' });
 const wa = whatsapp('Olá! Vim pelo site da Ludus e quero um orçamento.');
+const indexar = import.meta.env.PUBLIC_INDEXAR === '1';
+const gtm = import.meta.env.PUBLIC_GTM_ID ?? '';
 const org = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -42,8 +44,8 @@ const org = {
     <link rel="canonical" href={canonical} />
     <link rel="icon" href={icon.src} />
     <meta name="theme-color" content="#111110" />
-    <!-- Pré-visualização em endereço provisório: fora dos buscadores até o domínio definitivo. -->
-    <meta name="robots" content="noindex, nofollow" />
+    {/* Endereço provisório fica fora dos buscadores. PUBLIC_INDEXAR=1 libera quando o domínio definitivo entrar. */}
+    {!indexar && <meta name="robots" content="noindex, nofollow" />}
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -63,6 +65,7 @@ const org = {
         <nav id="menu">
           <a href="/loja/" aria-current={path.startsWith('/loja') ? 'page' : undefined}>Loja</a>
           <a href="/simulador/" aria-current={path.startsWith('/simulador') ? 'page' : undefined}>Simulador</a>
+          <a href="/kits/" aria-current={path.startsWith('/kits') ? 'page' : undefined}>Kits</a>
           <a href="/#como-funciona">Como funciona</a>
           <a href="/#contato">Contato</a>
           <a class="btn wa" href={wa} target="_blank" rel="noopener" data-wa="menu">Pedir orçamento</a>
@@ -83,6 +86,7 @@ const org = {
             <h4>Site</h4>
             <a href="/loja/">Loja</a>
             <a href="/simulador/">Simulador de academia</a>
+            <a href="/kits/">Kits prontos</a>
             <a href="/#como-funciona">Como funciona</a>
           </div>
           <div>
@@ -93,10 +97,56 @@ const org = {
         </div>
         <div class="fine">
           <span>© {new Date().getFullYear()} {empresa.nome}</span>
-          <span>CNPJ e endereço: <span class="tbd">a confirmar</span></span>
+          <span>{empresa.razaoSocial} · CNPJ {empresa.cnpj} · IE {empresa.inscricaoEstadual}</span>
+          <span>Endereço: <span class="tbd">a confirmar</span></span>
         </div>
       </div>
     </footer>
+
+    <div class="cookies" id="cookies" hidden role="dialog" aria-label="Cookies de medição">
+      <p>Usamos cookies de medição para saber quais equipamentos interessam mais e melhorar o site. Você pode aceitar ou recusar.</p>
+      <div>
+        <button class="btn sm ghost" data-cookies="nao">Recusar</button>
+        <button class="btn sm" data-cookies="sim">Aceitar</button>
+      </div>
+    </div>
+
+    <script is:inline define:vars={{ gtm }}>
+      // Eventos do site ficam em window.dataLayer. O Tag Manager só é carregado com um
+      // ID configurado (PUBLIC_GTM_ID) e depois do aceite de cookies.
+      window.dataLayer = window.dataLayer || [];
+      window.ludusEvento = (evento, dados) => window.dataLayer.push({ event: evento, ...(dados || {}) });
+      const carregar = () => {
+        if (!gtm || window.__gtm) return;
+        window.__gtm = true;
+        window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+        const s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtm.js?id=' + gtm;
+        document.head.appendChild(s);
+      };
+      let escolha = null;
+      try { escolha = localStorage.getItem('ludus-cookies'); } catch {}
+      const aviso = document.getElementById('cookies');
+      if (escolha === 'sim') carregar();
+      else if (!escolha && gtm) aviso.hidden = false;
+      aviso.querySelectorAll('[data-cookies]').forEach((b) =>
+        b.addEventListener('click', () => {
+          try { localStorage.setItem('ludus-cookies', b.dataset.cookies); } catch {}
+          aviso.hidden = true;
+          if (b.dataset.cookies === 'sim') carregar();
+        })
+      );
+      document.addEventListener('click', (ev) => {
+        const a = ev.target.closest && ev.target.closest('[data-wa]');
+        if (a) window.ludusEvento('clique_whatsapp', { origem: a.dataset.wa });
+      });
+      document.addEventListener('ludus:3d', (ev) => {
+        const art = ev.target.closest && ev.target.closest('[data-code]');
+        window.ludusEvento('interacao_3d', { codigo: art ? art.dataset.code : '' });
+      });
+      if (new URLSearchParams(location.search).get('origem') === 'catalogo') window.ludusEvento('visita_qr', { pagina: location.pathname });
+    </script>
 
     <script>
       const btn = document.querySelector<HTMLButtonElement>('.menu-btn');

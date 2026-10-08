@@ -1,18 +1,27 @@
 ---
 import { spec } from '../data/modelos';
+import { coresBraco, coresEstrutura } from '../data/site';
 
 interface Props {
   code: string;
   /** Carrega assim que a página abre (padrão: só quando entra na tela). */
   eager?: boolean;
+  /** Mostra as amostras de cor do catálogo para trocar no modelo. */
+  cores?: boolean;
 }
-const { code, eager = false } = Astro.props;
+const { code, eager = false, cores = false } = Astro.props;
 const dados = spec(code);
+const paleta = cores
+  ? {
+      frame: { label: 'Estrutura', options: coresEstrutura },
+      accent: { label: 'Braços', options: coresBraco },
+    }
+  : null;
 ---
 
 {
   dados && (
-    <div class="v3d" data-v3d data-eager={eager ? '1' : undefined} data-spec={JSON.stringify(dados)}>
+    <div class="v3d" data-v3d data-eager={eager ? '1' : undefined} data-spec={JSON.stringify(dados)} data-paleta={paleta ? JSON.stringify(paleta) : undefined}>
       <div class="v3d-ph">Carregando o modelo 3D…</div>
     </div>
   )
@@ -27,7 +36,10 @@ const dados = spec(code);
       const { EquipmentViewer } = await import('@avilaops/gerador-3d/viewer');
       const spec = JSON.parse(host.dataset.spec!);
       host.replaceChildren();
-      const viewer = new EquipmentViewer(host, { background: '#eeece7' });
+      const viewer = new EquipmentViewer(host, {
+        background: '#eeece7',
+        palette: host.dataset.paleta ? JSON.parse(host.dataset.paleta) : undefined,
+      });
       viewer.setEquipment(spec);
       host.addEventListener('pointerdown', () => host.dispatchEvent(new CustomEvent('ludus:3d', { bubbles: true })), { once: true });
     } catch {

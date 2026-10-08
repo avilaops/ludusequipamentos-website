@@ -3,3 +3,5 @@ dist/
 .astro/
 *.log
 .env*
+public/modelos/
+.modelos-tmp/
