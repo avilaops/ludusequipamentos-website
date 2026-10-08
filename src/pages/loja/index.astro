@@ -1,0 +1,110 @@
+---
+import Base from '../../layouts/Base.astro';
+import Card from '../../components/Card.astro';
+import { grupos, linhas, produtos } from '../../data/site';
+---
+
+<Base
+  title="Loja · Ludus Equipamentos"
+  description="Os 94 equipamentos de musculação Ludus Premium, com foto, ficha técnica, planta e modelo 3D. Filtre por linha e grupo muscular."
+>
+  <section class="head dark">
+    <div class="wrap">
+      <span class="kicker">Loja</span>
+      <h1>Equipamentos</h1>
+      <p class="lead">94 equipamentos Ludus Premium. Cada um com foto, ficha técnica, planta em escala e modelo 3D. A compra é por orçamento, direto com a Ludus.</p>
+    </div>
+  </section>
+
+  <section class="wrap corpo">
+    <div class="filtros" id="filtros">
+      <input type="search" id="busca" placeholder="Buscar por nome ou código" aria-label="Buscar por nome ou código" />
+      <div class="grupo">
+        <span class="rot">Linha</span>
+        <div class="chips" data-filtro="linha">
+          <button class="chip" data-v="" aria-pressed="true">Todas</button>
+          {linhas.map((l) => <button class="chip" data-v={l.id} data-slug={l.slug} aria-pressed="false">{l.titulo}</button>)}
+        </div>
+      </div>
+      <div class="grupo">
+        <span class="rot">Grupo muscular</span>
+        <div class="chips" data-filtro="grupo">
+          <button class="chip" data-v="" aria-pressed="true">Todos</button>
+          {grupos.map((g) => <button class="chip" data-v={g} aria-pressed="false">{g}</button>)}
+        </div>
+      </div>
+      <p class="conta" id="conta" aria-live="polite">{produtos.length} equipamentos</p>
+    </div>
+
+    <div class="grid-prod" id="grade">{produtos.map((p) => <Card p={p} />)}</div>
+    <p class="vazio" id="vazio" hidden>Nenhum equipamento com esse filtro. Tente outro nome ou limpe os filtros.</p>
+  </section>
+</Base>
+
+<script>
+  const slug = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const cards = [...document.querySelectorAll<HTMLElement>('#grade .card')];
+  const busca = document.getElementById('busca') as HTMLInputElement;
+  const conta = document.getElementById('conta')!;
+  const vazio = document.getElementById('vazio')!;
+  const estado = { linha: '', grupo: '', q: '' };
+
+  // Os filtros vão para a URL, para o link poder ser compartilhado.
+  const params = new URLSearchParams(location.search);
+  const chips = (f: string) => [...document.querySelectorAll<HTMLButtonElement>(`[data-filtro="${f}"] .chip`)];
+  const achar = (f: 'linha' | 'grupo') => {
+    const v = params.get(f);
+    if (!v) return '';
+    return chips(f).find((c) => (c.dataset.slug ?? slug(c.dataset.v!)) === v)?.dataset.v ?? '';
+  };
+  estado.linha = achar('linha');
+  estado.grupo = achar('grupo');
+  estado.q = params.get('q') ?? '';
+  busca.value = estado.q;
+
+  const aplicar = () => {
+    const q = estado.q.trim().toLowerCase();
+    let n = 0;
+    for (const c of cards) {
+      const ok =
+        (!estado.linha || c.dataset.linha === estado.linha) &&
+        (!estado.grupo || c.dataset.grupo === estado.grupo) &&
+        (!q || c.dataset.busca!.includes(q));
+      c.hidden = !ok;
+      if (ok) n++;
+    }
+    conta.textContent = `${n} ${n === 1 ? 'equipamento' : 'equipamentos'}`;
+    vazio.hidden = n > 0;
+    for (const f of ['linha', 'grupo'] as const)
+      chips(f).forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.v === estado[f])));
+    const u = new URLSearchParams();
+    for (const f of ['linha', 'grupo'] as const) {
+      const chip = chips(f).find((c) => c.dataset.v === estado[f]);
+      if (estado[f] && chip) u.set(f, chip.dataset.slug ?? slug(estado[f]));
+    }
+    if (q) u.set('q', q);
+    history.replaceState(null, '', u.size ? `?${u}` : location.pathname);
+  };
+  for (const f of ['linha', 'grupo'] as const)
+    chips(f).forEach((c) => c.addEventListener('click', () => ((estado[f] = c.dataset.v!), aplicar())));
+  busca.addEventListener('input', () => ((estado.q = busca.value), aplicar()));
+  aplicar();
+</script>
+
+<style>
+  .head { padding-block: clamp(40px, 6vw, 80px); }
+  .head .wrap { display: grid; gap: 14px; }
+  .corpo { padding-block: 32px 96px; }
+  .filtros { display: grid; gap: 16px; margin-bottom: 28px; }
+  input[type='search'] { font: 400 17px/1 var(--body); padding: 16px 22px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); width: min(100%, 460px); }
+  .grupo { display: grid; gap: 8px; }
+  .rot { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .conta { color: var(--muted); font-size: 14px; }
+  .vazio { padding: 48px 0; color: var(--muted); text-align: center; }
+  @media (max-width: 600px) {
+    .corpo :global(.grid-prod) { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .corpo :global(.card .name) { font-size: 20px; }
+    .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
+    .chip { white-space: nowrap; }
+  }
+</style>

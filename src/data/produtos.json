@@ -1,0 +1,1412 @@
+[
+ {
+  "code": "LD-A001",
+  "nome": "Hiperextensão de Glúteos de Peso Livre",
+  "linha": "Peso livre",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   1810,
+   1010,
+   1320
+  ],
+  "peso": "156 kg",
+  "bateria": null,
+  "descricao": "Desenvolvido para trabalhar a extensão do quadril, a cadeia posterior e a força explosiva. Reforça padrões de movimento usados em corridas, saltos e levantamentos. A mecânica suave e os apoios favorecem o fortalecimento dos quadris e da cadeia posterior.",
+  "slug": "hiperextensao-de-gluteos-de-peso-livre-ld-a001"
+ },
+ {
+  "code": "LD-A002",
+  "nome": "Supino e Remada",
+  "linha": "Peso livre",
+  "grupo_muscular": "Peitoral",
+  "dim": [
+   1830,
+   1330,
+   2090
+  ],
+  "peso": "177 kg",
+  "bateria": null,
+  "descricao": "Os suportes de anilhas separados permitem movimentos independentes de abertura e fechamento, favorecendo o desenvolvimento equilibrado da força e a variedade de estímulos. Reúne exercícios para peitoral e costas em um único equipamento.",
+  "slug": "supino-e-remada-ld-a002"
+ },
+ {
+  "code": "LD-A003",
+  "nome": "Supino Declinado",
+  "linha": "Peso livre",
+  "grupo_muscular": "Peitoral",
+  "dim": [
+   1300,
+   1380,
+   1730
+  ],
+  "peso": "143 kg",
+  "bateria": null,
+  "descricao": "Os suportes de anilhas separados permitem movimentos independentes de abertura e fechamento, inspirados no movimento humano. Essa configuração favorece o desenvolvimento equilibrado da força e a variedade de estímulos musculares.",
+  "slug": "supino-declinado-ld-a003"
+ },
+ {
+  "code": "LD-A004",
+  "nome": "Remada D.Y.",
+  "linha": "Peso livre",
+  "grupo_muscular": "Costas",
+  "dim": [
+   1300,
+   1430,
+   2090
+  ],
+  "peso": "164 kg",
+  "bateria": null,
+  "descricao": "Os suportes de anilhas separados permitem movimentos independentes para o desenvolvimento equilibrado da força. A pegada supinada e os pivôs elevados proporcionam um arco natural de movimento durante a remada.",
+  "slug": "remada-d-y-ld-a004"
+ },
+ {
+  "code": "LD-A005",
+  "nome": "Puxada Alta Frontal",
+  "linha": "Peso livre",
+  "grupo_muscular": "Costas",
+  "dim": [
+   1660,
+   1050,
+   2040
+  ],
+  "peso": "143 kg",
+  "bateria": null,
+  "descricao": "Os suportes de anilhas separados permitem movimentos independentes de abertura e fechamento. A trajetória em arco e as posições de pegada supinada oferecem variação de estímulos e um movimento natural durante a puxada.",
+  "slug": "puxada-alta-frontal-ld-a005"
+ },
+ {
+  "code": "LD-A006",
+  "nome": "Remada Alta",
+  "linha": "Peso livre",
+  "grupo_muscular": "Costas",
+  "dim": [
+   1550,
+   1050,
+   2010
+  ],
+  "peso": "150 kg",
+  "bateria": null,
+  "descricao": "Os suportes de anilhas separados permitem movimentos independentes para o desenvolvimento equilibrado da força. A trajetória específica de puxada se contrapõe à do supino inclinado e oferece um estímulo distinto para o treino de costas.",
+  "slug": "remada-alta-ld-a006"
+ },
+ {
+  "code": "LD-A007",
+  "nome": "Supino Horizontal",
+  "linha": "Peso livre",
+  "grupo_muscular": "Peitoral",
+  "dim": [
+   1680,
+   1550,
+   1070
+  ],
+  "peso": "109 kg",
+  "bateria": null,
+  "descricao": "Os braços com carga independente permitem movimentos de abertura e fechamento para o desenvolvimento equilibrado da força. É uma variação articulada do supino tradicional, com apoios de costas inclinados para estabilização.",
+  "slug": "supino-horizontal-ld-a007"
+ },
+ {
+  "code": "LD-A008",
+  "nome": "Remada T-Bar",
+  "linha": "Peso livre",
+  "grupo_muscular": "Costas",
+  "dim": [
+   2050,
+   820,
+   530
+  ],
+  "peso": "91 kg",
+  "bateria": null,
+  "descricao": "A posição de treino em pé, sem apoio para o tronco, envolve a cadeia posterior desde a base. A ausência de apoios acolchoados exige força das costas, pegada e estabilização de todo o corpo durante a remada.",
+  "slug": "remada-t-bar-ld-a008"
+ },
+ {
+  "code": "LD-A009",
+  "nome": "Remada Baixa",
+  "linha": "Peso livre",
+  "grupo_muscular": "Costas",
+  "dim": [
+   1220,
+   1200,
+   1710
+  ],
+  "peso": "152 kg",
+  "bateria": null,
+  "descricao": "Os suportes de anilhas separados permitem movimentos independentes de abertura e fechamento, favorecendo o desenvolvimento equilibrado da força. A trajetória específica da remada oferece um movimento complementar ao do supino declinado.",
+  "slug": "remada-baixa-ld-a009"
+ },
+ {
+  "code": "LD-A010",
+  "nome": "Flexão Nórdica",
+  "linha": "Peso livre",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   1970,
+   1360,
+   1470
+  ],
+  "peso": "183 kg",
+  "bateria": null,
+  "descricao": "O sistema contrabalançado permite ajustar a dificuldade da flexão nórdica: mais anilhas aumentam a assistência. O ajuste do apoio superior acomoda diferentes usuários e mantém uma posição firme para o treino dos posteriores da coxa.",
+  "slug": "flexao-nordica-ld-a010"
+ },
+ {
+  "code": "LD-A011",
+  "nome": "Remada Sentada",
+  "linha": "Peso livre",
+  "grupo_muscular": "Costas",
+  "dim": [
+   1500,
+   1270,
+   1300
+  ],
+  "peso": "128 kg",
+  "bateria": null,
+  "descricao": "Os suportes de anilhas separados permitem movimentos independentes e diferentes estímulos musculares. A estrutura compacta e baixa conta com múltiplas opções de pegada para variar o treino de remada.",
+  "slug": "remada-sentada-ld-a011"
+ },
+ {
+  "code": "LD-A012",
+  "nome": "Desenvolvimento de Ombros",
+  "linha": "Peso livre",
+  "grupo_muscular": "Deltoides",
+  "dim": [
+   1300,
+   1480,
+   1880
+  ],
+  "peso": "159 kg",
+  "bateria": null,
+  "descricao": "Os suportes de anilhas separados permitem movimentos independentes para o desenvolvimento equilibrado dos ombros. O encosto inclinado a 40 graus oferece estabilização e ajuda a evitar a hiperextensão da coluna.",
+  "slug": "desenvolvimento-de-ombros-ld-a012"
+ },
+ {
+  "code": "LD-A013",
+  "nome": "Supino Super Inclinado",
+  "linha": "Peso livre",
+  "grupo_muscular": "Peitoral",
+  "dim": [
+   1270,
+   1500,
+   1530
+  ],
+  "peso": "164 kg",
+  "bateria": null,
+  "descricao": "Os braços com carga independente favorecem o desenvolvimento equilibrado da força. A trajetória específica do movimento ocupa a faixa intermediária entre o desenvolvimento de ombros e o supino inclinado.",
+  "slug": "supino-super-inclinado-ld-a013"
+ },
+ {
+  "code": "LD-A014",
+  "nome": "Supino Vertical Aberto",
+  "linha": "Peso livre",
+  "grupo_muscular": "Peitoral",
+  "dim": [
+   1150,
+   1500,
+   1760
+  ],
+  "peso": "139 kg",
+  "bateria": null,
+  "descricao": "Os suportes de anilhas separados permitem movimentos independentes para o desenvolvimento equilibrado da força. Oferece maior convergência que o supino declinado e espaço para acomodar usuários de maior porte.",
+  "slug": "supino-vertical-aberto-ld-a014"
+ },
+ {
+  "code": "LD-A015",
+  "nome": "Puxada Alta",
+  "linha": "Peso livre",
+  "grupo_muscular": "Costas",
+  "dim": [
+   1810,
+   1070,
+   2040
+  ],
+  "peso": "146 kg",
+  "bateria": null,
+  "descricao": "Os suportes de anilhas separados permitem movimentos independentes de abertura e fechamento. Os pivôs inclinados em dois planos distintos oferecem uma trajetória articulada para variar o estímulo durante a puxada.",
+  "slug": "puxada-alta-ld-a015"
+ },
+ {
+  "code": "LD-A016",
+  "nome": "Elevação Lateral Peso Livre",
+  "linha": "Peso livre",
+  "grupo_muscular": "Deltoides",
+  "dim": [
+   1430,
+   1130,
+   1200
+  ],
+  "peso": "116 kg",
+  "bateria": null,
+  "descricao": "O movimento em arco suave e natural acompanha a mecânica dos ombros, favorecendo força, resistência e estabilidade. Permite trabalhar os deltoides e o equilíbrio muscular para as exigências esportivas e cotidianas.",
+  "slug": "elevacao-lateral-peso-livre-ld-a016"
+ },
+ {
+  "code": "LD-A017",
+  "nome": "Pullover de Peso Livre",
+  "linha": "Peso livre",
+  "grupo_muscular": "Costas",
+  "dim": [
+   1380,
+   1300,
+   1500
+  ],
+  "peso": "195 kg",
+  "bateria": null,
+  "descricao": "O desenho ergonômico favorece a estabilidade e o controle durante o exercício. O banco inclinado e a menor amplitude de extensão dos ombros ajudam a estabilizar o corpo e a reduzir a tensão sobre a articulação do ombro.",
+  "slug": "pullover-de-peso-livre-ld-a017"
+ },
+ {
+  "code": "LD-A018",
+  "nome": "Tríceps Sentado",
+  "linha": "Peso livre",
+  "grupo_muscular": "Braços",
+  "dim": [
+   1820,
+   1240,
+   1090
+  ],
+  "peso": "130 kg",
+  "bateria": null,
+  "descricao": "Permite executar o exercício sentado de frente ou de costas para o equipamento, oferecendo diferentes posições e maior variedade para o treino de tríceps.",
+  "slug": "triceps-sentado-ld-a018"
+ },
+ {
+  "code": "LD-A019",
+  "nome": "Super Fly",
+  "linha": "Peso livre",
+  "grupo_muscular": "Peitoral",
+  "dim": [
+   2090,
+   2190,
+   1050
+  ],
+  "peso": "142 kg",
+  "bateria": null,
+  "descricao": "Oferece posições de crucifixo reto e declinado para trabalhar o peitoral em diferentes ângulos. Os apoios de costas abertos permitem movimentos mais amplos e livres, com menor interferência na região dos ombros.",
+  "slug": "super-fly-ld-a019"
+ },
+ {
+  "code": "LD-A020",
+  "nome": "Suporte de Agachamento Búlgaro e Levantamentos",
+  "linha": "Peso livre",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   1555,
+   1375,
+   850
+  ],
+  "peso": "103 kg",
+  "bateria": null,
+  "descricao": "Favorece uma posição natural dos pés e a estabilização do corpo inteiro. Permite exercícios bilaterais ou unilaterais, incluindo agachamentos, avanços e variações com uma perna. As empunhaduras inclinadas oferecem pegada firme e controle do movimento.",
+  "slug": "suporte-de-agachamento-bulgaro-e-levantamentos-ld-a020"
+ },
+ {
+  "code": "LD-A021",
+  "nome": "Mesa Flexora de Peso Livre",
+  "linha": "Peso livre",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   1810,
+   1350,
+   1000
+  ],
+  "peso": "130 kg",
+  "bateria": null,
+  "descricao": "Os suportes de anilhas separados permitem movimentos independentes para o desenvolvimento equilibrado dos posteriores da coxa. O ângulo divergente entre os apoios de quadril e peito ajuda a reduzir a tensão na região lombar.",
+  "slug": "mesa-flexora-de-peso-livre-ld-a021"
+ },
+ {
+  "code": "LD-A022",
+  "nome": "Cadeira Extensora Iso-Lateral",
+  "linha": "Peso livre",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   1380,
+   1450,
+   1450
+  ],
+  "peso": "137 kg",
+  "bateria": null,
+  "descricao": "Os suportes de anilhas separados permitem movimentos independentes de cada perna, com trajetórias inspiradas no movimento humano. Essa configuração favorece o desenvolvimento equilibrado da força e a variedade de estímulos musculares.",
+  "slug": "cadeira-extensora-iso-lateral-ld-a022"
+ },
+ {
+  "code": "LD-A023",
+  "nome": "Hack Squat",
+  "linha": "Peso livre",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   2150,
+   1560,
+   1500
+  ],
+  "peso": "236 kg",
+  "bateria": null,
+  "descricao": "O ângulo de 45 graus enfatiza a flexão dos joelhos e a extensão controlada para o trabalho dos quadríceps. Os rolamentos lineares proporcionam deslocamento suave, e as alavancas de travamento facilitam transições firmes entre a execução e o apoio da carga.",
+  "slug": "hack-squat-ld-a023"
+ },
+ {
+  "code": "LD-A024",
+  "nome": "Cadeira Extensora de Peso Livre",
+  "linha": "Peso livre",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   1430,
+   1380,
+   1450
+  ],
+  "peso": "134 kg",
+  "bateria": null,
+  "descricao": "Os braços com carga independente permitem movimentos de abertura e fechamento para o desenvolvimento equilibrado da força. Duas posições para colocação das anilhas oferecem curvas de resistência diferentes conforme o objetivo do exercício.",
+  "slug": "cadeira-extensora-de-peso-livre-ld-a024"
+ },
+ {
+  "code": "LD-A025",
+  "nome": "Panturrilha Sentada",
+  "linha": "Peso livre",
+  "grupo_muscular": "Panturrilha",
+  "dim": [
+   1240,
+   840,
+   1370
+  ],
+  "peso": "91 kg",
+  "bateria": null,
+  "descricao": "Projetado para trabalhar o músculo sóleo por meio da elevação de panturrilhas na posição sentada. O apoio ajustável sobre as coxas permite acomodar diferentes usuários.",
+  "slug": "panturrilha-sentada-ld-a025"
+ },
+ {
+  "code": "LD-A026",
+  "nome": "Panturrilha Horizontal",
+  "linha": "Peso livre",
+  "grupo_muscular": "Panturrilha",
+  "dim": [
+   1630,
+   1450,
+   1520
+  ],
+  "peso": "173 kg",
+  "bateria": null,
+  "descricao": "Direciona a resistência para os quadris, em vez da coluna, durante o exercício. Permite trabalhar os músculos gastrocnêmio e sóleo em uma posição horizontal.",
+  "slug": "panturrilha-horizontal-ld-a026"
+ },
+ {
+  "code": "LD-A027",
+  "nome": "Elevação Pélvica",
+  "linha": "Peso livre",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   1720,
+   1480,
+   1020
+  ],
+  "peso": "152 kg",
+  "bateria": null,
+  "descricao": "A plataforma antiderrapante estabiliza os pés, enquanto os apoios de alta densidade sustentam a extensão do quadril. Permite preparar e repetir o treino de glúteos com anilhas sem utilizar bancos ou barras separados.",
+  "slug": "elevacao-pelvica-ld-a027"
+ },
+ {
+  "code": "LD-A028",
+  "nome": "Ground Base Jammer",
+  "linha": "Peso livre",
+  "grupo_muscular": "Multitrabalho",
+  "dim": [
+   1500,
+   1680,
+   2290
+  ],
+  "peso": "168 kg",
+  "bateria": null,
+  "descricao": "Desenvolvido para exercícios esportivos que exigem força explosiva a partir do solo. Mantém os pés firmemente apoiados enquanto permite produzir força e potência dos membros inferiores para os superiores.",
+  "slug": "ground-base-jammer-ld-a028"
+ },
+ {
+  "code": "LD-A029",
+  "nome": "Agachamento Múltiplo",
+  "linha": "Peso livre",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   1490,
+   1580,
+   870
+  ],
+  "peso": "100 kg",
+  "bateria": null,
+  "descricao": "Combina equilíbrio no agachamento com uma posição corporal adequada ao treino de desempenho. A base mantém os pés firmes no solo e favorece a produção de força e potência a partir dos membros inferiores.",
+  "slug": "agachamento-multiplo-ld-a029"
+ },
+ {
+  "code": "LD-A030",
+  "nome": "Agachamento Pendulum",
+  "linha": "Peso livre",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   2480,
+   1430,
+   1995
+  ],
+  "peso": "368 kg",
+  "bateria": null,
+  "descricao": "O movimento pendular enfatiza a extensão dos quadris e das pernas. A resistência varia de forma suave ao longo da amplitude, sendo menor na parte inferior e maior na parte superior, para um treino intenso dos membros inferiores.",
+  "slug": "agachamento-pendulum-ld-a030"
+ },
+ {
+  "code": "LD-A031",
+  "nome": "Flexora em Pé de Peso Livre",
+  "linha": "Peso livre",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   1100,
+   1270,
+   1200
+  ],
+  "peso": "114 kg",
+  "bateria": null,
+  "descricao": "Os braços com carga independente favorecem o desenvolvimento equilibrado dos posteriores da coxa. A posição ajoelhada e o ângulo divergente entre os apoios de quadril e peito ajudam a reduzir a tensão na região lombar.",
+  "slug": "flexora-em-pe-de-peso-livre-ld-a031"
+ },
+ {
+  "code": "LD-A032",
+  "nome": "Supino Reto Articulado",
+  "linha": "Peso livre",
+  "grupo_muscular": "Peitoral",
+  "dim": [
+   1250,
+   1330,
+   1760
+  ],
+  "peso": "159 kg",
+  "bateria": null,
+  "descricao": "Os suportes de anilhas separados permitem movimentos independentes de abertura e fechamento. As opções de pegada horizontal e vertical permitem variar a posição dos punhos e a execução, reproduzindo o supino tradicional ou movimentos voltados ao treino esportivo.",
+  "slug": "supino-reto-articulado-ld-a032"
+ },
+ {
+  "code": "LD-A033",
+  "nome": "Scott Articulado",
+  "linha": "Peso livre",
+  "grupo_muscular": "Braços",
+  "dim": [
+   1270,
+   1170,
+   1350
+  ],
+  "peso": "103 kg",
+  "bateria": null,
+  "descricao": "Oferece resistência articulada para a rosca na posição Scott. As empunhaduras giratórias acomodam diferenças no comprimento dos antebraços, permitindo ajustar a pegada ao usuário.",
+  "slug": "scott-articulado-ld-a033"
+ },
+ {
+  "code": "LD-A034",
+  "nome": "Leg Press",
+  "linha": "Peso livre",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   2400,
+   1688,
+   1480
+  ],
+  "peso": "265 kg",
+  "bateria": null,
+  "descricao": "O ângulo de 45 graus proporciona um movimento de empurrar suave e estável. Permite adicionar anilhas para trabalhar quadríceps, posteriores da coxa e glúteos em um exercício direcionado aos membros inferiores.",
+  "slug": "leg-press-ld-a034"
+ },
+ {
+  "code": "LD-A035",
+  "nome": "Cadeira Abdominal de Peso Livre",
+  "linha": "Peso livre",
+  "grupo_muscular": "Abdômen",
+  "dim": [
+   1200,
+   1480,
+   1680
+  ],
+  "peso": "162 kg",
+  "bateria": null,
+  "descricao": "O banco giratório permite direcionar o exercício para os dois lados dos músculos oblíquos. O movimento de dupla ação trabalha a parede abdominal de forma abrangente.",
+  "slug": "cadeira-abdominal-de-peso-livre-ld-a035"
+ },
+ {
+  "code": "LD-A036",
+  "nome": "Belt Squat",
+  "linha": "Peso livre",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   1985,
+   1610,
+   1525
+  ],
+  "peso": "185 kg",
+  "bateria": null,
+  "descricao": "Permite treinar os membros inferiores com carga no cinturão, reduzindo a carga sobre a coluna. A trajetória natural, definida pelo usuário, aproxima-se do agachamento com pesos livres e permite exercícios de força e potência.",
+  "slug": "belt-squat-ld-a036"
+ },
+ {
+  "code": "LD-A037",
+  "nome": "Belt Squat Pro",
+  "linha": "Peso livre",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   1986,
+   1604,
+   1527
+  ],
+  "peso": "208 kg",
+  "bateria": null,
+  "descricao": "As barras paralelas fixas permitem executar mergulhos com carga diretamente no sistema de agachamento com cinturão. Essa configuração acrescenta o treino de empurrar para os membros superiores sem exigir uma estação separada ou espaço adicional.",
+  "slug": "belt-squat-pro-ld-a037"
+ },
+ {
+  "code": "LD-A038",
+  "nome": "Leg Press Articulado",
+  "linha": "Peso livre",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   2240,
+   1745,
+   1425
+  ],
+  "peso": "240 kg",
+  "bateria": null,
+  "descricao": "As plataformas articuladas para os pés e a curva de resistência proporcionam um movimento de empurrar suave e desafiador. Os braços independentes permitem o treino unilateral para o desenvolvimento equilibrado das pernas.",
+  "slug": "leg-press-articulado-ld-a038"
+ },
+ {
+  "code": "LD-A039",
+  "nome": "Encolhimento de Ombro",
+  "linha": "Peso livre",
+  "grupo_muscular": "Deltoides",
+  "dim": [
+   1025,
+   1450,
+   1230
+  ],
+  "peso": "107 kg",
+  "bateria": null,
+  "descricao": "Permite executar encolhimentos sentado ou em pé para trabalhar o trapézio. A estrutura estável oferece apoio para exercícios com carga elevada e para o desenvolvimento da força de sustentação e estabilização dos membros superiores.",
+  "slug": "encolhimento-de-ombro-ld-a039"
+ },
+ {
+  "code": "LD-A040",
+  "nome": "Supino Inclinado Articulado",
+  "linha": "Peso livre",
+  "grupo_muscular": "Peitoral",
+  "dim": [
+   1380,
+   1160,
+   1910
+  ],
+  "peso": "148 kg",
+  "bateria": null,
+  "descricao": "A trajetória natural de empurrar para cima reproduz a mecânica do supino inclinado tradicional. Os braços independentes favorecem o desenvolvimento equilibrado da força dos dois lados do corpo.",
+  "slug": "supino-inclinado-articulado-ld-a040"
+ },
+ {
+  "code": "LD-A041",
+  "nome": "Agachamento V-Squat",
+  "linha": "Peso livre",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   2470,
+   1070,
+   2050
+  ],
+  "peso": "241 kg",
+  "bateria": null,
+  "descricao": "A trajetória curva acompanha o movimento natural do agachamento e ajuda a reduzir a sobrecarga nas costas e nos joelhos. O sistema contrabalançado reduz a resistência inicial do exercício.",
+  "slug": "agachamento-v-squat-ld-a041"
+ },
+ {
+  "code": "LD-A042",
+  "nome": "Banco Reto",
+  "linha": "Bancos e suportes",
+  "grupo_muscular": "Acessórios",
+  "dim": [
+   1270,
+   560,
+   410
+  ],
+  "peso": "25 kg",
+  "bateria": null,
+  "descricao": "Banco reto tradicional que oferece elevada durabilidade e qualidade para o treinamento.",
+  "slug": "banco-reto-ld-a042"
+ },
+ {
+  "code": "LD-A043",
+  "nome": "Banco Abdominal",
+  "linha": "Bancos e suportes",
+  "grupo_muscular": "Acessórios",
+  "dim": [
+   1740,
+   610,
+   880
+  ],
+  "peso": "52 kg",
+  "bateria": null,
+  "descricao": "Banco para exercícios com pesos livres, inclinado para baixo de modo a elevar a pelve e posicionar a cabeça mais baixa, com rolos para apoiar os pés. Os exercícios abdominais trabalham a musculatura das costas e do tronco; os exercícios para a parte superior do corpo realizados nesse banco trabalham a porção inferior do peitoral e os deltoides.",
+  "slug": "banco-abdominal-ld-a043"
+ },
+ {
+  "code": "LD-A044",
+  "nome": "Banco Inclinado 30°",
+  "linha": "Bancos e suportes",
+  "grupo_muscular": "Acessórios",
+  "dim": [
+   1100,
+   630,
+   780
+  ],
+  "peso": "34 kg",
+  "bateria": null,
+  "descricao": "O banco inclinado a 30° possui ângulo fixo que oferece posicionamento adequado para diversos exercícios da parte superior do corpo.",
+  "slug": "banco-inclinado-30-ld-a044"
+ },
+ {
+  "code": "LD-A045",
+  "nome": "Banco Inclinado 55°",
+  "linha": "Bancos e suportes",
+  "grupo_muscular": "Acessórios",
+  "dim": [
+   890,
+   550,
+   1010
+  ],
+  "peso": "33 kg",
+  "bateria": null,
+  "descricao": "O banco inclinado a 55° possui ângulo fixo que oferece posicionamento adequado para diversos exercícios da parte superior do corpo.",
+  "slug": "banco-inclinado-55-ld-a045"
+ },
+ {
+  "code": "LD-A046",
+  "nome": "Banco Multiuso 75°",
+  "linha": "Bancos e suportes",
+  "grupo_muscular": "Acessórios",
+  "dim": [
+   1300,
+   640,
+   940
+  ],
+  "peso": "30 kg",
+  "bateria": null,
+  "descricao": "Oferece a funcionalidade de um banco multiuso de 75°, com apoio curvo para os pés.",
+  "slug": "banco-multiuso-75-ld-a046"
+ },
+ {
+  "code": "LD-A047",
+  "nome": "Banco Declinado e Abdominal",
+  "linha": "Bancos e suportes",
+  "grupo_muscular": "Acessórios",
+  "dim": [
+   1610,
+   610,
+   870
+  ],
+  "peso": "46 kg",
+  "bateria": null,
+  "descricao": "Reúne duas opções de treino em um único equipamento, com a elevada durabilidade e qualidade da linha de bancos e suportes.",
+  "slug": "banco-declinado-e-abdominal-ld-a047"
+ },
+ {
+  "code": "LD-A048",
+  "nome": "Banco Regulável de 0° a 90°",
+  "linha": "Bancos e suportes",
+  "grupo_muscular": "Acessórios",
+  "dim": [
+   1330,
+   560,
+   470
+  ],
+  "peso": "39 kg",
+  "bateria": null,
+  "descricao": "O banco regulável oferece seis ângulos de encosto para exercícios de pressão e três ajustes do assento, atendendo às necessidades de diferentes usuários.",
+  "slug": "banco-regulavel-de-0-a-90-ld-a048"
+ },
+ {
+  "code": "LD-A049",
+  "nome": "Banco Declinado Ajustável",
+  "linha": "Bancos e suportes",
+  "grupo_muscular": "Acessórios",
+  "dim": [
+   1630,
+   720,
+   940
+  ],
+  "peso": "60 kg",
+  "bateria": null,
+  "descricao": "Oferece múltiplos ajustes de ângulo, de uma declinação leve para movimentos de pressão controlados a uma inclinação mais acentuada para intensificar o trabalho abdominal e de peitoral. O sistema simples de alavanca permite mudanças rápidas, sem improvisos. Estável e confortável, foi desenvolvido para dar suporte ao treino com cargas elevadas e ao trabalho direcionado da musculatura do tronco.",
+  "slug": "banco-declinado-ajustavel-ld-a049"
+ },
+ {
+  "code": "LD-A050",
+  "nome": "Supino Reto Livre",
+  "linha": "Bancos e suportes",
+  "grupo_muscular": "Peitoral",
+  "dim": [
+   1330,
+   1270,
+   1270
+  ],
+  "peso": "66 kg",
+  "bateria": null,
+  "descricao": "Estação de supino reto com padrão olímpico, com a elevada durabilidade e qualidade da linha de bancos e suportes.",
+  "slug": "supino-reto-livre-ld-a050"
+ },
+ {
+  "code": "LD-A051",
+  "nome": "Supino Inclinado Livre",
+  "linha": "Bancos e suportes",
+  "grupo_muscular": "Peitoral",
+  "dim": [
+   1300,
+   1330,
+   1480
+  ],
+  "peso": "90 kg",
+  "bateria": null,
+  "descricao": "Estação de supino inclinado com padrão olímpico, com a elevada durabilidade e qualidade da linha de bancos e suportes.",
+  "slug": "supino-inclinado-livre-ld-a051"
+ },
+ {
+  "code": "LD-A052",
+  "nome": "Supino Declinado Livre",
+  "linha": "Bancos e suportes",
+  "grupo_muscular": "Peitoral",
+  "dim": [
+   1530,
+   1350,
+   1270
+  ],
+  "peso": "87 kg",
+  "bateria": null,
+  "descricao": "Estação de supino declinado com padrão olímpico, com a elevada durabilidade e qualidade da linha de bancos e suportes.",
+  "slug": "supino-declinado-livre-ld-a052"
+ },
+ {
+  "code": "LD-A053",
+  "nome": "Suporte para 10 Barras",
+  "linha": "Bancos e suportes",
+  "grupo_muscular": "Acessórios",
+  "dim": [
+   790,
+   720,
+   1530
+  ],
+  "peso": "65 kg",
+  "bateria": null,
+  "descricao": "Oferece armazenamento prático e organizado para 10 barras de peso fixo.",
+  "slug": "suporte-para-10-barras-ld-a053"
+ },
+ {
+  "code": "LD-A054",
+  "nome": "Banco de Extensão Lombar",
+  "linha": "Bancos e suportes",
+  "grupo_muscular": "Acessórios",
+  "dim": [
+   1500,
+   720,
+   1100
+  ],
+  "peso": "62 kg",
+  "bateria": null,
+  "descricao": "Possui apoio angulado ajustável, que proporciona sustentação firme e excelente conforto para os exercícios de extensão lombar.",
+  "slug": "banco-de-extensao-lombar-ld-a054"
+ },
+ {
+  "code": "LD-A055",
+  "nome": "Scott Peso Livre",
+  "linha": "Bancos e suportes",
+  "grupo_muscular": "Braços",
+  "dim": [
+   1000,
+   920,
+   1100
+  ],
+  "peso": "73 kg",
+  "bateria": null,
+  "descricao": "Oferece a posição tradicional da rosca Scott, com a elevada durabilidade e qualidade da linha de bancos e suportes.",
+  "slug": "scott-peso-livre-ld-a055"
+ },
+ {
+  "code": "LD-A056",
+  "nome": "Suporte para Anilhas",
+  "linha": "Bancos e suportes",
+  "grupo_muscular": "Acessórios",
+  "dim": [
+   510,
+   690,
+   1000
+  ],
+  "peso": "34 kg",
+  "bateria": null,
+  "descricao": "Oferece quatro hastes para apoiar e armazenar as anilhas utilizadas no treinamento.",
+  "slug": "suporte-para-anilhas-ld-a056"
+ },
+ {
+  "code": "LD-B001",
+  "nome": "Mesa Flexora",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   1675,
+   1095,
+   1330
+  ],
+  "peso": "240 kg",
+  "bateria": "95 kg",
+  "descricao": "Projetada para o treino controlado dos músculos posteriores da coxa em áreas de musculação profissional. Os apoios separados para quadril e peito ajudam a manter uma posição estável deitada de bruços. O ajuste da posição inicial permite escolher um ângulo confortável de treino, conforme a mobilidade e a preferência de cada usuário.",
+  "slug": "mesa-flexora-ld-b001"
+ },
+ {
+  "code": "LD-B002",
+  "nome": "Cadeira Extensora",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   1250,
+   1130,
+   1445
+  ],
+  "peso": "300 kg",
+  "bateria": "138 kg",
+  "descricao": "Permite treinar o quadríceps de forma direcionada, com ajustes organizados e de fácil acesso. As principais regulagens podem ser alcançadas na posição sentada. O ajuste da posição inicial ajuda a definir uma amplitude adequada para executar a extensão de joelhos com controle.",
+  "slug": "cadeira-extensora-ld-b002"
+ },
+ {
+  "code": "LD-B003",
+  "nome": "Leg Press 180°",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   2000,
+   1085,
+   1540
+  ],
+  "peso": "385 kg",
+  "bateria": "138 kg",
+  "descricao": "Desenvolvido para o treino de membros inferiores, com posicionamento estável do corpo e movimento guiado suave. A estrutura sobre trilhos favorece uma trajetória consistente, enquanto o percurso de pressão inclinado proporciona uma experiência de treino confortável e segura em academias.",
+  "slug": "leg-press-180-ld-b003"
+ },
+ {
+  "code": "LD-B004",
+  "nome": "Peck Deck",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Peitoral",
+  "dim": [
+   1310,
+   1200,
+   2050
+  ],
+  "peso": "298 kg",
+  "bateria": "138 kg",
+  "descricao": "Desenvolvido para exercícios isolados de peitoral, com posicionamento ajustável dos braços e apoio estável para o usuário. A barra de auxílio acionada pelos pés facilita a entrada e a estabilização durante o exercício. O mecanismo de ajuste inicial permite variar a amplitude de movimento conforme a necessidade de treino.",
+  "slug": "peck-deck-ld-b004"
+ },
+ {
+  "code": "LD-B005",
+  "nome": "Elevação Lateral Sentado",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Deltoides",
+  "dim": [
+   1095,
+   930,
+   1330
+  ],
+  "peso": "260 kg",
+  "bateria": "95 kg",
+  "descricao": "Proporciona um treino direcionado dos ombros, com apoios e pegadores posicionados para a elevação controlada dos braços. Os pegadores articulados acomodam diferentes biotipos. A trajetória guiada favorece uma execução estável e consistente da elevação lateral.",
+  "slug": "elevacao-lateral-sentado-ld-b005"
+ },
+ {
+  "code": "LD-B006",
+  "nome": "Desenvolvimento de Ombros Máquina",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Deltoides",
+  "dim": [
+   1510,
+   1465,
+   1540
+  ],
+  "peso": "258 kg",
+  "bateria": "95 kg",
+  "descricao": "Projetado para o desenvolvimento acima da cabeça na posição sentada, com estrutura de apoio estável e regulagem simples. A posição do assento ajuda a definir a amplitude de treino. As diferentes opções de pegada permitem escolher uma posição de execução natural e controlada.",
+  "slug": "desenvolvimento-de-ombros-maquina-ld-b006"
+ },
+ {
+  "code": "LD-B007",
+  "nome": "Crucifixo Máquina",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Peitoral",
+  "dim": [
+   1250,
+   1435,
+   2050
+  ],
+  "peso": "295 kg",
+  "bateria": "138 kg",
+  "descricao": "Reúne dois movimentos isolados para a parte superior do corpo em uma estação compacta: crucifixo para peitoral e crucifixo inverso para deltoide posterior. Os braços articulados e os pegadores cuidadosamente posicionados atendem aos dois exercícios, reduzindo a necessidade de ajustes complexos entre eles.",
+  "slug": "crucifixo-maquina-ld-b007"
+ },
+ {
+  "code": "LD-B008",
+  "nome": "Supino Vertical",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Peitoral",
+  "dim": [
+   1480,
+   1080,
+   1540
+  ],
+  "peso": "286 kg",
+  "bateria": "138 kg",
+  "descricao": "Oferece um movimento de pressão guiado para o treino controlado do peitoral. O braço de movimento ajustável permite diferentes posições iniciais, ajudando o usuário a escolher uma amplitude adequada e a manter uma postura sentada estável durante todo o exercício.",
+  "slug": "supino-vertical-ld-b008"
+ },
+ {
+  "code": "LD-B009",
+  "nome": "Graviton - Barra Fixa e Paralela",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Multitrabalho",
+  "dim": [
+   1285,
+   1125,
+   2215
+  ],
+  "peso": "325 kg",
+  "bateria": "82 kg",
+  "descricao": "Projetado para exercícios assistidos de barra fixa e paralelas, permitindo também a progressão para movimentos com o peso corporal. O apoio de joelhos rebatível amplia as opções de treino. Os pegadores em múltiplas posições oferecem diferentes escolhas de pegada e variações de exercício.",
+  "slug": "graviton-barra-fixa-e-paralela-ld-b009"
+ },
+ {
+  "code": "LD-B010",
+  "nome": "Panturrilha em Pé",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Panturrilha",
+  "dim": [
+   1490,
+   1145,
+   1620
+  ],
+  "peso": "340 kg",
+  "bateria": "195 kg",
+  "descricao": "Desenvolvido para a elevação de panturrilhas em pé, com regulagem de altura dos apoios de ombros e suporte estável para os pés. A plataforma anatômica ajuda a manter um posicionamento seguro, permitindo uma amplitude natural de movimento dos tornozelos durante as repetições.",
+  "slug": "panturrilha-em-pe-ld-b010"
+ },
+ {
+  "code": "LD-B011",
+  "nome": "Quadril e Glúteos Máquina",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   1650,
+   995,
+   1770
+  ],
+  "peso": "340 kg",
+  "bateria": "138 kg",
+  "descricao": "Oferece treino direcionado dos membros inferiores para ativação do quadril e dos glúteos. A estrutura de resistência bidirecional permite movimentos controlados nos dois sentidos, favorecendo exercícios de extensão de quadril e treino de glúteos com posicionamento estável do corpo.",
+  "slug": "quadril-e-gluteos-maquina-ld-b011"
+ },
+ {
+  "code": "LD-B012",
+  "nome": "Puxada Alta",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Costas",
+  "dim": [
+   1390,
+   1235,
+   2260
+  ],
+  "peso": "270 kg",
+  "bateria": "138 kg",
+  "descricao": "Projetada para o treino da região superior das costas, com apoios de coxa ajustáveis para maior estabilidade e conforto. A barra reta com extremidades anguladas favorece uma posição natural das mãos e dos punhos, ajudando o usuário a manter o controle durante a puxada.",
+  "slug": "puxada-alta-ld-b012"
+ },
+ {
+  "code": "LD-B013",
+  "nome": "Abdominal Crunch Máquina",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Abdômen",
+  "dim": [
+   1565,
+   930,
+   1330
+  ],
+  "peso": "248 kg",
+  "bateria": "95 kg",
+  "descricao": "Permite o treino controlado do abdômen por meio de uma trajetória guiada de flexão do tronco. O braço de movimento contrabalançado ajuda a reduzir a resistência inicial excessiva. Os apoios duplos para os pés estabilizam os membros inferiores sem exigir regulagens complexas.",
+  "slug": "abdominal-crunch-maquina-ld-b013"
+ },
+ {
+  "code": "LD-B014",
+  "nome": "Abdutor",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   1550,
+   1550,
+   1330
+  ],
+  "peso": "280 kg",
+  "bateria": "138 kg",
+  "descricao": "Desenvolvido para o treino direcionado da parte externa das coxas e da abdução do quadril. O mecanismo de ajuste inicial permite regular a posição em incrementos. Os apoios de joelhos e as duas posições para os pés sustentam as pernas com conforto durante todo o movimento.",
+  "slug": "abdutor-ld-b014"
+ },
+ {
+  "code": "LD-B015",
+  "nome": "Adutor",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   1550,
+   1550,
+   1330
+  ],
+  "peso": "280 kg",
+  "bateria": "138 kg",
+  "descricao": "Proporciona um treino controlado da parte interna das coxas, com ajuste acessível da posição inicial para facilitar a entrada e a saída. A bateria de pesos posicionada à frente cria uma posição de treino mais resguardada, favorecendo a sensação de estabilidade e conforto durante o exercício.",
+  "slug": "adutor-ld-b015"
+ },
+ {
+  "code": "LD-B016",
+  "nome": "Cadeira Flexora",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   1510,
+   1255,
+   1445
+  ],
+  "peso": "305 kg",
+  "bateria": "138 kg",
+  "descricao": "Projetada para o treino direcionado dos músculos posteriores da coxa na posição sentada. O encosto e o apoio de coxas ajustáveis ajudam a encontrar um alinhamento estável. A regulagem da posição inicial oferece opções para diferentes níveis de mobilidade e preferências de treino.",
+  "slug": "cadeira-flexora-ld-b016"
+ },
+ {
+  "code": "LD-B017",
+  "nome": "Extensão de Tríceps Máquina",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Braços",
+  "dim": [
+   1145,
+   1050,
+   1360
+  ],
+  "peso": "228 kg",
+  "bateria": "95 kg",
+  "descricao": "Permite o treino direcionado dos braços com postura sentada estável e movimento guiado de extensão. O assento e os apoios de braços angulados ajudam a manter o controle do tronco. A estrutura articulada dos pegadores se adapta a diferentes comprimentos de antebraço durante o exercício.",
+  "slug": "extensao-de-triceps-maquina-ld-b017"
+ },
+ {
+  "code": "LD-B018",
+  "nome": "Scott Máquina",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Braços",
+  "dim": [
+   1155,
+   1075,
+   1330
+  ],
+  "peso": "225 kg",
+  "bateria": "95 kg",
+  "descricao": "Oferece um movimento guiado de flexão dos braços, com apoios angulados para estabilizar a parte superior dos braços. As posições do eixo e dos pegadores favorecem uma trajetória confortável para os punhos, permitindo concentrar o esforço na contração controlada dos bíceps.",
+  "slug": "scott-maquina-ld-b018"
+ },
+ {
+  "code": "LD-B019",
+  "nome": "Extensão Lombar Máquina",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Costas",
+  "dim": [
+   1220,
+   1015,
+   1330
+  ],
+  "peso": "280 kg",
+  "bateria": "138 kg",
+  "descricao": "Projetada para o treino controlado da cadeia posterior e da região lombar. O mecanismo de ajuste inicial permite escolher uma amplitude adequada. O apoio lombar e as duas posições para os pés ajudam a manter o alinhamento estável do corpo durante o exercício.",
+  "slug": "extensao-lombar-maquina-ld-b019"
+ },
+ {
+  "code": "LD-B020",
+  "nome": "Remada Sentada Máquina",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Costas",
+  "dim": [
+   1345,
+   830,
+   1960
+  ],
+  "peso": "295 kg",
+  "bateria": "138 kg",
+  "descricao": "Permite treinar as regiões superior e média das costas por uma trajetória guiada de puxada. O eixo superior proporciona um arco de movimento suave. As múltiplas posições das mãos oferecem variedade ao treino e permitem trabalhar diferentes ângulos de puxada.",
+  "slug": "remada-sentada-maquina-ld-b020"
+ },
+ {
+  "code": "LD-B021",
+  "nome": "Puxada Fixa",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Costas",
+  "dim": [
+   1565,
+   1425,
+   1865
+  ],
+  "peso": "305 kg",
+  "bateria": "138 kg",
+  "descricao": "Oferece uma trajetória de puxada definida para o treino controlado das costas e para áreas de musculação em circuito. O assento angulado e o posicionamento dos pegadores ajudam o usuário a manter uma postura estável durante as repetições de puxada.",
+  "slug": "puxada-fixa-ld-b021"
+ },
+ {
+  "code": "LD-B022",
+  "nome": "Rosca Direta Iso-Lateral",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Braços",
+  "dim": [
+   970,
+   1480,
+   1500
+  ],
+  "peso": "236 kg",
+  "bateria": "2 × 50 kg",
+  "descricao": "Os braços independentes permitem movimentos naturais de abertura e fechamento, favorecendo o desenvolvimento equilibrado da força. O banco e os apoios ajustáveis ajudam a manter os punhos alinhados e uma posição confortável durante a rosca.",
+  "slug": "rosca-direta-iso-lateral-ld-b022"
+ },
+ {
+  "code": "LD-B023",
+  "nome": "Supino Iso-Lateral",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Peitoral",
+  "dim": [
+   1020,
+   1730,
+   1960
+  ],
+  "peso": "347 kg",
+  "bateria": "2 × 75 kg",
+  "descricao": "Os braços de empurrar independentes permitem o trabalho natural do peitoral e o desenvolvimento equilibrado dos dois lados do corpo. O desenho ergonômico proporciona um movimento suave e resistência equilibrada ao longo da amplitude.",
+  "slug": "supino-iso-lateral-ld-b023"
+ },
+ {
+  "code": "LD-B024",
+  "nome": "Remada Iso-Lateral",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Costas",
+  "dim": [
+   1300,
+   1580,
+   2090
+  ],
+  "peso": "347 kg",
+  "bateria": "2 × 75 kg",
+  "descricao": "Os braços de puxada independentes e a pegada supinada ergonômica favorecem movimentos naturais e o trabalho direcionado das costas. O banco ajustável oferece estabilidade e alinhamento adequado durante as repetições.",
+  "slug": "remada-iso-lateral-ld-b024"
+ },
+ {
+  "code": "LD-B025",
+  "nome": "Supino Inclinado Iso-Lateral",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Peitoral",
+  "dim": [
+   1020,
+   1730,
+   1960
+  ],
+  "peso": "347 kg",
+  "bateria": "2 × 75 kg",
+  "descricao": "Os braços independentes favorecem o desenvolvimento equilibrado do peitoral e dos ombros. O encosto inclinado facilita a entrada e a saída e oferece uma posição confortável para executar o movimento.",
+  "slug": "supino-inclinado-iso-lateral-ld-b025"
+ },
+ {
+  "code": "LD-B026",
+  "nome": "Desenvolvimento de Ombros Iso-Lateral",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Deltoides",
+  "dim": [
+   1150,
+   1580,
+   1380
+  ],
+  "peso": "339 kg",
+  "bateria": "2 × 75 kg",
+  "descricao": "Os braços independentes permitem um movimento natural de empurrar acima da cabeça e o desenvolvimento equilibrado dos ombros. As empunhaduras ajustáveis e a estrutura de apoio facilitam a entrada, a saída e a execução das séries.",
+  "slug": "desenvolvimento-de-ombros-iso-lateral-ld-b026"
+ },
+ {
+  "code": "LD-B027",
+  "nome": "Supino Declinado Iso-Lateral",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Peitoral",
+  "dim": [
+   1000,
+   1630,
+   1680
+  ],
+  "peso": "343 kg",
+  "bateria": "2 × 75 kg",
+  "descricao": "Projetado para enfatizar a porção inferior do peitoral, oferece uma trajetória de empurrar estável e natural. O ajuste do ângulo do banco melhora o conforto, enquanto os braços independentes permitem o trabalho individual de cada lado.",
+  "slug": "supino-declinado-iso-lateral-ld-b027"
+ },
+ {
+  "code": "LD-B028",
+  "nome": "Extensão de Tríceps Iso-Lateral",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Braços",
+  "dim": [
+   920,
+   1330,
+   1530
+  ],
+  "peso": "264 kg",
+  "bateria": "2 × 50 kg",
+  "descricao": "As trajetórias independentes dos braços favorecem o movimento natural dos cotovelos. O banco e os apoios ajustáveis ajudam a manter os punhos bem posicionados para um treino de tríceps direcionado e confortável.",
+  "slug": "extensao-de-triceps-iso-lateral-ld-b028"
+ },
+ {
+  "code": "LD-B029",
+  "nome": "Puxada Frontal Iso-Lateral",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Costas",
+  "dim": [
+   1220,
+   1480,
+   2040
+  ],
+  "peso": "360 kg",
+  "bateria": "2 × 75 kg",
+  "descricao": "A trajetória de puxada em arco natural combina braços independentes e opções ergonômicas de pegada supinada. O conjunto favorece o trabalho da musculatura das costas e o conforto dos punhos.",
+  "slug": "puxada-frontal-iso-lateral-ld-b029"
+ },
+ {
+  "code": "LD-B030",
+  "nome": "Remada Alta Iso-Lateral",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Costas",
+  "dim": [
+   1200,
+   1830,
+   1960
+  ],
+  "peso": "354 kg",
+  "bateria": "2 × 75 kg",
+  "descricao": "Combina uma trajetória específica de puxada com braços independentes para um treino de costas dinâmico e versátil. O desenho favorece o trabalho da parte superior das costas e um movimento suave.",
+  "slug": "remada-alta-iso-lateral-ld-b030"
+ },
+ {
+  "code": "LD-B031",
+  "nome": "Abdominal Máquina",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Abdômen",
+  "dim": [
+   1120,
+   1000,
+   1430
+  ],
+  "peso": "241 kg",
+  "bateria": "75 kg",
+  "descricao": "O movimento simultâneo das partes superior e inferior do corpo trabalha a região abdominal. A estrutura compacta permite um exercício controlado e desafiador, com uso eficiente do espaço.",
+  "slug": "abdominal-maquina-ld-b031"
+ },
+ {
+  "code": "LD-B032",
+  "nome": "Flexora Iso-Lateral",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   1150,
+   1580,
+   1380
+  ],
+  "peso": "339 kg",
+  "bateria": "2 × 75 kg",
+  "descricao": "Os apoios ergonômicos e os braços contrabalançados favorecem o trabalho dos músculos posteriores da coxa. Os ajustes facilitam a entrada e a saída e proporcionam uma execução confortável e suave.",
+  "slug": "flexora-iso-lateral-ld-b032"
+ },
+ {
+  "code": "LD-B033",
+  "nome": "Cadeira Extensora Iso-Lateral",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   1220,
+   1450,
+   1400
+  ],
+  "peso": "341 kg",
+  "bateria": "2 × 75 kg",
+  "descricao": "Permite o treino individual de cada perna e ajustes personalizados da amplitude de movimento. As trajetórias independentes favorecem o desenvolvimento equilibrado, a biomecânica adequada e o controle da extensão dos joelhos.",
+  "slug": "cadeira-extensora-iso-lateral-ld-b033"
+ },
+ {
+  "code": "LD-B034",
+  "nome": "Agachamento V-Squat",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Pernas e glúteos",
+  "dim": [
+   2465,
+   800,
+   2005
+  ],
+  "peso": "430 kg",
+  "bateria": "195 kg",
+  "descricao": "Projetado para reproduzir a biomecânica natural do agachamento, apresenta uma trajetória curva e suave que ajuda a reduzir a sobrecarga na lombar e nos joelhos. Oferece uma alternativa ao leg press e ao hack squat.",
+  "slug": "agachamento-v-squat-ld-b034"
+ },
+ {
+  "code": "LD-B035",
+  "nome": "Estação Multifuncional Dupla",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Multitrabalho",
+  "dim": [
+   1560,
+   1150,
+   2150
+  ],
+  "peso": "452 kg",
+  "bateria": "2 × 105 kg",
+  "descricao": "Permite realizar movimentos semelhantes aos das atividades cotidianas, trabalhando de forma integrada os músculos do corpo inteiro. Os cabos permitem explorar diferentes planos de movimento e desenvolver força, estabilidade e coordenação.",
+  "slug": "estacao-multifuncional-dupla-ld-b035"
+ },
+ {
+  "code": "LD-B036",
+  "nome": "Cross-Smith",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Multitrabalho",
+  "dim": [
+   2580,
+   1020,
+   2480
+  ],
+  "peso": "480 kg",
+  "bateria": "2 × 92 kg",
+  "descricao": "Combina o treino por cabos com uma máquina Smith. O par de polias e as duas baterias de pesos ampliam as possibilidades de exercícios e permitem que mais pessoas treinem ao mesmo tempo, reunindo diferentes opções de treino de força em uma única estação.",
+  "slug": "cross-smith-ld-b036"
+ },
+ {
+  "code": "LD-B037",
+  "nome": "Crossover Angular",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Multitrabalho",
+  "dim": [
+   1950,
+   1040,
+   2350
+  ],
+  "peso": "381 kg",
+  "bateria": "2 × 95 kg",
+  "descricao": "Oferece 17 posições de ajuste dos cabos para diferentes exercícios e usuários de várias estaturas, incluindo os mais altos. Pode ser utilizado como estação independente. As duas baterias de 95 kg oferecem carga também para praticantes experientes.",
+  "slug": "crossover-angular-ld-b037"
+ },
+ {
+  "code": "LD-B038",
+  "nome": "Crossover",
+  "linha": "Bateria de pesos",
+  "grupo_muscular": "Multitrabalho",
+  "dim": [
+   4400,
+   750,
+   2280
+  ],
+  "peso": "440 kg",
+  "bateria": "2 × 110 kg",
+  "descricao": "As duas estações com posições ajustáveis dos cabos permitem o treino individual ou de duas pessoas ao mesmo tempo. A barra fixa revestida de borracha oferece duas posições de pegada. Os ajustes rápidos permitem combinar o equipamento com bancos e outros acessórios para variar os exercícios.",
+  "slug": "crossover-ld-b038"
+ }
+]

@@ -1,0 +1,59 @@
+---
+import { FOLGA, porCodigo, type Kit } from '../data/site';
+import { poligonos } from '../data/modelos';
+
+interface Props {
+  kit: Kit;
+  /** Tema escuro (para seções pretas). */
+  dark?: boolean;
+}
+const { kit, dark = false } = Astro.props;
+const W = kit.largura;
+const D = kit.profundidade;
+const itens = kit.itens.map((it, k) => {
+  const p = porCodigo.get(it.code)!;
+  const [c, l] = [p.dim[0] / 1000, p.dim[1] / 1000];
+  const [w, h] = it.rot % 2 ? [c, l] : [l, c];
+  return { ...it, n: k + 1, w, h };
+});
+---
+
+<svg class:list={['planta', { dark }]} viewBox={`-0.5 -0.5 ${W + 1} ${D + 1}`} role="img" aria-label={`Planta de ${kit.nome}: ${W} por ${D} metros, com ${itens.length} equipamentos em escala`}>
+  <rect x="-0.14" y="-0.14" width={W + 0.28} height={D + 0.28} class="parede"></rect>
+  <rect x="0" y="0" width={W} height={D} class="piso"></rect>
+  {
+    itens.map((i) => (
+      <rect
+        class="zona"
+        x={Math.max(0, i.x - i.w / 2 - FOLGA)}
+        y={Math.max(0, i.y - i.h / 2 - FOLGA)}
+        width={Math.min(W, i.x + i.w / 2 + FOLGA) - Math.max(0, i.x - i.w / 2 - FOLGA)}
+        height={Math.min(D, i.y + i.h / 2 + FOLGA) - Math.max(0, i.y - i.h / 2 - FOLGA)}
+      />
+    ))
+  }
+  {itens.map((i) => <g class="equip" set:html={poligonos(i.code, i.x, i.y, i.rot)} />)}
+  {
+    itens.map((i) => (
+      <>
+        <circle class="dot" cx={i.x} cy={i.y} r="0.23" />
+        <text class="n" x={i.x} y={i.y} dominant-baseline="central">{i.n}</text>
+      </>
+    ))
+  }
+</svg>
+
+<style>
+  .planta { width: 100%; height: auto; display: block; }
+  .parede { fill: #141413; }
+  .piso { fill: #fbfaf7; }
+  .zona { fill: #ebe4d7; }
+  .equip :global(polygon) { fill: #141413; }
+  .dot { fill: #fff; stroke: #141413; stroke-width: 0.03; }
+  .n { font: 600 0.26px Barlow, sans-serif; text-anchor: middle; fill: #141413; }
+  .dark .parede { fill: #55524c; }
+  .dark .piso { fill: #1b1b1a; }
+  .dark .zona { fill: rgba(196, 162, 116, 0.16); }
+  .dark .equip :global(polygon) { fill: #f1efea; }
+  .dark .dot { fill: #c4a274; stroke: none; }
+</style>

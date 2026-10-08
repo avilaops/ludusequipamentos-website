@@ -1,0 +1,28 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  code: string;
+  alt: string;
+  /** Largura de exibição aproximada, para escolher os tamanhos gerados. */
+  size?: 'card' | 'full';
+  eager?: boolean;
+}
+const { code, alt, size = 'card', eager = false } = Astro.props;
+const fotos = import.meta.glob<{ default: ImageMetadata }>('../assets/produtos/*.jpg', { eager: true });
+const foto = fotos[`../assets/produtos/${code}.jpg`]?.default;
+---
+
+{
+  foto && (
+    <Image
+      src={foto}
+      alt={alt}
+      widths={size === 'card' ? [320, 520] : [520, 900, 1400]}
+      sizes={size === 'card' ? '(max-width: 600px) 46vw, 260px' : '(max-width: 900px) 92vw, 560px'}
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : undefined}
+    />
+  )
+}

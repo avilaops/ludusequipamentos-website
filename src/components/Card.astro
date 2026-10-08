@@ -1,0 +1,27 @@
+---
+import Foto from './Foto.astro';
+import type { Produto } from '../data/site';
+
+interface Props {
+  p: Produto;
+}
+const { p } = Astro.props;
+---
+
+<a
+  class="card"
+  href={`/loja/${p.slug}/`}
+  data-linha={p.linha}
+  data-grupo={p.grupo_muscular}
+  data-busca={`${p.code} ${p.nome}`.toLowerCase()}
+>
+  <div class="stage">
+    <span class="b3d">3D</span>
+    <Foto code={p.code} alt={`${p.nome} (${p.code})`} />
+  </div>
+  <div class="txt">
+    <span class="code">{p.code}</span>
+    <span class="name">{p.nome}</span>
+    <span class="meta">{p.linha} · {p.grupo_muscular}</span>
+  </div>
+</a>

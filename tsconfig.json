@@ -1,0 +1,9 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "resolveJsonModule": true,
+    "paths": { "three/addons/*": ["./node_modules/@types/three/examples/jsm/*"] }
+  },
+  "include": [".astro/types.d.ts", "src"],
+  "exclude": ["dist"]
+}

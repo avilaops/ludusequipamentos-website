@@ -1,0 +1,42 @@
+---
+import { spec } from '../data/modelos';
+
+interface Props {
+  code: string;
+  /** Carrega assim que a página abre (padrão: só quando entra na tela). */
+  eager?: boolean;
+}
+const { code, eager = false } = Astro.props;
+const dados = spec(code);
+---
+
+{
+  dados && (
+    <div class="v3d" data-v3d data-eager={eager ? '1' : undefined} data-spec={JSON.stringify(dados)}>
+      <div class="v3d-ph">Carregando o modelo 3D…</div>
+    </div>
+  )
+}
+
+<script>
+  // O gerador 3D (Three.js) só é baixado quando o visualizador entra na tela.
+  const start = async (host: HTMLElement) => {
+    if (host.dataset.ready) return;
+    host.dataset.ready = '1';
+    try {
+      const { EquipmentViewer } = await import('@avilaops/gerador-3d/viewer');
+      const spec = JSON.parse(host.dataset.spec!);
+      host.replaceChildren();
+      const viewer = new EquipmentViewer(host, { background: '#eeece7' });
+      viewer.setEquipment(spec);
+      host.addEventListener('pointerdown', () => host.dispatchEvent(new CustomEvent('ludus:3d', { bubbles: true })), { once: true });
+    } catch {
+      host.querySelector('.v3d-ph')!.textContent = 'Não foi possível carregar o 3D neste aparelho.';
+    }
+  };
+  const io = new IntersectionObserver(
+    (es) => es.forEach((e) => e.isIntersecting && (io.unobserve(e.target), start(e.target as HTMLElement))),
+    { rootMargin: '300px' }
+  );
+  document.querySelectorAll<HTMLElement>('[data-v3d]').forEach((el) => (el.dataset.eager ? start(el) : io.observe(el)));
+</script>
