@@ -22,7 +22,7 @@ jobs:
           path: dist
           retention-days: 3
 
-  # Publica em ludus.avilaops.com a cada push na main. Só roda se o repositório tiver
+  # Publica em ludusequipamentos.com a cada push na main. Só roda se o repositório tiver
   # o segredo DEPLOY_SSH_KEY (chave com acesso ao servidor "applications").
   deploy:
     needs: build
@@ -48,4 +48,4 @@ jobs:
           ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
           DIR=/var/www/ludus.avilaops.com
           tar -C dist -cf - . | ssh -i ~/.ssh/deploy "root@$DEPLOY_HOST" "mkdir -p $DIR.novo && tar -C $DIR.novo -xf - && rm -rf $DIR && mv $DIR.novo $DIR"
-          curl -fsS -o /dev/null https://ludus.avilaops.com/
+          curl -fsS -o /dev/null https://ludusequipamentos.com/

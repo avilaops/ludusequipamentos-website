@@ -22,7 +22,7 @@ const path = Astro.url.pathname;
 const logo = await getImage({ src: logoBranca, width: 360, format: 'webp' });
 const icon = await getImage({ src: capacete, width: 96, format: 'png' });
 const wa = whatsapp('Olá! Vim pelo site da Ludus e quero um orçamento.');
-const indexar = import.meta.env.PUBLIC_INDEXAR === '1';
+const indexar = import.meta.env.PUBLIC_INDEXAR !== '0';
 const gtm = import.meta.env.PUBLIC_GTM_ID ?? '';
 const org = {
   '@context': 'https://schema.org',
@@ -44,7 +44,7 @@ const org = {
     <link rel="canonical" href={canonical} />
     <link rel="icon" href={icon.src} />
     <meta name="theme-color" content="#111110" />
-    {/* Endereço provisório fica fora dos buscadores. PUBLIC_INDEXAR=1 libera quando o domínio definitivo entrar. */}
+    {/* Domínio definitivo é indexado. PUBLIC_INDEXAR=0 tira dos buscadores (ex.: ambiente de teste). */}
     {!indexar && <meta name="robots" content="noindex, nofollow" />}
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />

@@ -1,7 +1,7 @@
 # Site da Ludus Equipamentos
 
 Site institucional, loja (catálogo por orçamento) e simulador "Monte sua academia".
-Publicado em https://ludus.avilaops.com enquanto o domínio da Ludus não aponta para cá (marcado como noindex).
+Publicado em https://ludusequipamentos.com. Os endereços antigos (ludus.avilaops.com, www e ludusequipamentos.com.br) redirecionam para ele.
 
 | Rota | O que é |
 | --- | --- |
@@ -39,7 +39,8 @@ Astro (saída estática), TypeScript, Three.js via gerador 3D, fontes Barlow e B
 | --- | --- |
 | `PUBLIC_GTM_ID` | ID do Google Tag Manager. Sem ele nada de medição é carregado e o aviso de cookies não aparece. Os eventos (`clique_whatsapp`, `interacao_3d`, `visita_qr`, `envio_formulario`, `abrir_ar`) já vão para `window.dataLayer`. |
 | `PUBLIC_LEAD_ENDPOINT` | Endereço que recebe o formulário (multipart, com a planta). Sem ele o formulário abre o WhatsApp com os dados preenchidos. |
-| `PUBLIC_INDEXAR=1` | Tira o noindex. Usar quando o domínio definitivo estiver no ar (ajustar também `SITE_URL` e `public/robots.txt`). |
+| `PUBLIC_INDEXAR=0` | Coloca noindex em todas as páginas (para ambientes de teste). Sem a variável, o site é indexado. |
+| `SITE_URL` | Endereço público usado em canonical, og:url e sitemap. Padrão: `https://ludusequipamentos.com`. |
 
 Os arquivos de AR (`public/modelos/*.glb` e `*.usdz`) saem do gerador com `npm run modelos` e não ficam no git.
 
@@ -53,4 +54,4 @@ O workflow `.github/workflows/ci.yml` checa e faz o build a cada push. Ele publi
 - AR não testado em aparelho real.
 - Kits de 300 e 600 m² são composição sugerida, a validar com a Ludus.
 - Endereço, garantia, prazo e pagamento: "a confirmar".
-- Domínio definitivo e remoção do noindex.
+- Cadastrar ludusequipamentos.com no Search Console e enviar o sitemap.
