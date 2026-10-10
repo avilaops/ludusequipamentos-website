@@ -17,7 +17,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.10",
     "@astrojs/sitemap": "^3.7.4",
-    "@avilaops/gerador-3d": "github:avilaops/gerador-3d#962d597",
+    "@avilaops/gerador-3d": "github:avilaops/gerador-3d#930fd6d",
     "@fontsource/barlow": "^5.3.0",
     "@fontsource/barlow-condensed": "^5.3.0",
     "astro": "^5.18.2",
@@ -29,6 +29,7 @@
   "devDependencies": {
     "@napi-rs/canvas": "^1.0.10",
     "@types/three": "^0.149.0",
+    "gltf-validator": "^2.0.0-dev.3.10",
     "vite-node": "^6.0.0"
   }
 }
