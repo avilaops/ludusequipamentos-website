@@ -5,6 +5,11 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Foto from '../components/Foto.astro';
 import { linhas, produtos } from '../data/site';
+import notas from '@avilaops/gerador-3d/catalogs/ludus/silhueta.json';
+
+// Nota de silhueta (0 a 1): quanto o contorno do modelo coincide com o da foto.
+const nota = (code: string) => (notas as Record<string, number>)[code];
+const faixa = (n: number) => (n < 0.3 ? 'baixa' : n < 0.45 ? 'media' : 'alta');
 
 const renders = import.meta.glob<{ default: ImageMetadata }>(
   '/node_modules/@avilaops/gerador-3d/catalogs/ludus/models/*/thumb.png',
@@ -18,7 +23,7 @@ const render = (code: string) =>
   <section class="wrap rev">
     <span class="kicker">Revisão interna</span>
     <h1>Foto × modelo 3D</h1>
-    <p class="lead">Os {produtos.length} equipamentos, com a foto do catálogo à esquerda e o modelo 3D à direita. Clique para abrir a página do produto.</p>
+    <p class="lead">Os {produtos.length} equipamentos, com a foto do catálogo à esquerda e o modelo 3D à direita. Clique para abrir a página do produto. O número é a nota de silhueta, de 0 a 1: quanto o contorno do modelo coincide com o da foto. É uma medida aproximada, para apontar por onde começar.</p>
     <nav class="chips">{linhas.map((l) => <a class="chip" href={`#${l.slug}`}>{l.titulo}</a>)}</nav>
     {
       linhas.map((l) => (
@@ -33,7 +38,7 @@ const render = (code: string) =>
                     <div class="stage"><Foto code={p.code} alt={`Foto: ${p.nome}`} /></div>
                     <div class="stage r">{render(p.code) && <Image src={render(p.code)!} alt={`Modelo 3D: ${p.nome}`} widths={[360, 600]} sizes="(max-width: 700px) 46vw, 300px" loading="lazy" />}</div>
                   </div>
-                  <div class="txt"><span class="code">{p.code}</span> <b>{p.nome}</b></div>
+                  <div class="txt"><span class="code">{p.code}</span> <b>{p.nome}</b>{nota(p.code) !== undefined && <span class={`nota ${faixa(nota(p.code))}`}>{nota(p.code).toFixed(2).replace('.', ',')}</span>}</div>
                 </a>
               ))}
           </div>
@@ -53,5 +58,8 @@ const render = (code: string) =>
   .imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); }
   .imgs .stage { border-radius: 0; aspect-ratio: 1; }
   .imgs .stage.r :global(img) { padding: 0; mix-blend-mode: normal; }
-  .txt { padding: 10px 14px 12px; font-size: 15px; }
+  .txt { padding: 10px 14px 12px; font-size: 15px; display: flex; gap: 6px; align-items: baseline; }
+  .nota { margin-left: auto; font-variant-numeric: tabular-nums; font-weight: 600; padding: 1px 8px; border-radius: 99px; border: 1px solid var(--line); }
+  .nota.baixa { color: #b3261e; border-color: #b3261e; }
+  .nota.alta { color: #1e7a3c; border-color: #1e7a3c; }
 </style>
