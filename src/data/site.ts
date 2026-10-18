@@ -13,7 +13,8 @@ export interface Produto {
   descricao: string;
 }
 
-export const produtos = produtosJson as Produto[];
+const produtosOcultos = new Set(['LD-B010', 'LD-B011', 'LD-B034']);
+export const produtos = (produtosJson as Produto[]).filter((produto) => !produtosOcultos.has(produto.code));
 export const porCodigo = new Map(produtos.map((p) => [p.code, p]));
 
 /** Dados da empresa. O que ainda não foi informado pela Ludus fica como `null` e aparece como "a confirmar". */
@@ -162,6 +163,7 @@ function kitStudio(): Kit {
  */
 function distribuir(w: number, d: number, codes: string[]): ItemPlanta[] {
   const itens: ItemPlanta[] = [];
+  codes = codes.filter((code) => porCodigo.has(code));
   const dim = (code: string) => {
     const p = porCodigo.get(code)!;
     return { C: p.dim[0] / 1000, L: p.dim[1] / 1000 };

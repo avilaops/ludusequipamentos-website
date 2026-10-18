@@ -5,11 +5,11 @@ Publicado em https://ludusequipamentos.com. Os endereços antigos (ludus.avilaop
 
 | Rota | O que é |
 | --- | --- |
-| `/` | Institucional: proposta, linhas, simulador, 3D, como funciona, contato |
-| `/loja/` | Os 94 equipamentos, com busca e filtros por linha e grupo muscular (refletidos na URL) |
-| `/loja/<slug>/` | Página do equipamento: foto, 3D, ficha, planta, cores, relacionados, WhatsApp. Endereço permanente (alvo do QR do catálogo) |
+| `/` | Institucional: proposta, linhas, simulador, como funciona, contato |
+| `/loja/` | Os 91 equipamentos publicados, com busca e filtros por linha e grupo muscular (refletidos na URL) |
+| `/loja/<slug>/` | Página do equipamento: foto, ficha, planta, cores, relacionados, WhatsApp. Endereço permanente (alvo do QR do catálogo) |
 | `/kits/` e `/kits/<id>/` | Academias de 150, 300 e 600 m² com planta e lista |
-| `/simulador/` | Planta em escala com arrastar, giro livre e encaixe, obstáculos, sugestão de layout, edição no 3D, projetos salvos, PDF e PNG, link compartilhável e pedido de orçamento |
+| `/simulador/` | Planta em escala com arrastar, giro livre e encaixe, obstáculos, sugestão de layout, projetos salvos, PDF e PNG, link compartilhável e pedido de orçamento |
 
 Links antigos do QR (`/?id=LD-B004`) redirecionam para a página do equipamento.
 
@@ -24,7 +24,7 @@ Links antigos do QR (`/?id=LD-B004`) redirecionam para a página do equipamento.
 
 ## De onde vêm os dados
 
-- `src/data/produtos.json`: os 94 produtos (código, nome, linha, grupo, medidas, peso, bateria, descrição, slug). O slug não muda depois de impresso no catálogo.
+- `src/data/produtos.json`: catálogo-fonte com 94 produtos (código, nome, linha, grupo, medidas, peso, bateria, descrição, slug). A exportação pública em `src/data/site.ts` oculta os itens fora do escopo do cliente. O slug não muda depois de impresso no catálogo.
 - `src/assets/produtos/<código>.jpg`: fotos do catálogo.
 - `src/data/site.ts`: dados da empresa, linhas, cores e o Kit Studio. O que a Ludus ainda não informou (CNPJ, endereço, garantia, prazo, pagamento) fica `null` e aparece no site como "a confirmar". Nada disso é inventado.
 - Modelos 3D, plantas e silhuetas: pacote `@avilaops/gerador-3d` (repositório `avilaops/gerador-3d`), fixado por commit no `package.json`. Para atualizar os modelos, troque o commit e rode `npm install`.

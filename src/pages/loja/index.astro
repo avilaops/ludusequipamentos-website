@@ -6,13 +6,13 @@ import { grupos, linhas, produtos } from '../../data/site';
 
 <Base
   title="Loja · Ludus Equipamentos"
-  description="Os 94 equipamentos de musculação Ludus Premium, com foto, ficha técnica, planta e modelo 3D. Filtre por linha e grupo muscular."
+  description={`${produtos.length} equipamentos de musculação Ludus Premium, com foto, ficha técnica e planta. Filtre por linha e grupo muscular.`}
 >
   <section class="head dark">
     <div class="wrap">
       <span class="kicker">Loja</span>
       <h1>Equipamentos</h1>
-      <p class="lead">94 equipamentos Ludus Premium. Cada um com foto, ficha técnica, planta em escala e modelo 3D. A compra é por orçamento, direto com a Ludus.</p>
+      <p class="lead">{produtos.length} equipamentos Ludus Premium. Cada um com foto, ficha técnica e planta em escala. A compra é por orçamento, direto com a Ludus.</p>
     </div>
   </section>
 
