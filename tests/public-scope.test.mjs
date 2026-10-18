@@ -38,19 +38,50 @@ test('removes the three out-of-scope products from the generated catalog', () =>
   }
 });
 
-test('does not expose 3D or augmented-reality controls in public HTML', () => {
+test('exposes 3D only in the academy simulator', () => {
   const forbidden = [
-    /Ver em 3D/i,
-    /modelo 3D/i,
     /em cada produto/i,
     /data-aba="3d"/i,
-    /data-modo="3d"/i,
     /Ver no meu espaço \(AR\)/i,
     /class="b3d"/i,
   ];
 
-  for (const file of htmlFiles(new URL('../dist/', import.meta.url))) {
+  const simulator = readFileSync(new URL('../dist/simulador/index.html', import.meta.url), 'utf8');
+  assert.match(simulator, /data-modo="3d"/i);
+  assert.match(simulator, /Ver em 3D/i);
+  assert.match(simulator, /id="cena"/i);
+
+  for (const file of htmlFiles(new URL('../dist/', import.meta.url)).filter((file) => !file.pathname.endsWith('/simulador/index.html'))) {
     const html = readFileSync(file, 'utf8');
+    assert.doesNotMatch(html, /data-modo="3d"/i, `${file.pathname}: simulator 3D control`);
+    assert.doesNotMatch(html, /Ver em 3D/i, `${file.pathname}: individual 3D control`);
+    assert.doesNotMatch(html, /modelo 3D/i, `${file.pathname}: individual 3D copy`);
     for (const pattern of forbidden) assert.doesNotMatch(html, pattern, `${file.pathname}: ${pattern}`);
   }
+});
+
+test('publishes the supplied Ludus logo and symbol favicon', () => {
+  const home = readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
+
+  assert.match(home, /ludus-retangular[^"']*\.webp/);
+  assert.match(home, /<link rel="icon" type="image\/png" href="\/favicon-32x32\.png"/);
+  assert.match(home, /<link rel="apple-touch-icon" href="\/apple-touch-icon\.png"/);
+  assert.equal(existsSync(new URL('../dist/favicon-32x32.png', import.meta.url)), true);
+  assert.equal(existsSync(new URL('../dist/apple-touch-icon.png', import.meta.url)), true);
+});
+
+test('does not publish unconfirmed information', () => {
+  for (const file of htmlFiles(new URL('../dist/', import.meta.url))) {
+    const html = readFileSync(file, 'utf8');
+    assert.doesNotMatch(html, /a confirmar/i, file.pathname);
+  }
+});
+
+test('publishes the confirmed address and WhatsApp number', () => {
+  const home = readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
+
+  assert.match(home, /R\. Oswaldo Guirão Peron, 4473 - Votuporanga, SP, 15508-514/);
+  assert.match(home, /\(17\) 99649-5696/);
+  assert.match(home, /wa\.me\/5517996495696/);
+  assert.doesNotMatch(home, /99777-5154|5517997775154/);
 });
