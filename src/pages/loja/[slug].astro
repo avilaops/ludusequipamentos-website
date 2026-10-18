@@ -62,7 +62,6 @@ const jsonLd = {
             {p.peso && <tr><td>Peso do equipamento</td><td>{p.peso}</td></tr>}
             {p.bateria ? <tr><td>Bateria de pesos</td><td>{p.bateria}</td></tr> : p.linha === 'Peso livre' ? <tr><td>Carga</td><td>Anilhas</td></tr> : null}
             <tr><td>Área de treino</td><td>{fmt(areaTreino(p))} m²</td></tr>
-            <tr><td>Carga máxima</td><td><span class="tbd">a confirmar</span></td></tr>
           </tbody>
         </table>
       </div>
@@ -108,7 +107,6 @@ const jsonLd = {
           )
         }
       </div>
-      <p class="nota">Opções de fábrica. Disponibilidade <span class="tbd">a confirmar</span> no orçamento.</p>
     </section>
 
     {

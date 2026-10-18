@@ -64,3 +64,10 @@ test('publishes the supplied Ludus logo and symbol favicon', () => {
   assert.equal(existsSync(new URL('../dist/favicon-32x32.png', import.meta.url)), true);
   assert.equal(existsSync(new URL('../dist/apple-touch-icon.png', import.meta.url)), true);
 });
+
+test('does not publish unconfirmed information', () => {
+  for (const file of htmlFiles(new URL('../dist/', import.meta.url))) {
+    const html = readFileSync(file, 'utf8');
+    assert.doesNotMatch(html, /a confirmar/i, file.pathname);
+  }
+});

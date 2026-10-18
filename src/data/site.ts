@@ -17,7 +17,7 @@ const produtosOcultos = new Set(['LD-B010', 'LD-B011', 'LD-B034']);
 export const produtos = (produtosJson as Produto[]).filter((produto) => !produtosOcultos.has(produto.code));
 export const porCodigo = new Map(produtos.map((p) => [p.code, p]));
 
-/** Dados da empresa. O que ainda não foi informado pela Ludus fica como `null` e aparece como "a confirmar". */
+/** Dados públicos confirmados da empresa. */
 export const empresa = {
   nome: 'Ludus Equipamentos',
   razaoSocial: 'Ludus Equipamentos para Musculação Ltda',
@@ -27,10 +27,6 @@ export const empresa = {
   email: 'comercial@ludusequipamentos.com.br',
   cnpj: '66.058.955/0001-08' as string | null,
   inscricaoEstadual: '718.319.130.117' as string | null,
-  endereco: null as string | null,
-  garantia: null as string | null,
-  prazoEntrega: null as string | null,
-  pagamento: null as string | null,
 };
 
 export function whatsapp(mensagem: string): string {
@@ -76,7 +72,7 @@ export function areaTreino(p: Produto): number {
 export const fmt = (n: number, d = 1) =>
   n.toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d });
 
-/** Opções de cor do catálogo (disponibilidade a confirmar com a Ludus). */
+/** Opções de cor apresentadas no catálogo. */
 export const coresEstrutura = [
   ['Piano Black', '#121212'],
   ['Graphite Black', '#3a3b3d'],
