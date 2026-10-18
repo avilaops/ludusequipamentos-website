@@ -28,6 +28,7 @@ const org = {
   name: empresa.nome,
   email: empresa.email,
   telephone: `+${empresa.whatsappNumero}`,
+  address: empresa.endereco,
   url: Astro.site?.href,
 };
 ---
@@ -97,6 +98,7 @@ const org = {
         <div class="fine">
           <span>© {new Date().getFullYear()} {empresa.nome}</span>
           <span>{empresa.razaoSocial} · CNPJ {empresa.cnpj} · IE {empresa.inscricaoEstadual}</span>
+          <span>{empresa.endereco}</span>
         </div>
       </div>
     </footer>

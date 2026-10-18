@@ -22,9 +22,10 @@ export const empresa = {
   nome: 'Ludus Equipamentos',
   razaoSocial: 'Ludus Equipamentos para Musculação Ltda',
   marca: 'Ludus Premium',
-  whatsapp: '(17) 99777-5154',
-  whatsappNumero: '5517997775154',
+  whatsapp: '(17) 99649-5696',
+  whatsappNumero: '5517996495696',
   email: 'comercial@ludusequipamentos.com.br',
+  endereco: 'R. Oswaldo Guirão Peron, 4473 - Votuporanga, SP, 15508-514',
   cnpj: '66.058.955/0001-08' as string | null,
   inscricaoEstadual: '718.319.130.117' as string | null,
 };

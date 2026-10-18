@@ -71,3 +71,12 @@ test('does not publish unconfirmed information', () => {
     assert.doesNotMatch(html, /a confirmar/i, file.pathname);
   }
 });
+
+test('publishes the confirmed address and WhatsApp number', () => {
+  const home = readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
+
+  assert.match(home, /R\. Oswaldo Guirão Peron, 4473 - Votuporanga, SP, 15508-514/);
+  assert.match(home, /\(17\) 99649-5696/);
+  assert.match(home, /wa\.me\/5517996495696/);
+  assert.doesNotMatch(home, /99777-5154|5517997775154/);
+});
