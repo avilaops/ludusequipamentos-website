@@ -38,19 +38,24 @@ test('removes the three out-of-scope products from the generated catalog', () =>
   }
 });
 
-test('does not expose 3D or augmented-reality controls in public HTML', () => {
+test('exposes 3D only in the academy simulator', () => {
   const forbidden = [
-    /Ver em 3D/i,
-    /modelo 3D/i,
     /em cada produto/i,
     /data-aba="3d"/i,
-    /data-modo="3d"/i,
     /Ver no meu espaço \(AR\)/i,
     /class="b3d"/i,
   ];
 
-  for (const file of htmlFiles(new URL('../dist/', import.meta.url))) {
+  const simulator = readFileSync(new URL('../dist/simulador/index.html', import.meta.url), 'utf8');
+  assert.match(simulator, /data-modo="3d"/i);
+  assert.match(simulator, /Ver em 3D/i);
+  assert.match(simulator, /id="cena"/i);
+
+  for (const file of htmlFiles(new URL('../dist/', import.meta.url)).filter((file) => !file.pathname.endsWith('/simulador/index.html'))) {
     const html = readFileSync(file, 'utf8');
+    assert.doesNotMatch(html, /data-modo="3d"/i, `${file.pathname}: simulator 3D control`);
+    assert.doesNotMatch(html, /Ver em 3D/i, `${file.pathname}: individual 3D control`);
+    assert.doesNotMatch(html, /modelo 3D/i, `${file.pathname}: individual 3D copy`);
     for (const pattern of forbidden) assert.doesNotMatch(html, pattern, `${file.pathname}: ${pattern}`);
   }
 });

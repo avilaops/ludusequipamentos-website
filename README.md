@@ -9,7 +9,7 @@ Publicado em https://ludusequipamentos.com. Os endereços antigos (ludus.avilaop
 | `/loja/` | Os 91 equipamentos publicados, com busca e filtros por linha e grupo muscular (refletidos na URL) |
 | `/loja/<slug>/` | Página do equipamento: foto, ficha, planta, cores, relacionados, WhatsApp. Endereço permanente (alvo do QR do catálogo) |
 | `/kits/` e `/kits/<id>/` | Academias de 150, 300 e 600 m² com planta e lista |
-| `/simulador/` | Planta em escala com arrastar, giro livre e encaixe, obstáculos, sugestão de layout, projetos salvos, PDF e PNG, link compartilhável e pedido de orçamento |
+| `/simulador/` | Planta em escala com arrastar, giro livre e encaixe, obstáculos, sugestão de layout, edição no 3D, projetos salvos, PDF e PNG, link compartilhável e pedido de orçamento |
 
 Links antigos do QR (`/?id=LD-B004`) redirecionam para a página do equipamento.
 
