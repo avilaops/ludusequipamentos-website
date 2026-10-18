@@ -54,3 +54,13 @@ test('does not expose 3D or augmented-reality controls in public HTML', () => {
     for (const pattern of forbidden) assert.doesNotMatch(html, pattern, `${file.pathname}: ${pattern}`);
   }
 });
+
+test('publishes the supplied Ludus logo and symbol favicon', () => {
+  const home = readFileSync(new URL('../dist/index.html', import.meta.url), 'utf8');
+
+  assert.match(home, /ludus-retangular[^"']*\.webp/);
+  assert.match(home, /<link rel="icon" type="image\/png" href="\/favicon-32x32\.png"/);
+  assert.match(home, /<link rel="apple-touch-icon" href="\/apple-touch-icon\.png"/);
+  assert.equal(existsSync(new URL('../dist/favicon-32x32.png', import.meta.url)), true);
+  assert.equal(existsSync(new URL('../dist/apple-touch-icon.png', import.meta.url)), true);
+});

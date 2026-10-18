@@ -6,8 +6,7 @@ import '@fontsource/barlow-condensed/600.css';
 import '@fontsource/barlow-condensed/700.css';
 import '../styles/global.css';
 import { getImage } from 'astro:assets';
-import logoBranca from '../assets/marca/ludus-branca.png';
-import capacete from '../assets/marca/capacete.png';
+import logoRetangular from '../assets/marca/ludus-retangular.jpg';
 import { empresa, whatsapp } from '../data/site';
 
 interface Props {
@@ -19,8 +18,7 @@ interface Props {
 const { title, description, image, jsonLd } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const path = Astro.url.pathname;
-const logo = await getImage({ src: logoBranca, width: 360, format: 'webp' });
-const icon = await getImage({ src: capacete, width: 96, format: 'png' });
+const logo = await getImage({ src: logoRetangular, width: 360, format: 'webp' });
 const wa = whatsapp('Olá! Vim pelo site da Ludus e quero um orçamento.');
 const indexar = import.meta.env.PUBLIC_INDEXAR !== '0';
 const gtm = import.meta.env.PUBLIC_GTM_ID ?? '';
@@ -42,7 +40,8 @@ const org = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
-    <link rel="icon" href={icon.src} />
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#111110" />
     {/* Domínio definitivo é indexado. PUBLIC_INDEXAR=0 tira dos buscadores (ex.: ambiente de teste). */}
     {!indexar && <meta name="robots" content="noindex, nofollow" />}
@@ -57,7 +56,7 @@ const org = {
     <header class="top">
       <div class="wrap">
         <a class="logo" href="/" aria-label="Ludus Equipamentos, página inicial">
-          <img src={logo.src} alt="Ludus" width="90" height="26" />
+          <img src={logo.src} alt="Ludus" width="88" height="28" />
         </a>
         <button class="menu-btn" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
@@ -79,7 +78,7 @@ const org = {
       <div class="wrap">
         <div class="cols">
           <div>
-            <img src={logo.src} alt="Ludus" width="104" height="30" />
+            <img src={logo.src} alt="Ludus" width="113" height="36" />
             <p>Equipamentos profissionais de musculação, do projeto da sala à entrega e montagem.</p>
           </div>
           <div>
