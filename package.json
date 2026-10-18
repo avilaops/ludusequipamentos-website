@@ -8,6 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
+    "test": "astro build && node --test tests/*.test.mjs",
     "deploy": "bash scripts/deploy.sh",
     "modelos": "bash scripts/modelos.sh"
   },

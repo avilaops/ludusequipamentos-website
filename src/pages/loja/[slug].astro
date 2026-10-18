@@ -4,7 +4,6 @@ import { getImage } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import Card from '../../components/Card.astro';
 import Foto from '../../components/Foto.astro';
-import Viewer3D from '../../components/Viewer3D.astro';
 import { areaTreino, coresBraco, coresEstrutura, empresa, fmt, FOLGA, produtos, whatsapp, type Produto } from '../../data/site';
 import { planta } from '../../data/modelos';
 import { musculos } from '../../data/musculos';
@@ -17,8 +16,6 @@ const [c, l, a] = p.dim;
 const wa = whatsapp(`Olá! Vi o ${p.nome} (${p.code}) no site e quero um orçamento.`);
 const svg = planta(p.code);
 const musc = musculos(p);
-const glb = `/modelos/${p.code}.glb`;
-const usdz = `/modelos/${p.code}.usdz`;
 const relacionados = [
   ...produtos.filter((x) => x.code !== p.code && x.grupo_muscular === p.grupo_muscular && x.linha === p.linha),
   ...produtos.filter((x) => x.code !== p.code && x.grupo_muscular === p.grupo_muscular && x.linha !== p.linha),
@@ -45,16 +42,8 @@ const jsonLd = {
 
     <div class="topo">
       <div class="midia">
-        <div class="abas" role="tablist" aria-label="Foto ou modelo 3D">
-          <button class="chip on" role="tab" aria-selected="true" data-aba="foto">Foto</button>
-          <button class="chip" role="tab" aria-selected="false" data-aba="3d">Ver em 3D</button>
-        </div>
-        <div class="stage foto" data-painel="foto">
+        <div class="stage foto">
           <Foto code={p.code} alt={`${p.nome} ${p.code}`} size="full" eager />
-        </div>
-        <div data-painel="3d" hidden>
-          <Viewer3D code={p.code} eager={false} cores />
-          <p class="nota">Modelo 3D representativo, gerado a partir das medidas do catálogo. Detalhes de acabamento podem variar em relação ao equipamento real.</p>
         </div>
       </div>
 
@@ -66,9 +55,6 @@ const jsonLd = {
         <div class="cta">
           <a class="btn wa" href={wa} target="_blank" rel="noopener" data-wa={p.code}>Pedir orçamento no WhatsApp</a>
           <a class="btn ghost" href={`/simulador/?add=${p.code}`}>Colocar na minha academia</a>
-          <a class="btn ghost ar" id="ar" hidden data-glb={glb} data-usdz={usdz} data-titulo={`${p.nome} ${p.code}`} rel="ar" href={usdz}>
-            <img alt="" width="1" height="1" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />Ver no meu espaço (AR)
-          </a>
         </div>
         <table class="ficha">
           <tbody>
@@ -122,7 +108,7 @@ const jsonLd = {
           )
         }
       </div>
-      <p class="nota">Opções de fábrica. Disponibilidade <span class="tbd">a confirmar</span> no orçamento. Na aba "Ver em 3D" você troca as cores no modelo.</p>
+      <p class="nota">Opções de fábrica. Disponibilidade <span class="tbd">a confirmar</span> no orçamento.</p>
     </section>
 
     {
@@ -149,40 +135,6 @@ const jsonLd = {
   </div>
 </Base>
 
-<script>
-  const abas = [...document.querySelectorAll<HTMLButtonElement>('[data-aba]')];
-  const paineis = [...document.querySelectorAll<HTMLElement>('[data-painel]')];
-  const mostrar = (nome: string) => {
-    abas.forEach((b) => {
-      const on = b.dataset.aba === nome;
-      b.classList.toggle('on', on);
-      b.setAttribute('aria-selected', String(on));
-    });
-    paineis.forEach((el) => (el.hidden = el.dataset.painel !== nome));
-  };
-  abas.forEach((b) => b.addEventListener('click', () => mostrar(b.dataset.aba!)));
-  // Quem chega pelo QR do catálogo (?origem=catalogo) ou pede o 3D na URL já cai no modelo.
-  const q = new URLSearchParams(location.search);
-  if (q.has('3d') || q.get('origem') === 'catalogo') mostrar('3d');
-
-  // Realidade aumentada: Quick Look no iPhone/iPad (USDZ) e Scene Viewer no Android (GLB).
-  const ar = document.getElementById('ar') as HTMLAnchorElement | null;
-  if (ar) {
-    const ios = document.createElement('a').relList?.supports?.('ar');
-    const android = /Android/i.test(navigator.userAgent);
-    if (ios) ar.hidden = false;
-    else if (android) {
-      const arquivo = new URL(ar.dataset.glb!, location.href).href;
-      ar.removeAttribute('rel');
-      ar.href = `intent://arvr.google.com/scene-viewer/1.0?file=${encodeURIComponent(arquivo)}&mode=ar_preferred&title=${encodeURIComponent(ar.dataset.titulo!)}#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=${encodeURIComponent(location.href)};end;`;
-      ar.hidden = false;
-    }
-    ar.addEventListener('click', () =>
-      (window as unknown as { ludusEvento?: (e: string, d?: object) => void }).ludusEvento?.('abrir_ar', { codigo: ar.dataset.titulo })
-    );
-  }
-</script>
-
 <style>
   .prod { padding-block: 20px 120px; }
   .crumb { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); padding-block: 8px 20px; }
@@ -190,7 +142,6 @@ const jsonLd = {
   .crumb a:hover { color: var(--ink); }
   .topo { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
   .midia { position: sticky; top: 88px; display: grid; gap: 12px; }
-  .abas { display: flex; gap: 8px; }
   .stage.foto { aspect-ratio: 1 / 1; }
   .info { display: grid; gap: 14px; }
   h1 { font-size: clamp(44px, 6vw, 76px); }
@@ -209,7 +160,6 @@ const jsonLd = {
   .cores ul { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 18px; }
   .cores li { display: flex; align-items: center; gap: 8px; font-size: 15px; }
   .cores i { width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(0, 0, 0, 0.18); }
-  .ar img { position: absolute; width: 1px; height: 1px; opacity: 0; }
   .musc { display: flex; flex-wrap: wrap; gap: 8px; }
   .m { font: 500 15px/1 var(--body); padding: 10px 16px; border-radius: 999px; border: 1.5px solid var(--ink); }
   .m.p { background: var(--ink); color: #fff; }
