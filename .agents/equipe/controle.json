@@ -1,8 +1,31 @@
 {
   "schemaVersion": 1,
   "application": "avila-ludusequipamentos-website",
-  "members": [],
-  "tasks": [],
+  "members": [
+    {
+      "id": "nicolas-avila",
+      "name": "Nícolas Ávila",
+      "role": "Solicitante"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T-LOGO-20261103",
+      "title": "Ampliar logo no cabeçalho",
+      "responsavel": "nicolas-avila",
+      "status": "concluido",
+      "acceptance": [
+        "Logo com 48 px no desktop e 40 px no celular",
+        "Menu recolhido até 1024 px"
+      ],
+      "evidence": [
+        "Commit e45fbab5b5a64acb7a15fa18e05d3308cca72cef",
+        "99 páginas publicadas; HTTP 200 e nova folha de estilos verificados na home, loja, simulador e kits",
+        "Validação visual no navegador não realizada"
+      ],
+      "updatedAt": "2026-11-03"
+    }
+  ],
   "decisions": [],
   "integrations": []
 }
