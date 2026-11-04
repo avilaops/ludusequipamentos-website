@@ -47,6 +47,6 @@ jobs:
           mkdir -p ~/.ssh
           echo "$DEPLOY_SSH_KEY" > ~/.ssh/deploy && chmod 600 ~/.ssh/deploy
           ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
-          DIR=/var/www/ludus.avilaops.com
+          DIR=/var/www/ludusequipamentos.com
           tar -C dist -cf - . | ssh -i ~/.ssh/deploy "root@$DEPLOY_HOST" "mkdir -p $DIR.novo && tar -C $DIR.novo -xf - && rm -rf $DIR && mv $DIR.novo $DIR"
           curl -fsS -o /dev/null https://ludusequipamentos.com/

@@ -4,7 +4,7 @@
 # Uso: npm run deploy   (precisa do host "applications" no ~/.ssh/config)
 set -euo pipefail
 HOST="${DEPLOY_HOST:-applications}"
-DIR=/var/www/ludus.avilaops.com
+DIR=/var/www/ludusequipamentos.com
 
 [ -d public/modelos ] || bash scripts/modelos.sh
 npx astro build
