@@ -28,6 +28,9 @@ Links antigos do QR (`/?id=LD-B004`) redirecionam para a página do equipamento.
 
 ## De onde vêm os dados
 
+- O catálogo Premium para download fica em `public/catalogos/ludus-premium.pdf`, gerado pela skill `criar-catalogo` do avx-tools com 91 produtos, sem preços. A fonte e os relatórios de conferência ficam no projeto local do catálogo: `premium/manifesto.json` e `outputs/ludus-premium/`.
+- As três telas de loja compartilham `CatalogoLoja.astro`. Na visão geral os produtos das duas coleções se alternam; os cartões identificam sua coleção. Nomes equivalentes de grupo são normalizados apenas para navegação, preservando dados técnicos de origem.
+
 - Não há banco de servidor neste site estático. `src/data/catalogo.ts` unifica os dois arquivos de produtos através do campo tipado `colecao: 'premium' | 'core'`. Os carregadores identificam a coleção pela fonte, preservando os JSONs originais e mantendo `linha` como categoria técnica da Premium. `selecionarColecao` atende seleção de uma coleção ou das duas.
 - As fichas `/loja/<slug>/` e `/core/<codigo>/` permanecem nos endereços impressos nos QR codes. A mudança de rota se aplica às páginas das coleções.
 

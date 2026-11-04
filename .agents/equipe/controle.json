@@ -10,12 +10,21 @@
   ],
   "tasks": [
     {
+      "id": "T-UNIFORMIDADE-PREMIUM-20261104",
+      "title": "Padronizar as coleções e publicar PDF Premium gerado pelo avx-tools",
+      "responsavel": "nicolas-avila",
+      "status": "em-revisao",
+      "acceptance": ["Mesma estrutura de catálogo nas três telas, marca institucional no cabeçalho e coleção identificada nos cartões", "PDF Premium criado pela nova capacidade do avx-tools, sem preços, medidas em mm e QR válidos"],
+      "evidence": ["11 testes do site aprovados na primeira validação; oito testes avx-tools aprovados", "avx-tools 0.2.0: 91 produtos, 106 páginas, nove grupos", "91 QR codes decodificados e 91 fichas públicas conferidas; revisão visual de todas as páginas"],
+      "updatedAt": "2026-11-04"
+    },
+    {
       "id": "T-COLECOES-20261104",
       "title": "Organizar Core e Premium na loja e tornar a marca Core clicável",
       "responsavel": "nicolas-avila",
-      "status": "em-revisao",
+      "status": "concluido",
       "acceptance": ["/loja/premium/ e /loja/core/ com seleção das duas coleções", "Base de produtos identifica coleção sem alterar preços ou inventar banco externo", "Logo Core clicável sem título duplicado; links QR preservados"],
-      "evidence": ["Astro check: zero erros; 10 testes aprovados", "Navegador: grupo pernas e glúteos mantém 54 resultados totais, 30 Core e 24 Premium ao trocar coleção", "Organização local: 33 arquivos movidos com SHA-256 preservado, 12 atalhos em source/Ludus, planilha validada"],
+      "evidence": ["PR #7 integrada; CI e deploy 41888775404 aprovados", "Astro check: zero erros; 10 testes aprovados", "Navegador: grupo pernas e glúteos mantém 54 resultados totais, 30 Core e 24 Premium ao trocar coleção; rotas públicas verificadas", "390 px sem transbordamento; logo Core clicável", "Organização local: 35 arquivos movidos com SHA-256 preservado, 12 atalhos em source/Ludus, planilha validada"],
       "updatedAt": "2026-11-04"
     },
     {
