@@ -1,7 +1,7 @@
 ---
 import Foto from './Foto.astro';
 import type { Produto } from '../data/site';
-import { urlProduto } from '../data/catalogo';
+import { grupoCatalogo, urlProduto } from '../data/catalogo';
 
 interface Props {
   p: Produto;
@@ -15,15 +15,20 @@ const { p, href = urlProduto(p) } = Astro.props;
   href={href}
   data-linha={p.linha}
   data-colecao={p.colecao}
-  data-grupo={p.grupo_muscular}
+  data-grupo={grupoCatalogo(p)}
   data-busca={`${p.code} ${p.nome}`.toLowerCase()}
 >
   <div class="stage">
     <Foto code={p.code} alt={`${p.nome} (${p.code})`} />
   </div>
   <div class="txt">
+    <span class="colecao">{p.colecao === 'core' ? 'Linha Core' : 'Linha Premium'}</span>
     <span class="code">{p.code}</span>
     <span class="name">{p.nome}</span>
-    <span class="meta">{p.linha} · {p.grupo_muscular}</span>
+    <span class="meta">{grupoCatalogo(p)}</span>
   </div>
 </a>
+
+<style>
+  .colecao { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+</style>

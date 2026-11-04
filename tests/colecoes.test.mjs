@@ -35,3 +35,23 @@ test('home Core identity links to its collection without a duplicate text headin
   assert.match(home, /<dt\b[^>]*>157<\/dt>/);
   assert.match(home, /<dt\b[^>]*>2<\/dt>/);
 });
+
+test('collection pages share the catalog controls and the overview represents both lines immediately', () => {
+  for (const path of ['loja/index.html', 'loja/core/index.html', 'loja/premium/index.html']) {
+    const html = read(path);
+    assert.match(html, /id="busca"/);
+    assert.match(html, /id="limpar"/);
+    assert.match(html, /id="grade"/);
+    assert.doesNotMatch(html, /Seu treino\. Sua seleção\.|class="hero-foto/);
+    assert.doesNotMatch(html, /data-v="(?:Deltoides|Multitrabalho|Abdômen)"/);
+    const header = html.match(/<header\b[\s\S]*?<\/header>/)?.[0];
+    assert.match(header, /alt="Ludus"/);
+  }
+  const cards = [...read('loja/index.html').matchAll(/data-colecao="(core|premium)"/g)];
+  assert.deepEqual(cards.slice(0, 4).map((match) => match[1]), ['core', 'premium', 'core', 'premium']);
+  assert.doesNotMatch(read('loja/index.html'), /data-filtro="linha"/);
+  assert.match(read('loja/premium/index.html'), /data-filtro="linha"/);
+  assert.match(read('loja/premium/index.html'), /href="\/catalogos\/ludus-premium.pdf"/);
+  const pdf = readFileSync(new URL('../dist/catalogos/ludus-premium.pdf', import.meta.url));
+  assert.equal(pdf.subarray(0, 5).toString(), '%PDF-');
+});

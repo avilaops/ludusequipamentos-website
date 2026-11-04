@@ -2,13 +2,18 @@
 import Base from '../layouts/Base.astro';
 import Card from './Card.astro';
 import Colecoes from './Colecoes.astro';
-import { linhas, type Produto } from '../data/site';
-import { selecionarColecao } from '../data/catalogo';
+import { linhas, whatsapp, type Produto } from '../data/site';
+import { grupoCatalogo, selecionarColecao } from '../data/catalogo';
+import { catalogoCore } from '../data/core';
+import { Image } from 'astro:assets';
+import logoCore from '../assets/marca/ludus-core.png';
 interface Props { colecao?: Produto['colecao']; }
 const { colecao } = Astro.props;
 const produtos = selecionarColecao(colecao);
-const grupos = [...new Set(produtos.map((p) => p.grupo_muscular))];
-const titulo = colecao === 'premium' ? 'Linha Premium' : 'Nossas linhas';
+const ordemGrupos = ['Pernas e glúteos', 'Peitoral', 'Costas', 'Ombros', 'Braços', 'Panturrilha', 'Abdômen e lombar', 'Multifuncionais', 'Acessórios'];
+const grupos = ordemGrupos.filter((grupo) => produtos.some((p) => grupoCatalogo(p) === grupo));
+const titulo = colecao === 'premium' ? 'Linha Premium' : colecao === 'core' ? 'Linha Core' : 'Nossas linhas';
+const resumo = colecao ? `${produtos.length} equipamentos da ${titulo}.` : `${produtos.length} equipamentos das linhas Core e Premium.`;
 ---
 
 <Base
@@ -16,24 +21,31 @@ const titulo = colecao === 'premium' ? 'Linha Premium' : 'Nossas linhas';
   description={`${produtos.length} equipamentos de musculação. Escolha sua linha e filtre por categoria e grupo muscular.`}
 >
   <section class="head dark">
-    <div class="wrap">
-      <span class="kicker">Ludus Equipamentos</span>
-      <h1>{titulo}</h1>
-      <p class="lead">{colecao === 'premium' ? `${produtos.length} equipamentos Ludus Premium.` : `${produtos.length} equipamentos das linhas Core e Premium.`} Explore fotos e fichas técnicas. A compra é por orçamento, direto com a Ludus.</p>
+    <div class="wrap apresentacao">
+      <div>
+        <span class="kicker">Ludus Equipamentos</span>
+        <h1 class="titulo">{colecao === 'core' ? <Image src={logoCore} alt="Ludus Core" width={360} loading="eager" /> : titulo}</h1>
+        <p class="lead">{resumo} Compare fotos, medidas e fichas técnicas.</p>
+      </div>
+      <div class="acoes">
+        <a class="btn ghost" href={whatsapp(`Olá! Quero um orçamento de equipamentos ${colecao ? titulo : 'Ludus'}.`)} target="_blank" rel="noopener">Pedir orçamento</a>
+        {colecao === 'core' && <a class="pdf" href={catalogoCore} target="_blank" rel="noopener">Catálogo Core em PDF ↗</a>}
+        {colecao === 'premium' && <a class="pdf" href="/catalogos/ludus-premium.pdf" target="_blank" rel="noopener">Catálogo Premium em PDF ↗</a>}
+      </div>
     </div>
   </section>
 
-  <section class="wrap corpo">
+  <section class="wrap corpo" id="equipamentos">
     <Colecoes atual={colecao} />
     <div class="filtros" id="filtros">
-      <input type="search" id="busca" placeholder="Buscar por nome ou código" aria-label="Buscar por nome ou código" />
-      <div class="grupo">
+      <div class="busca"><input type="search" id="busca" placeholder="Buscar por nome ou código" aria-label="Buscar por nome ou código" /><button type="button" class="limpar" id="limpar">Limpar filtros</button></div>
+      {colecao === 'premium' && <div class="grupo">
         <span class="rot">Categoria</span>
         <div class="chips" data-filtro="linha">
           <button class="chip" data-v="" aria-pressed="true">Todas</button>
           {linhas.map((l) => <button class="chip" data-v={l.id} data-slug={l.slug} aria-pressed="false">{l.titulo}</button>)}
         </div>
-      </div>
+      </div>}
       <div class="grupo">
         <span class="rot">Grupo muscular</span>
         <div class="chips" data-filtro="grupo">
@@ -61,7 +73,9 @@ const titulo = colecao === 'premium' ? 'Linha Premium' : 'Nossas linhas';
   const params = new URLSearchParams(location.search);
   const chips = (f: string) => [...document.querySelectorAll<HTMLButtonElement>(`[data-filtro="${f}"] .chip`)];
   const achar = (f: 'linha' | 'grupo') => {
-    const v = params.get(f);
+    const aliases: Record<string, string> = { deltoides: 'ombros', abdomen: 'abdomen-e-lombar', multitrabalho: 'multifuncionais' };
+    const original = params.get(f);
+    const v = f === 'grupo' && original ? aliases[original] ?? original : original;
     if (!v) return '';
     return chips(f).find((c) => (c.dataset.slug ?? slug(c.dataset.v!)) === v)?.dataset.v ?? '';
   };
@@ -103,20 +117,34 @@ const titulo = colecao === 'premium' ? 'Linha Premium' : 'Nossas linhas';
   for (const f of ['linha', 'grupo'] as const)
     chips(f).forEach((c) => c.addEventListener('click', () => ((estado[f] = c.dataset.v!), aplicar())));
   busca.addEventListener('input', () => ((estado.q = busca.value), aplicar()));
+  document.getElementById('limpar')!.addEventListener('click', () => {
+    estado.linha = ''; estado.grupo = ''; estado.q = ''; busca.value = ''; aplicar(); busca.focus();
+  });
   aplicar();
 </script>
 
 <style>
-  .head { padding-block: clamp(40px, 6vw, 80px); }
-  .head .wrap { display: grid; gap: 14px; }
+  .head { padding-block: 36px; }
+  .apresentacao { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px; }
+  .titulo { min-height: 120px; display: flex; align-items: center; font-size: clamp(44px, 6vw, 76px); }
+  .titulo :global(img) { width: min(100%, 300px); height: auto; filter: url(#core-logo-alpha); }
+  .head .lead { font-size: 17px; max-width: 620px; }
+  .acoes { display: grid; gap: 12px; justify-items: center; }
+  .pdf { color: var(--dark-muted); font-size: 13px; text-underline-offset: 4px; }
   .corpo { padding-block: 32px 96px; }
   .filtros { display: grid; gap: 16px; margin-bottom: 28px; }
+  .busca { display: flex; gap: 16px; align-items: center; }
+  .limpar { border: 0; background: none; color: var(--muted); font: inherit; font-size: 13px; cursor: pointer; white-space: nowrap; text-decoration: underline; text-underline-offset: 4px; }
   input[type='search'] { font: 400 17px/1 var(--body); padding: 16px 22px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); width: min(100%, 460px); }
   .grupo { display: grid; gap: 8px; }
   .rot { font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
   .conta { color: var(--muted); font-size: 14px; }
   .vazio { padding: 48px 0; color: var(--muted); text-align: center; }
   @media (max-width: 600px) {
+    .apresentacao { grid-template-columns: 1fr; gap: 20px; }
+    .titulo { min-height: 112px; }
+    .acoes { display: flex; flex-wrap: wrap; align-items: center; }
+    .busca { flex-wrap: wrap; }
     .corpo :global(.grid-prod) { grid-template-columns: 1fr 1fr; gap: 12px; }
     .corpo :global(.card .name) { font-size: 20px; }
     .chips { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }

@@ -10,6 +10,15 @@
   ],
   "tasks": [
     {
+      "id": "T-UNIFORMIDADE-PREMIUM-20261104",
+      "title": "Padronizar as coleções e publicar PDF Premium gerado pelo avx-tools",
+      "responsavel": "nicolas-avila",
+      "status": "em-revisao",
+      "acceptance": ["Mesma estrutura de catálogo nas três telas, marca institucional no cabeçalho e coleção identificada nos cartões", "PDF Premium criado pela nova capacidade do avx-tools, sem preços, medidas em mm e QR válidos"],
+      "evidence": ["11 testes do site aprovados na primeira validação; oito testes avx-tools aprovados", "avx-tools 0.2.0: 91 produtos, 106 páginas, nove grupos", "91 QR codes decodificados e 91 fichas públicas conferidas; revisão visual de todas as páginas"],
+      "updatedAt": "2026-11-04"
+    },
+    {
       "id": "T-COLECOES-20261104",
       "title": "Organizar Core e Premium na loja e tornar a marca Core clicável",
       "responsavel": "nicolas-avila",

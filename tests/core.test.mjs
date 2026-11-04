@@ -37,7 +37,7 @@ test('publishes all 66 national products at permanent Core URLs without commerci
 
 test('exposes Core from the home and keeps the original Premium catalog independent', () => {
   assert.match(read('index.html'), /href="\/loja\/core\/"/);
-  assert.match(read('loja/premium/index.html'), /Ludus Premium/);
+  assert.match(read('loja/premium/index.html'), /91 equipamentos da Linha Premium/);
   assert.match(read('loja/premium/index.html'), /Linha Premium/);
   assert.doesNotMatch(read('loja/core/index.html'), /naciona(?:l|is)/i);
   assert.match(read('loja/core/index.html'), /alt="Ludus Core"/);
