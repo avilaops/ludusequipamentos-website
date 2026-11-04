@@ -39,7 +39,10 @@ test('exposes Core from the home and keeps the original Premium catalog independ
   assert.match(read('index.html'), /href="\/loja\/core\/"/);
   assert.match(read('loja/premium/index.html'), /91 equipamentos da Linha Premium/);
   assert.match(read('loja/premium/index.html'), /Linha Premium/);
-  assert.doesNotMatch(read('loja/core/index.html'), /naciona(?:l|is)/i);
+  // Core remains the collection name; origin is useful in the comparison.
+  assert.match(read('loja/core/index.html'), /<title>Linha Core · Ludus Equipamentos<\/title>/);
+  assert.match(read('loja/core/index.html'), /Fabricação nacional/);
+  assert.match(read('loja/premium/index.html'), /alt="Ludus Premium"/);
   assert.match(read('loja/core/index.html'), /alt="Ludus Core"/);
   assert.doesNotMatch(read('loja/premium/index.html'), /data-colecao="core"/);
   assert.match(read('core/ld-wh001/index.html'), /900 mm/);

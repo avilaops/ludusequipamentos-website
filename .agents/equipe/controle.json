@@ -10,12 +10,21 @@
   ],
   "tasks": [
     {
+      "id": "T-IDENTIDADE-LINHAS-20261104",
+      "title": "Usar Core como referência visual com logo Premium e comparação das linhas",
+      "responsavel": "nicolas-avila",
+      "status": "em-andamento",
+      "acceptance": ["Logos próprias e equipamento real em destaque nas duas coleções", "Comparação factual, textos e filtros legíveis, sem indicador mm no destaque", "Conferência visual desktop e celular e publicação"],
+      "evidence": ["Astro check sem erros, avisos ou hints; 11 testes aprovados", "Premium revisada visualmente no desktop; Core a 390 px sem transbordamento e CTA conferido", "Logo Premium original preservada; transparência aplicada na apresentação pelo filtro SVG existente"],
+      "updatedAt": "2026-11-04"
+    },
+    {
       "id": "T-UNIFORMIDADE-PREMIUM-20261104",
       "title": "Padronizar as coleções e publicar PDF Premium gerado pelo avx-tools",
       "responsavel": "nicolas-avila",
-      "status": "em-revisao",
+      "status": "concluido",
       "acceptance": ["Mesma estrutura de catálogo nas três telas, marca institucional no cabeçalho e coleção identificada nos cartões", "PDF Premium criado pela nova capacidade do avx-tools, sem preços, medidas em mm e QR válidos"],
-      "evidence": ["11 testes do site aprovados na primeira validação; oito testes avx-tools aprovados", "avx-tools 0.2.0: 91 produtos, 106 páginas, nove grupos", "91 QR codes decodificados e 91 fichas públicas conferidas; revisão visual de todas as páginas"],
+      "evidence": ["11 testes do site aprovados; oito testes avx-tools aprovados", "avx-tools 0.2.0: 91 produtos, 106 páginas, nove grupos", "91 QR codes decodificados e 91 fichas públicas conferidas; revisão visual de todas as páginas", "PR #8 integrada; CI e deploy 41897418516 aprovados", "Três coleções conferidas no navegador público; PDF HTTP 200, 11068200 bytes, SHA256 de002e238151149d420a02051557fdff28282f2deb23d05166dceee0d17b0fce"],
       "updatedAt": "2026-11-04"
     },
     {
