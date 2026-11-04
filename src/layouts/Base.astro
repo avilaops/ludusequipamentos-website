@@ -79,7 +79,7 @@ const org = {
           <a href="/loja/core/" aria-current={isCore ? 'page' : undefined}>Linha Core</a>
           <a href="/simulador/" aria-current={path.startsWith('/simulador') ? 'page' : undefined}>Simulador</a>
           <a href="/kits/" aria-current={path.startsWith('/kits') ? 'page' : undefined}>Kits</a>
-          <a href="/#como-funciona">Como funciona</a>
+          <a href="/catalogos/" aria-current={path === '/catalogos/' ? 'page' : undefined}>Catálogos</a>
           <a href="/#contato">Contato</a>
           <a class="btn wa" href={wa} target="_blank" rel="noopener" data-wa="menu">Pedir orçamento</a>
         </nav>
@@ -99,6 +99,7 @@ const org = {
             <h4>Site</h4>
             <a href="/loja/premium/">Linha Premium</a>
             <a href="/loja/core/">Linha Core</a>
+            <a href="/catalogos/">Catálogos em PDF</a>
             <a href="/simulador/">Simulador de academia</a>
             <a href="/kits/">Kits prontos</a>
             <a href="/#como-funciona">Como funciona</a>

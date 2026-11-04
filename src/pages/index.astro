@@ -4,8 +4,7 @@ import Card from '../components/Card.astro';
 import Foto from '../components/Foto.astro';
 import PlantaKit from '../components/PlantaKit.astro';
 import Contato from '../components/Contato.astro';
-import { Image } from 'astro:assets';
-import logoCore from '../assets/marca/ludus-core.png';
+import Catalogos from '../components/Catalogos.astro';
 import { catalogo } from '../data/catalogo';
 import { empresa, kits, linhas, porCodigo, produtos, whatsapp } from '../data/site';
 
@@ -51,16 +50,7 @@ const slugs = Object.fromEntries(produtos.map((p) => [p.code, p.slug]));
     </div>
   </section>
 
-  <section class="sec">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="kicker">Conheça a coleção</span>
-        <h2><a href="/loja/core/" aria-label="Explorar a Linha Core"><Image src={logoCore} alt="Ludus Core" width={320} style="width:min(100%,320px);height:auto;filter:url(#core-logo-alpha) brightness(0)" /></a></h2>
-        <p class="lead">66 equipamentos em sete grupos corporais. Compare fotos, fichas técnicas e medidas para compor sua academia.</p>
-        <div class="cta"><a class="btn" href="/loja/core/">Explorar Ludus Core</a></div>
-      </div>
-    </div>
-  </section>
+  <Catalogos />
 
   <section class="sec">
     <div class="wrap">

@@ -6,6 +6,7 @@ Publicado em https://ludusequipamentos.com, na pasta exclusiva `/var/www/luduseq
 | Rota | O que é |
 | --- | --- |
 | `/` | Institucional: proposta, linhas, simulador, como funciona, contato |
+| `/catalogos/` | Vitrine Core e Premium com capas, PDFs completos e orçamento por linha |
 | `/loja/` | Todos os 157 equipamentos, com seleção entre Core e Premium |
 | `/loja/premium/` | 91 equipamentos Premium, com busca e filtros por categoria e grupo muscular |
 | `/loja/core/` | 66 equipamentos Core, com busca e filtros por grupo corporal; sem preços |
@@ -27,6 +28,8 @@ Links antigos do QR (`/?id=LD-B004`) redirecionam para a página do equipamento.
 | Publicar | `npm run deploy` |
 
 ## De onde vêm os dados
+
+- `Catalogos.astro` apresenta as duas edições na home e em `/catalogos/`. Os PDFs ficam em `public/catalogos/ludus-core.pdf` e `public/catalogos/ludus-premium.pdf`, ambos com as capas produzidas pelo imagegen. As páginas internas, links e índices foram preservados; fontes e conferência em `outputs/catalogos-capas-publicadas/` no projeto local do catálogo. As imagens da vitrine usam tamanhos responsivos gerados pelo Astro.
 
 - O catálogo Premium para download fica em `public/catalogos/ludus-premium.pdf`, gerado pela skill `criar-catalogo` do avx-tools com 91 produtos, sem preços. A fonte e os relatórios de conferência ficam no projeto local do catálogo: `premium/manifesto.json` e `outputs/ludus-premium-marca/`. Esta edição usa a logo LUDUS PREMIUM original na capa e em cabeçalhos pretos, preservando as fotos, medidas e URLs dos 91 produtos.
 - As três telas de loja compartilham `CatalogoLoja.astro`. Na visão geral os produtos das duas coleções se alternam; os cartões identificam sua coleção. Nomes equivalentes de grupo são normalizados apenas para navegação, preservando dados técnicos de origem.
