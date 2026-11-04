@@ -6,6 +6,7 @@ import PlantaKit from '../components/PlantaKit.astro';
 import Contato from '../components/Contato.astro';
 import { Image } from 'astro:assets';
 import logoCore from '../assets/marca/ludus-core.png';
+import { catalogo } from '../data/catalogo';
 import { empresa, kits, linhas, porCodigo, produtos, whatsapp } from '../data/site';
 
 const wa = whatsapp('Olá! Vim pelo site da Ludus e quero um orçamento.');
@@ -17,7 +18,7 @@ const slugs = Object.fromEntries(produtos.map((p) => [p.code, p.slug]));
 
 <Base
   title="Ludus Equipamentos · Musculação profissional, do projeto à entrega"
-  description={`${produtos.length} equipamentos de musculação Ludus Premium. Monte a planta da sua academia no simulador e peça o orçamento pelo WhatsApp.`}
+  description={`${catalogo.length} equipamentos das linhas Core e Premium. Conheça os catálogos Ludus e peça o orçamento pelo WhatsApp.`}
 >
   <!-- Links antigos do QR (/?id=LD-B004) levam à página do equipamento. -->
   <script is:inline define:vars={{ slugs }}>
@@ -28,18 +29,18 @@ const slugs = Object.fromEntries(produtos.map((p) => [p.code, p.slug]));
   <section class="hero dark">
     <div class="wrap hero-grid">
       <div class="hero-txt">
-        <span class="kicker">Linha Premium · Equipamentos de musculação</span>
+        <span class="kicker">Ludus Equipamentos · Core e Premium</span>
         <h1>Força profissional, <em>do projeto à entrega.</em></h1>
         <p class="lead">
           Você escolhe os equipamentos e monta a planta da sua academia em escala. A Ludus entrega, monta e deixa pronto para o primeiro treino.
         </p>
         <div class="cta">
-          <a class="btn" href="/loja/">Ver os {produtos.length} equipamentos</a>
-          <a class="btn ghost" href="/simulador/">Monte sua academia</a>
+          <a class="btn" href="/loja/core/">Explorar Linha Core</a>
+          <a class="btn" href="/loja/premium/">Explorar Linha Premium</a>
         </div>
         <dl class="stats">
-          <div><dt>{produtos.length}</dt><dd>equipamentos</dd></div>
-          <div><dt>3</dt><dd>linhas</dd></div>
+          <div><dt>{catalogo.length}</dt><dd>equipamentos</dd></div>
+          <div><dt>2</dt><dd>linhas</dd></div>
           <div><dt>1:1</dt><dd>planta em escala</dd></div>
         </dl>
       </div>
@@ -53,11 +54,10 @@ const slugs = Object.fromEntries(produtos.map((p) => [p.code, p.slug]));
   <section class="sec">
     <div class="wrap">
       <div class="sec-head">
-        <span class="kicker">Conheça também</span>
-        <h2>Linha Core</h2>
-        <Image src={logoCore} alt="Ludus Core" width={320} style="width:min(100%,320px);height:auto;filter:url(#core-logo-alpha) brightness(0)" />
+        <span class="kicker">Conheça a coleção</span>
+        <h2><a href="/loja/core/" aria-label="Explorar a Linha Core"><Image src={logoCore} alt="Ludus Core" width={320} style="width:min(100%,320px);height:auto;filter:url(#core-logo-alpha) brightness(0)" /></a></h2>
         <p class="lead">66 equipamentos em sete grupos corporais. Compare fotos, fichas técnicas e medidas para compor sua academia.</p>
-        <div class="cta"><a class="btn" href="/core/">Explorar Ludus Core</a></div>
+        <div class="cta"><a class="btn" href="/loja/core/">Explorar Ludus Core</a></div>
       </div>
     </div>
   </section>
@@ -67,12 +67,12 @@ const slugs = Object.fromEntries(produtos.map((p) => [p.code, p.slug]));
       <div class="sec-head rv">
         <span class="kicker">Séries da Linha Premium</span>
         <h2>Tudo para uma sala completa</h2>
-        <p class="lead">Três linhas que se combinam: do corpo inteiro na bateria de pesos à área de peso livre.</p>
+        <p class="lead">Três categorias que se combinam: do corpo inteiro na bateria de pesos à área de peso livre.</p>
       </div>
       <div class="linhas">
         {
           linhas.map((l, i) => (
-            <a class="linha rv" href={`/loja/?linha=${l.slug}`}>
+            <a class="linha rv" href={`/loja/premium/?linha=${l.slug}`}>
               <div class="stage">
                 <Foto code={l.destaque} alt={l.titulo} />
               </div>

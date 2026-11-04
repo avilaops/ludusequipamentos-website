@@ -2,7 +2,8 @@ import catalogo from './core.json';
 import type { Produto } from './site';
 
 /** Nacional: dados confirmados da planilha, sem valores comerciais. */
-export const produtosCore = catalogo as Produto[];
+export const produtosCore: Produto[] = (catalogo as Omit<Produto, 'colecao'>[])
+  .map((produto) => ({ ...produto, colecao: 'core' }));
 export const gruposCore = [
   { nome: 'Pernas e glúteos', slug: 'pernas-e-gluteos' },
   { nome: 'Peitoral', slug: 'peitoral' },

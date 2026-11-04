@@ -1,6 +1,7 @@
 import produtosJson from './produtos.json';
 
 export interface Produto {
+  colecao: 'premium' | 'core';
   code: string;
   slug: string;
   nome: string;
@@ -14,7 +15,9 @@ export interface Produto {
 }
 
 const produtosOcultos = new Set(['LD-B010', 'LD-B011', 'LD-B034']);
-export const produtos = (produtosJson as Produto[]).filter((produto) => !produtosOcultos.has(produto.code));
+export const produtos: Produto[] = (produtosJson as Omit<Produto, 'colecao'>[])
+  .filter((produto) => !produtosOcultos.has(produto.code))
+  .map((produto) => ({ ...produto, colecao: 'premium' }));
 export const porCodigo = new Map(produtos.map((p) => [p.code, p]));
 
 /** Dados públicos confirmados da empresa. */

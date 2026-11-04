@@ -6,9 +6,11 @@ Publicado em https://ludusequipamentos.com. Os endereços antigos (ludus.avilaop
 | Rota | O que é |
 | --- | --- |
 | `/` | Institucional: proposta, linhas, simulador, como funciona, contato |
-| `/loja/` | Os 91 equipamentos publicados, com busca e filtros por linha e grupo muscular (refletidos na URL) |
+| `/loja/` | Todos os 157 equipamentos, com seleção entre Core e Premium |
+| `/loja/premium/` | 91 equipamentos Premium, com busca e filtros por categoria e grupo muscular |
+| `/loja/core/` | 66 equipamentos Core, com busca e filtros por grupo corporal; sem preços |
 | `/loja/<slug>/` | Página do equipamento: foto, ficha, planta, cores, relacionados, WhatsApp. Endereço permanente (alvo do QR do catálogo) |
-| `/core/` | 66 equipamentos nacionais Ludus Core, com busca e filtros por grupo corporal; sem preços |
+| `/core/` | Compatibilidade: encaminha à coleção `/loja/core/`, preservando busca, grupo e âncora |
 | `/core/ld-wh001/` a `/core/ld-wh066/` | Fichas nacionais com foto, medidas em mm, área nominal, planta dimensional esquemática e orçamento. URLs permanentes para o catálogo |
 | `/kits/` e `/kits/<id>/` | Academias de 150, 300 e 600 m² com planta e lista |
 | `/simulador/` | Planta em escala com arrastar, giro livre e encaixe, obstáculos, sugestão de layout, edição no 3D, projetos salvos, PDF e PNG, link compartilhável e pedido de orçamento |
@@ -25,6 +27,9 @@ Links antigos do QR (`/?id=LD-B004`) redirecionam para a página do equipamento.
 | Publicar | `npm run deploy` |
 
 ## De onde vêm os dados
+
+- Não há banco de servidor neste site estático. `src/data/catalogo.ts` unifica os dois arquivos de produtos através do campo tipado `colecao: 'premium' | 'core'`. Os carregadores identificam a coleção pela fonte, preservando os JSONs originais e mantendo `linha` como categoria técnica da Premium. `selecionarColecao` atende seleção de uma coleção ou das duas.
+- As fichas `/loja/<slug>/` e `/core/<codigo>/` permanecem nos endereços impressos nos QR codes. A mudança de rota se aplica às páginas das coleções.
 
 - `src/data/produtos.json`: catálogo-fonte com 94 produtos (código, nome, linha, grupo, medidas, peso, bateria, descrição, slug). A exportação pública em `src/data/site.ts` oculta os itens fora do escopo do cliente. O slug não muda depois de impresso no catálogo.
 - `src/assets/produtos/<código>.jpg`: fotos do catálogo.

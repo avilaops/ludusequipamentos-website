@@ -37,7 +37,7 @@ const jsonLd = {
 <Base title={`${p.nome} ${p.code} · Ludus Equipamentos`} description={p.descricao.slice(0, 155)} image={og.src} jsonLd={jsonLd}>
   <article class="wrap prod" data-code={p.code}>
     <nav class="crumb" aria-label="Você está em">
-      <a href="/loja/">Loja</a> / <a href={`/loja/?linha=${p.linha === 'Peso livre' ? 'peso-livre' : p.linha === 'Bateria de pesos' ? 'bateria-de-pesos' : 'bancos-e-suportes'}`}>{p.linha}</a> / {p.grupo_muscular}
+      <a href="/loja/">Loja</a> / <a href="/loja/premium/">Linha Premium</a> / <a href={`/loja/premium/?linha=${p.linha === 'Peso livre' ? 'peso-livre' : p.linha === 'Bateria de pesos' ? 'bateria-de-pesos' : 'bancos-e-suportes'}`}>{p.linha}</a> / {p.grupo_muscular}
     </nav>
 
     <div class="topo">

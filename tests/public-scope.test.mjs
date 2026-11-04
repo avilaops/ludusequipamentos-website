@@ -22,7 +22,7 @@ test('removes the three out-of-scope products from the generated catalog', () =>
   }
 
   const productPages = readdirSync(productRoot, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory() && existsSync(new URL(`${entry.name}/index.html`, productRoot)));
+    .filter((entry) => entry.isDirectory() && !['core', 'premium'].includes(entry.name) && existsSync(new URL(`${entry.name}/index.html`, productRoot)));
   assert.equal(productPages.length, 91);
 
   const publicDocuments = [
