@@ -10,6 +10,19 @@
   ],
   "tasks": [
     {
+      "id": "T-MARCA-CORE-20261104",
+      "title": "Aplicar logo enviada e identificar as coleções como Linha Core e Linha Premium",
+      "responsavel": "nicolas-avila",
+      "status": "em-andamento",
+      "acceptance": [
+        "Logo LUDUS CORE com capacete na seção Core e catálogo",
+        "Remover nacional da apresentação pública da Core",
+        "Preservar 66 fichas, medidas, ausência de preços e destinos dos QR"
+      ],
+      "evidence": ["npm run check: zero erros"],
+      "updatedAt": "2026-11-04"
+    },
+    {
       "id": "T-CORE-20261104",
       "title": "Publicar a linha nacional Ludus Core e conectar o catálogo",
       "responsavel": "nicolas-avila",
