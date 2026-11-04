@@ -55,7 +55,7 @@ const slugs = Object.fromEntries(produtos.map((p) => [p.code, p.slug]));
       <div class="sec-head">
         <span class="kicker">Conheça também</span>
         <h2>Linha Core</h2>
-        <Image src={logoCore} alt="Ludus Core" width={320} style="width:min(100%,320px);height:auto;border-radius:12px" />
+        <Image src={logoCore} alt="Ludus Core" width={320} style="width:min(100%,320px);height:auto;filter:url(#core-logo-alpha) brightness(0)" />
         <p class="lead">66 equipamentos em sete grupos corporais. Compare fotos, fichas técnicas e medidas para compor sua academia.</p>
         <div class="cta"><a class="btn" href="/core/">Explorar Ludus Core</a></div>
       </div>
