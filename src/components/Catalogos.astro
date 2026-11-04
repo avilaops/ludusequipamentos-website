@@ -1,0 +1,70 @@
+---
+import { Image } from 'astro:assets';
+import capaCore from '../assets/catalogos/core.png';
+import capaPremium from '../assets/catalogos/premium.png';
+import logoCore from '../assets/marca/ludus-core.png';
+import logoPremium from '../assets/marca/ludus-premium.png';
+import { whatsapp } from '../data/site';
+interface Props { principal?: boolean; }
+const { principal = false } = Astro.props;
+const Heading = principal ? 'h1' : 'h2';
+const edicoes = [
+  { id: 'core', nome: 'Core', origem: 'Fabricação nacional', quantidade: 66, paginas: 79, capa: capaCore, logo: logoCore, texto: 'A base para compor sua sala de musculação. Explore os modelos por grupo corporal e encontre os equipamentos para o seu espaço.' },
+  { id: 'premium', nome: 'Premium', origem: 'Linha importada', quantidade: 91, paginas: 106, capa: capaPremium, logo: logoPremium, texto: 'Amplie as possibilidades do seu projeto. Conheça as opções de peso livre articulado, bateria de pesos, bancos e suportes.' },
+];
+---
+<section class="catalogos dark" id="catalogos" aria-label="Catálogos Ludus">
+  <div class="wrap">
+    <div class="intro">
+      <span class="kicker">Sua próxima academia começa aqui</span>
+      <Heading>Duas linhas.<br />Seu próximo projeto.</Heading>
+      <p class="lead">Conheça os catálogos completos da Ludus. Compare os equipamentos, confira as medidas e fale com nossa equipe para montar sua seleção.</p>
+    </div>
+    <div class="edicoes">
+      {edicoes.map((edicao) => <article class:list={['edicao', edicao.id]}>
+        <a class="capa" href={`/catalogos/ludus-${edicao.id}.pdf`} target="_blank" rel="noopener" aria-label={`Abrir catálogo ${edicao.nome} em PDF`}>
+          <Image src={edicao.capa} alt={`Capa do catálogo Ludus ${edicao.nome}`} widths={[320, 560, 840]} sizes="(max-width: 700px) 85vw, 440px" loading={principal ? 'eager' : 'lazy'} />
+          <span class="abrir">Explorar catálogo ↗</span>
+        </a>
+        <div class="informacoes">
+          <span class="origem">{edicao.origem}</span>
+          <h3><a href={`/loja/${edicao.id}/`} aria-label={`Explorar a Linha ${edicao.nome}`}><Image src={edicao.logo} alt={`Ludus ${edicao.nome}`} width={320} /></a></h3>
+          <p>{edicao.texto}</p>
+          <ul aria-label={`Informações do catálogo ${edicao.nome}`}><li>{edicao.quantidade} equipamentos</li><li>{edicao.paginas} páginas</li><li>PDF completo</li></ul>
+          <a class="btn" href={`/catalogos/ludus-${edicao.id}.pdf`} target="_blank" rel="noopener">Abrir catálogo {edicao.nome} ↗</a>
+          <a class="orcamento" href={whatsapp(`Olá! Vi o catálogo Ludus ${edicao.nome} e quero montar uma seleção de equipamentos para orçamento.`)} target="_blank" rel="noopener">Pedir orçamento da Linha {edicao.nome} →</a>
+        </div>
+      </article>)}
+    </div>
+    <p class="nota">Fotos, fichas técnicas e medidas em milímetros. Orçamento personalizado para o seu projeto.</p>
+  </div>
+</section>
+<style>
+  .catalogos { padding-block: clamp(48px, 7vw, 96px); background: #151514; scroll-margin-top: 80px; }
+  .intro { max-width: 780px; margin-bottom: 44px; }
+  .intro h1, .intro h2 { font-size: clamp(42px, 5.5vw, 76px); margin-block: 16px 22px; }
+  .intro .lead { max-width: 65ch; }
+  .edicoes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+  .edicao { border: 1px solid #383835; border-radius: 20px; overflow: hidden; background: #20201e; }
+  .capa { display: block; position: relative; padding: 30px 48px; background: radial-gradient(ellipse at bottom, #564328 0%, #242320 65%); text-decoration: none; }
+  .premium .capa { background: radial-gradient(ellipse at bottom, #263d56 0%, #222426 65%); }
+  .capa :global(img) { width: 100%; height: auto; box-shadow: 0 20px 35px #0008; transition: transform .2s; }
+  .capa:hover :global(img) { transform: translateY(-4px); }
+  .abrir { position: absolute; right: 20px; bottom: 20px; padding: 10px 16px; background: #f6f5f2; color: #141413; border-radius: 999px; font-size: 15px; font-weight: 600; }
+  .informacoes { display: grid; gap: 18px; padding: 30px; }
+  .origem { color: #e0bd77; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; }
+  .premium .origem { color: #b6cff0; }
+  h3 :global(img) { width: 220px; height: 88px; object-fit: contain; object-position: left; filter: url(#core-logo-alpha); }
+  .informacoes p { color: #d0cec8; font-size: 18px; min-height: 84px; }
+  ul { display: flex; flex-wrap: wrap; gap: 8px 18px; list-style: none; color: #d0cec8; font-size: 15px; }
+  .informacoes .btn { width: 100%; }
+  .orcamento { text-align: center; font-size: 16px; text-underline-offset: 5px; padding-block: 6px; }
+  .nota { color: #bcb9b2; font-size: 16px; text-align: center; margin-top: 32px; }
+  @media (max-width: 700px) {
+    .edicoes { grid-template-columns: 1fr; gap: 28px; }
+    .capa { padding: 24px 32px; }
+    .informacoes { padding: 24px; }
+    .informacoes p { min-height: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .capa :global(img) { transition: none; } }
+</style>

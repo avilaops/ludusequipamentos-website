@@ -13,5 +13,5 @@ export const gruposCore = [
   { nome: 'Abdômen e lombar', slug: 'abdomen-e-lombar' },
   { nome: 'Multifuncionais', slug: 'multifuncionais' },
 ];
-export const catalogoCore = 'https://drive.google.com/file/d/16v8UsmppZ7wegFcHQuF1tlO_DlPOhGaj/view';
+export const catalogoCore = '/catalogos/ludus-core.pdf';
 export const areaNominal = (p: Produto) => p.dim[0] * p.dim[1] / 1_000_000;
