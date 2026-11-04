@@ -32,7 +32,7 @@ const jsonLd = {
 
 <Base title={`${p.nome} ${p.code} · Ludus Core`} description={p.descricao} image={og.src} jsonLd={jsonLd}>
   <article class="wrap produto" data-code={p.code}>
-    <nav class="caminho" aria-label="Você está em"><a href="/core/">Ludus Core</a><span>/</span><a href={`/core/?grupo=${grupo.slug}#equipamentos`}>{grupo.nome}</a><span>/</span><span>{p.code}</span></nav>
+    <nav class="caminho" aria-label="Você está em"><a href="/loja/">Loja</a><span>/</span><a href="/loja/core/">Ludus Core</a><span>/</span><a href={`/loja/core/?grupo=${grupo.slug}#equipamentos`}>{grupo.nome}</a><span>/</span><span>{p.code}</span></nav>
     <div class="topo">
       <div class="stage foto"><Foto code={p.code} alt={`${p.nome} ${p.code}, Ludus Core`} size="full" eager /></div>
       <div class="info">
@@ -68,7 +68,7 @@ const jsonLd = {
       </figure>
     </section>
     {relacionados.length > 0 && <section class="relacionados"><div class="sec-head"><span class="kicker">Explore a seleção</span><h2>Mais em {grupo.nome.toLowerCase()}</h2></div><div class="grid-prod">{relacionados.map((item) => <Card p={item} href={`/core/${item.slug}/`} />)}</div></section>}
-    <a class="voltar" href={`/core/?grupo=${grupo.slug}#equipamentos`}>← Voltar para {grupo.nome.toLowerCase()}</a>
+    <a class="voltar" href={`/loja/core/?grupo=${grupo.slug}#equipamentos`}>← Voltar para {grupo.nome.toLowerCase()}</a>
   </article>
 </Base>
 

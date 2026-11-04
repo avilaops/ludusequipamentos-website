@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: process.env.SITE_URL ?? 'https://ludusequipamentos.com',
   trailingSlash: 'always',
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: (page) => new URL(page).pathname !== '/core/' })],
   build: { format: 'directory' },
   vite: {
     build: { chunkSizeWarningLimit: 1200 },

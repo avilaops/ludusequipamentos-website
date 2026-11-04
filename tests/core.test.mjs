@@ -11,7 +11,7 @@ test('publishes all 66 national products at permanent Core URLs without commerci
   assert.equal(new Set(products.map((p) => p.grupo_muscular)).size, 7);
   const folders = readdirSync(new URL('../dist/core/', import.meta.url), { withFileTypes: true }).filter((f) => f.isDirectory());
   assert.equal(folders.length, 66);
-  const listing = read('core/index.html');
+  const listing = read('loja/core/index.html');
   const sitemap = read('sitemap-0.xml');
   for (const p of products) {
     assert.equal(p.slug, p.code.toLowerCase());
@@ -36,12 +36,12 @@ test('publishes all 66 national products at permanent Core URLs without commerci
 });
 
 test('exposes Core from the home and keeps the original Premium catalog independent', () => {
-  assert.match(read('index.html'), /href="\/core\/"/);
-  assert.match(read('loja/index.html'), /Ludus Premium/);
-  assert.match(read('loja/index.html'), /Linha Premium/);
-  assert.doesNotMatch(read('core/index.html'), /naciona(?:l|is)/i);
-  assert.match(read('core/index.html'), /alt="Ludus Core"/);
-  assert.doesNotMatch(read('loja/index.html'), /data-linha="Ludus Core"/);
+  assert.match(read('index.html'), /href="\/loja\/core\/"/);
+  assert.match(read('loja/premium/index.html'), /Ludus Premium/);
+  assert.match(read('loja/premium/index.html'), /Linha Premium/);
+  assert.doesNotMatch(read('loja/core/index.html'), /naciona(?:l|is)/i);
+  assert.match(read('loja/core/index.html'), /alt="Ludus Core"/);
+  assert.doesNotMatch(read('loja/premium/index.html'), /data-colecao="core"/);
   assert.match(read('core/ld-wh001/index.html'), /900 mm/);
   assert.match(read('core/ld-wh001/index.html'), /1,20 m²/);
   assert.match(read('core/ld-wh024/index.html'), /200 kg/);

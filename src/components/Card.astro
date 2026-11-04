@@ -1,18 +1,20 @@
 ---
 import Foto from './Foto.astro';
 import type { Produto } from '../data/site';
+import { urlProduto } from '../data/catalogo';
 
 interface Props {
   p: Produto;
   href?: string;
 }
-const { p, href = `/loja/${p.slug}/` } = Astro.props;
+const { p, href = urlProduto(p) } = Astro.props;
 ---
 
 <a
   class="card"
   href={href}
   data-linha={p.linha}
+  data-colecao={p.colecao}
   data-grupo={p.grupo_muscular}
   data-busca={`${p.code} ${p.nome}`.toLowerCase()}
 >
