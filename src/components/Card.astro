@@ -4,13 +4,14 @@ import type { Produto } from '../data/site';
 
 interface Props {
   p: Produto;
+  href?: string;
 }
-const { p } = Astro.props;
+const { p, href = `/loja/${p.slug}/` } = Astro.props;
 ---
 
 <a
   class="card"
-  href={`/loja/${p.slug}/`}
+  href={href}
   data-linha={p.linha}
   data-grupo={p.grupo_muscular}
   data-busca={`${p.code} ${p.nome}`.toLowerCase()}

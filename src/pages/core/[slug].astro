@@ -1,0 +1,96 @@
+---
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Card from '../../components/Card.astro';
+import Foto from '../../components/Foto.astro';
+import { areaNominal, catalogoCore, gruposCore, produtosCore } from '../../data/core';
+import { fmt, whatsapp, type Produto } from '../../data/site';
+
+export function getStaticPaths() {
+  return produtosCore.map((p) => ({ params: { slug: p.slug }, props: { p } }));
+}
+const { p } = Astro.props as { p: Produto };
+const [profundidade, largura, altura] = p.dim;
+const grupo = gruposCore.find((g) => g.nome === p.grupo_muscular)!;
+const relacionados = produtosCore.filter((item) => item.code !== p.code && item.grupo_muscular === p.grupo_muscular).slice(0, 4);
+const wa = whatsapp(`Olá! Conheci o ${p.nome} (${p.code}), da linha Ludus Core, e gostaria de um orçamento.`);
+const fotos = import.meta.glob<{ default: ImageMetadata }>('../../assets/core/*.webp', { eager: true });
+const og = await getImage({ src: fotos[`../../assets/core/${p.code}.webp`].default, width: 1200, format: 'jpg' });
+const escala = Math.min(250 / largura, 230 / profundidade);
+const desenho = { largura: largura * escala, profundidade: profundidade * escala };
+const x = (380 - desenho.largura) / 2;
+const y = (290 - desenho.profundidade) / 2;
+const jsonLd = {
+  '@context': 'https://schema.org', '@type': 'Product', name: `${p.nome} ${p.code}`,
+  sku: p.code, brand: { '@type': 'Brand', name: 'Ludus Core' },
+  category: p.grupo_muscular, description: p.descricao,
+  image: new URL(og.src, Astro.site).href,
+  url: new URL(`/core/${p.slug}/`, Astro.site).href,
+};
+---
+
+<Base title={`${p.nome} ${p.code} · Ludus Core`} description={p.descricao} image={og.src} jsonLd={jsonLd}>
+  <article class="wrap produto" data-code={p.code}>
+    <nav class="caminho" aria-label="Você está em"><a href="/core/">Ludus Core</a><span>/</span><a href={`/core/?grupo=${grupo.slug}#equipamentos`}>{grupo.nome}</a><span>/</span><span>{p.code}</span></nav>
+    <div class="topo">
+      <div class="stage foto"><Foto code={p.code} alt={`${p.nome} ${p.code}, Ludus Core`} size="full" eager /></div>
+      <div class="info">
+        <span class="kicker">Ludus Core · Linha nacional</span><span class="code">{p.code}</span>
+        <h1>{p.nome}</h1><p class="lead">{p.grupo_muscular}</p>
+        <table class="ficha"><caption>Ficha técnica</caption><tbody>
+          <tr><th scope="row">Altura</th><td>{altura} mm</td></tr>
+          <tr><th scope="row">Largura</th><td>{largura} mm</td></tr>
+          <tr><th scope="row">Profundidade</th><td>{profundidade} mm</td></tr>
+          <tr><th scope="row">Peso do equipamento</th><td>{p.peso}</td></tr>
+          {p.bateria && <tr><th scope="row">Bateria de pesos</th><td>{p.bateria}</td></tr>}
+          <tr><th scope="row">Área nominal (L × P)</th><td>{fmt(areaNominal(p), 2)} m²</td></tr>
+        </tbody></table>
+        <a class="btn wa" href={wa} target="_blank" rel="noopener" data-wa={p.code}>Pedir orçamento deste modelo</a>
+        <a class="catalogo" href={catalogoCore} target="_blank" rel="noopener">Abrir catálogo Ludus Core em PDF →</a>
+      </div>
+    </div>
+    <section class="espaco">
+      <div><span class="kicker">Para planejar seu espaço</span><h2>Dimensões em planta</h2><p class="lead">Largura de {largura} mm e profundidade de {profundidade} mm. A área nominal deste equipamento é de {fmt(areaNominal(p), 2)} m².</p><p class="nota">O desenho representa o envelope dimensional, não o contorno da máquina. Considere também o espaço de uso, os acessos e a circulação no projeto.</p></div>
+      <figure>
+        <svg viewBox="0 0 400 350" role="img" aria-labelledby="planta-titulo planta-desc">
+          <title id="planta-titulo">Planta dimensional de {p.nome}</title>
+          <desc id="planta-desc">Retângulo proporcional de {largura} mm de largura por {profundidade} mm de profundidade.</desc>
+          <rect x={x} y={y} width={desenho.largura} height={desenho.profundidade} fill="var(--ink)" />
+          <g stroke="var(--accent)" stroke-width="1.5">
+            <path d={`M ${x} ${y+desenho.profundidade+17} H ${x+desenho.largura} M ${x} ${y+desenho.profundidade+12} v 10 M ${x+desenho.largura} ${y+desenho.profundidade+12} v 10`} />
+            <path d={`M ${x+desenho.largura+17} ${y} v ${desenho.profundidade} M ${x+desenho.largura+12} ${y} h 10 M ${x+desenho.largura+12} ${y+desenho.profundidade} h 10`} />
+          </g>
+          <text x={x+desenho.largura/2} y={y+desenho.profundidade+40} text-anchor="middle">{largura} mm</text>
+          <text transform={`translate(${x+desenho.largura+38},${y+desenho.profundidade/2}) rotate(-90)`} text-anchor="middle">{profundidade} mm</text>
+        </svg>
+        <figcaption>Vista superior esquemática · dimensões em mm</figcaption>
+      </figure>
+    </section>
+    {relacionados.length > 0 && <section class="relacionados"><div class="sec-head"><span class="kicker">Explore a seleção</span><h2>Mais em {grupo.nome.toLowerCase()}</h2></div><div class="grid-prod">{relacionados.map((item) => <Card p={item} href={`/core/${item.slug}/`} />)}</div></section>}
+    <a class="voltar" href={`/core/?grupo=${grupo.slug}#equipamentos`}>← Voltar para {grupo.nome.toLowerCase()}</a>
+  </article>
+</Base>
+
+<style>
+  .produto { padding-block: 24px 80px; }
+  .caminho { display: flex; flex-wrap: wrap; gap: 10px; color: var(--muted); font-size: 13px; margin-bottom: 24px; }
+  .caminho a { text-decoration: none; }
+  .topo { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: start; }
+  .foto { position: sticky; top: 92px; aspect-ratio: 1; background: white; }
+  .info { display: grid; gap: 14px; }
+  h1 { font-size: clamp(38px, 4.5vw, 66px); }
+  .ficha caption { text-align: left; font-weight: 600; margin-bottom: 8px; }
+  .ficha th { text-align: left; font-weight: 400; color: var(--muted); padding: 12px 0; }
+  .ficha td { text-align: right; white-space: nowrap; }
+  .catalogo { font-size: 14px; text-align: center; text-underline-offset: 4px; }
+  .espaco { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-block: 80px; }
+  .espaco > div { display: grid; gap: 18px; }
+  figure { border: 1px solid var(--line); border-radius: 20px; padding: 20px; background: var(--surface); }
+  svg { width: 100%; max-height: 380px; }
+  svg text { font: 14px var(--body); fill: var(--muted); }
+  figcaption, .nota { color: var(--muted); font-size: 14px; }
+  figcaption { text-align: center; }
+  .voltar { display: inline-block; margin-top: 40px; }
+  @media (max-width: 900px) { .topo, .espaco { grid-template-columns: 1fr; gap: 28px; } .foto { position: static; max-height: 560px; } .espaco { margin-block: 48px; } }
+</style>
