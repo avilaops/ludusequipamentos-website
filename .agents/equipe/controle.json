@@ -10,6 +10,15 @@
   ],
   "tasks": [
     {
+      "id": "T-FOOTER-20261104",
+      "title": "Adicionar crédito discreto Developed by avilaops.com no rodapé",
+      "responsavel": "nicolas-avila",
+      "status": "em-revisao",
+      "acceptance": ["Crédito em inglês, fonte pequena, link para https://avilaops.com no rodapé compartilhado"],
+      "evidence": ["npm run check sem erros; npm test com 7 testes aprovados e 166 páginas", "Link confirmado no navegador local"],
+      "updatedAt": "2026-11-04"
+    },
+    {
       "id": "T-MARCA-CORE-20261104",
       "title": "Aplicar logo enviada e identificar as coleções como Linha Core e Linha Premium",
       "responsavel": "nicolas-avila",
