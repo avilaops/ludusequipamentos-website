@@ -1,7 +1,7 @@
 # Site da Ludus Equipamentos
 
 Site institucional, loja (catálogo por orçamento) e simulador "Monte sua academia".
-Publicado em https://ludusequipamentos.com. Os endereços antigos (ludus.avilaops.com, www e ludusequipamentos.com.br) redirecionam para ele.
+Publicado em https://ludusequipamentos.com, na pasta exclusiva `/var/www/ludusequipamentos.com` do servidor `applications`. Os aliases www e ludusequipamentos.com.br redirecionam para ele. O site institucional tem armazenamento e publicação separados dos demais serviços Ludus.
 
 | Rota | O que é |
 | --- | --- |
