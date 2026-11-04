@@ -1,0 +1,992 @@
+[
+  {
+    "code": "LD-WH001",
+    "slug": "ld-wh001",
+    "nome": "Agachamento Búlgaro",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1200,
+      1000,
+      900
+    ],
+    "peso": "50 kg",
+    "bateria": null,
+    "descricao": "Agachamento Búlgaro da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH002",
+    "slug": "ld-wh002",
+    "nome": "Agachamento Pêndulo",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      2400,
+      1250,
+      1650
+    ],
+    "peso": "100 kg",
+    "bateria": null,
+    "descricao": "Agachamento Pêndulo da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH003",
+    "slug": "ld-wh003",
+    "nome": "Agachamento Sumô",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1650,
+      1000,
+      1100
+    ],
+    "peso": "50 kg",
+    "bateria": null,
+    "descricao": "Agachamento Sumô da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH004",
+    "slug": "ld-wh004",
+    "nome": "Banco Extensor Lombar",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Abdômen e lombar",
+    "dim": [
+      1300,
+      900,
+      1000
+    ],
+    "peso": "50 kg",
+    "bateria": null,
+    "descricao": "Banco Extensor Lombar da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH005",
+    "slug": "ld-wh005",
+    "nome": "Banco Scott Com Regulagem",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Braços",
+    "dim": [
+      1100,
+      900,
+      1150
+    ],
+    "peso": "50 kg",
+    "bateria": null,
+    "descricao": "Banco Scott Com Regulagem da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH006",
+    "slug": "ld-wh006",
+    "nome": "Banco Sissy Agachamento",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1100,
+      600,
+      700
+    ],
+    "peso": "50 kg",
+    "bateria": null,
+    "descricao": "Banco Sissy Agachamento da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH007",
+    "slug": "ld-wh007",
+    "nome": "Banco Supino Declinado Para Barra",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Peitoral",
+    "dim": [
+      1600,
+      1100,
+      1500
+    ],
+    "peso": "40 kg",
+    "bateria": null,
+    "descricao": "Banco Supino Declinado Para Barra da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH008",
+    "slug": "ld-wh008",
+    "nome": "Banco Supino Inclinado Para Barra",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Peitoral",
+    "dim": [
+      1500,
+      1100,
+      1500
+    ],
+    "peso": "30 kg",
+    "bateria": null,
+    "descricao": "Banco Supino Inclinado Para Barra da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH009",
+    "slug": "ld-wh009",
+    "nome": "Banco Supino Reto Para Barra",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Peitoral",
+    "dim": [
+      1500,
+      1100,
+      1500
+    ],
+    "peso": "40 kg",
+    "bateria": null,
+    "descricao": "Banco Supino Reto Para Barra da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH010",
+    "slug": "ld-wh010",
+    "nome": "Banco Supino 2 em 1",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Peitoral",
+    "dim": [
+      1500,
+      1100,
+      1500
+    ],
+    "peso": "30 kg",
+    "bateria": null,
+    "descricao": "Banco Supino 2 em 1 da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH011",
+    "slug": "ld-wh011",
+    "nome": "Banco Regulável de 0 a 90º",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Multifuncionais",
+    "dim": [
+      1500,
+      500,
+      480
+    ],
+    "peso": "30 kg",
+    "bateria": null,
+    "descricao": "Banco Regulável de 0 a 90º da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH012",
+    "slug": "ld-wh012",
+    "nome": "Banco Regulável 3 em 1",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Multifuncionais",
+    "dim": [
+      1500,
+      500,
+      480
+    ],
+    "peso": "30 kg",
+    "bateria": null,
+    "descricao": "Banco Regulável 3 em 1 da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH013",
+    "slug": "ld-wh013",
+    "nome": "Barra Guiada Tradicional",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Multifuncionais",
+    "dim": [
+      1200,
+      2000,
+      2300
+    ],
+    "peso": "100 kg",
+    "bateria": null,
+    "descricao": "Barra Guiada Tradicional da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH014",
+    "slug": "ld-wh014",
+    "nome": "Barra Guiada Parede",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Multifuncionais",
+    "dim": [
+      500,
+      2000,
+      2300
+    ],
+    "peso": "50 kg",
+    "bateria": null,
+    "descricao": "Barra Guiada Parede da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH015",
+    "slug": "ld-wh015",
+    "nome": "Bíceps Máquina - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Braços",
+    "dim": [
+      1400,
+      1000,
+      1500
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Bíceps Máquina - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH016",
+    "slug": "ld-wh016",
+    "nome": "Bíceps e Tríceps - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Braços",
+    "dim": [
+      1400,
+      1000,
+      1500
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Bíceps e Tríceps - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH017",
+    "slug": "ld-wh017",
+    "nome": "Cadeira Abdutora - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1400,
+      1200,
+      1500
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Cadeira Abdutora - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH018",
+    "slug": "ld-wh018",
+    "nome": "Cadeira Adutora - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1400,
+      1200,
+      1500
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Cadeira Adutora - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH019",
+    "slug": "ld-wh019",
+    "nome": "Cadeira Adutora e Abdutora - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1200,
+      900,
+      1500
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Cadeira Adutora e Abdutora - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH020",
+    "slug": "ld-wh020",
+    "nome": "Cadeira Extensora Articulada",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1000,
+      1550,
+      1000
+    ],
+    "peso": "80 kg",
+    "bateria": null,
+    "descricao": "Cadeira Extensora Articulada da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH021",
+    "slug": "ld-wh021",
+    "nome": "Cadeira Extensora - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1100,
+      900,
+      2300
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Cadeira Extensora - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH022",
+    "slug": "ld-wh022",
+    "nome": "Cadeira Extensora e Flexora - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1200,
+      900,
+      1500
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Cadeira Extensora e Flexora - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH023",
+    "slug": "ld-wh023",
+    "nome": "Cadeira Flexora - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1200,
+      900,
+      1500
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Cadeira Flexora - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH024",
+    "slug": "ld-wh024",
+    "nome": "Cross Over Angular Com Regulagem e Barra Fixa  - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Multifuncionais",
+    "dim": [
+      1000,
+      2000,
+      2300
+    ],
+    "peso": "300 kg",
+    "bateria": "200 kg",
+    "descricao": "Cross Over Angular Com Regulagem e Barra Fixa  - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH025",
+    "slug": "ld-wh025",
+    "nome": "Cross Over Com Regulagem e Barra Fixa - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Multifuncionais",
+    "dim": [
+      3000,
+      800,
+      2300
+    ],
+    "peso": "300 kg",
+    "bateria": "200 kg",
+    "descricao": "Cross Over Com Regulagem e Barra Fixa - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH026",
+    "slug": "ld-wh026",
+    "nome": "Cross Smith Com Regulagem e Barra Fixa - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Multifuncionais",
+    "dim": [
+      1100,
+      2000,
+      2300
+    ],
+    "peso": "350 kg",
+    "bateria": "200 kg",
+    "descricao": "Cross Smith Com Regulagem e Barra Fixa - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH027",
+    "slug": "ld-wh027",
+    "nome": "Desenvolvimento de Ombros Articulado",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Ombros",
+    "dim": [
+      1000,
+      1550,
+      1400
+    ],
+    "peso": "80 kg",
+    "bateria": null,
+    "descricao": "Desenvolvimento de Ombros Articulado da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH028",
+    "slug": "ld-wh028",
+    "nome": "Desenvolvimento de Ombros Livre",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Ombros",
+    "dim": [
+      1000,
+      1100,
+      1500
+    ],
+    "peso": "60 kg",
+    "bateria": null,
+    "descricao": "Desenvolvimento de Ombros Livre da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH029",
+    "slug": "ld-wh029",
+    "nome": "Elevação Pélvica",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1600,
+      1500,
+      1300
+    ],
+    "peso": "80 kg",
+    "bateria": null,
+    "descricao": "Elevação Pélvica da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH030",
+    "slug": "ld-wh030",
+    "nome": "Elevação Pélvica 2D",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1550,
+      1500,
+      1200
+    ],
+    "peso": "120 kg",
+    "bateria": null,
+    "descricao": "Elevação Pélvica 2D da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH031",
+    "slug": "ld-wh031",
+    "nome": "Flexora em Pé - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1200,
+      900,
+      1500
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Flexora em Pé - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH032",
+    "slug": "ld-wh032",
+    "nome": "Flexora em Pé Articulada Unilateral",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1100,
+      1550,
+      1700
+    ],
+    "peso": "80 kg",
+    "bateria": null,
+    "descricao": "Flexora em Pé Articulada Unilateral da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH033",
+    "slug": "ld-wh033",
+    "nome": "Gráviton - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Multifuncionais",
+    "dim": [
+      1700,
+      1150,
+      2300
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Gráviton - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH034",
+    "slug": "ld-wh034",
+    "nome": "Hack 45º Para Agachamento",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      2050,
+      1500,
+      1600
+    ],
+    "peso": "120 kg",
+    "bateria": null,
+    "descricao": "Hack 45º Para Agachamento da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH035",
+    "slug": "ld-wh035",
+    "nome": "Hack Agachamento Com Apoio Lombar",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      2050,
+      1500,
+      1600
+    ],
+    "peso": "120 kg",
+    "bateria": null,
+    "descricao": "Hack Agachamento Com Apoio Lombar da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH036",
+    "slug": "ld-wh036",
+    "nome": "Hack Agachamento Squat",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1600,
+      1500,
+      1700
+    ],
+    "peso": "80 kg",
+    "bateria": null,
+    "descricao": "Hack Agachamento Squat da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH037",
+    "slug": "ld-wh037",
+    "nome": "Leg Press 45º Com Suporte Para Anilhas",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      2050,
+      1500,
+      1600
+    ],
+    "peso": "100 kg",
+    "bateria": null,
+    "descricao": "Leg Press 45º Com Suporte Para Anilhas da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH038",
+    "slug": "ld-wh038",
+    "nome": "Leg Press 90º Com Suporte Para Anilhas",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1800,
+      1500,
+      1700
+    ],
+    "peso": "100 kg",
+    "bateria": null,
+    "descricao": "Leg Press 90º Com Suporte Para Anilhas da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH039",
+    "slug": "ld-wh039",
+    "nome": "Leg Press Articulado",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      2100,
+      1000,
+      1400
+    ],
+    "peso": "120 kg",
+    "bateria": null,
+    "descricao": "Leg Press Articulado da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH040",
+    "slug": "ld-wh040",
+    "nome": "Leg Press Horizontal - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      2000,
+      1200,
+      1800
+    ],
+    "peso": "160 kg",
+    "bateria": "100 kg",
+    "descricao": "Leg Press Horizontal - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH041",
+    "slug": "ld-wh041",
+    "nome": "Máquina de Glúteo 4 Apoio - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1100,
+      900,
+      1500
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Máquina de Glúteo 4 Apoio - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH042",
+    "slug": "ld-wh042",
+    "nome": "Mesa Flexora - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1500,
+      900,
+      1500
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Mesa Flexora - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH043",
+    "slug": "ld-wh043",
+    "nome": "Mesa Flexora e Extensora 2 em 1 - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1500,
+      900,
+      1500
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Mesa Flexora e Extensora 2 em 1 - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH044",
+    "slug": "ld-wh044",
+    "nome": "Mesa Flexora 3 em 1 - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1500,
+      900,
+      1500
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Mesa Flexora 3 em 1 - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH045",
+    "slug": "ld-wh045",
+    "nome": "Panturrilha em Pé Com Agachamento - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1500,
+      1000,
+      1800
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Panturrilha em Pé Com Agachamento - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH046",
+    "slug": "ld-wh046",
+    "nome": "Panturrilha Sentada (Burrinho)",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1000,
+      500,
+      600
+    ],
+    "peso": "50 kg",
+    "bateria": null,
+    "descricao": "Panturrilha Sentada (Burrinho) da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH047",
+    "slug": "ld-wh047",
+    "nome": "Paralela Para Abdominal",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Abdômen e lombar",
+    "dim": [
+      1000,
+      800,
+      1500
+    ],
+    "peso": "50 kg",
+    "bateria": null,
+    "descricao": "Paralela Para Abdominal da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH048",
+    "slug": "ld-wh048",
+    "nome": "Peitoral Dorsal - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Multifuncionais",
+    "dim": [
+      1400,
+      1200,
+      2000
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Peitoral Dorsal - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH049",
+    "slug": "ld-wh049",
+    "nome": "Peck Fly Articulado",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Peitoral",
+    "dim": [
+      1850,
+      1200,
+      1100
+    ],
+    "peso": "60 kg",
+    "bateria": null,
+    "descricao": "Peck Fly Articulado da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH050",
+    "slug": "ld-wh050",
+    "nome": "Peck Fly - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Peitoral",
+    "dim": [
+      1400,
+      1200,
+      2000
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Peck Fly - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH051",
+    "slug": "ld-wh051",
+    "nome": "Prancha Para Abdominal",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Abdômen e lombar",
+    "dim": [
+      1800,
+      800,
+      1500
+    ],
+    "peso": "40 kg",
+    "bateria": null,
+    "descricao": "Prancha Para Abdominal da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH052",
+    "slug": "ld-wh052",
+    "nome": "Polia Mono Cross - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Multifuncionais",
+    "dim": [
+      800,
+      1000,
+      2300
+    ],
+    "peso": "160 kg",
+    "bateria": "100 kg",
+    "descricao": "Polia Mono Cross - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH053",
+    "slug": "ld-wh053",
+    "nome": "Puxada Alta Articulada",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Costas",
+    "dim": [
+      1400,
+      1100,
+      2200
+    ],
+    "peso": "60 kg",
+    "bateria": null,
+    "descricao": "Puxada Alta Articulada da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH054",
+    "slug": "ld-wh054",
+    "nome": "Puxador 2 em 1 ( horizontal e vertical ) - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Costas",
+    "dim": [
+      1700,
+      900,
+      2300
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Puxador 2 em 1 ( horizontal e vertical ) - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH055",
+    "slug": "ld-wh055",
+    "nome": "Puxador Horizontal - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Costas",
+    "dim": [
+      1700,
+      900,
+      2300
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Puxador Horizontal - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH056",
+    "slug": "ld-wh056",
+    "nome": "Puxador Vertical - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Costas",
+    "dim": [
+      1300,
+      900,
+      2300
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Puxador Vertical - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH057",
+    "slug": "ld-wh057",
+    "nome": "Remada Cavalinho Com Apoio",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Costas",
+    "dim": [
+      1800,
+      1000,
+      1100
+    ],
+    "peso": "80 kg",
+    "bateria": null,
+    "descricao": "Remada Cavalinho Com Apoio da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH058",
+    "slug": "ld-wh058",
+    "nome": "Remada Sentada Articulada",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Costas",
+    "dim": [
+      1300,
+      1000,
+      1000
+    ],
+    "peso": "50 kg",
+    "bateria": null,
+    "descricao": "Remada Sentada Articulada da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH059",
+    "slug": "ld-wh059",
+    "nome": "Remada Sentada - Bateria de Pesos",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Costas",
+    "dim": [
+      1400,
+      1000,
+      1500
+    ],
+    "peso": "150 kg",
+    "bateria": "100 kg",
+    "descricao": "Remada Sentada - Bateria de Pesos da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH060",
+    "slug": "ld-wh060",
+    "nome": "Supino Declinado Linha Articulado",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Peitoral",
+    "dim": [
+      2100,
+      1500,
+      1100
+    ],
+    "peso": "80 kg",
+    "bateria": null,
+    "descricao": "Supino Declinado Linha Articulado da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH061",
+    "slug": "ld-wh061",
+    "nome": "Supino Inclinado Linha Articulado",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Peitoral",
+    "dim": [
+      1800,
+      1600,
+      1250
+    ],
+    "peso": "80 kg",
+    "bateria": null,
+    "descricao": "Supino Inclinado Linha Articulado da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH062",
+    "slug": "ld-wh062",
+    "nome": "Supino Reto Linha Articulado",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Peitoral",
+    "dim": [
+      1650,
+      1600,
+      1100
+    ],
+    "peso": "80 kg",
+    "bateria": null,
+    "descricao": "Supino Reto Linha Articulado da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH063",
+    "slug": "ld-wh063",
+    "nome": "Supino Vertical Linha Articulado",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Peitoral",
+    "dim": [
+      1200,
+      1000,
+      1800
+    ],
+    "peso": "50 kg",
+    "bateria": null,
+    "descricao": "Supino Vertical Linha Articulado da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH064",
+    "slug": "ld-wh064",
+    "nome": "Suporte Agachamento",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1100,
+      1100,
+      1800
+    ],
+    "peso": "50 kg",
+    "bateria": null,
+    "descricao": "Suporte Agachamento da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH065",
+    "slug": "ld-wh065",
+    "nome": "Panturrilha em Pé Com Agachamento",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Pernas e glúteos",
+    "dim": [
+      1650,
+      1300,
+      1700
+    ],
+    "peso": "100 kg",
+    "bateria": null,
+    "descricao": "Panturrilha em Pé Com Agachamento da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  },
+  {
+    "code": "LD-WH066",
+    "slug": "ld-wh066",
+    "nome": "Suporte Remada Solo",
+    "linha": "Ludus Core",
+    "grupo_muscular": "Costas",
+    "dim": [
+      2000,
+      900,
+      300
+    ],
+    "peso": "50 kg",
+    "bateria": null,
+    "descricao": "Suporte Remada Solo da linha nacional Ludus Core. Confira a foto, as dimensões e a ficha técnica para planejar sua academia."
+  }
+]

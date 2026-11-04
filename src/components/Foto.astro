@@ -11,7 +11,8 @@ interface Props {
 }
 const { code, alt, size = 'card', eager = false } = Astro.props;
 const fotos = import.meta.glob<{ default: ImageMetadata }>('../assets/produtos/*.jpg', { eager: true });
-const foto = fotos[`../assets/produtos/${code}.jpg`]?.default;
+const fotosCore = import.meta.glob<{ default: ImageMetadata }>('../assets/core/*.webp', { eager: true });
+const foto = fotos[`../assets/produtos/${code}.jpg`]?.default ?? fotosCore[`../assets/core/${code}.webp`]?.default;
 ---
 
 {

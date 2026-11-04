@@ -10,6 +10,19 @@
   ],
   "tasks": [
     {
+      "id": "T-CORE-20261104",
+      "title": "Publicar a linha nacional Ludus Core e conectar o catálogo",
+      "responsavel": "nicolas-avila",
+      "status": "em-andamento",
+      "acceptance": [
+        "66 fichas nacionais sem preços, com fotos Ludus e medidas em mm",
+        "Busca, sete grupos corporais e acesso pela home e menu",
+        "URLs públicas permanentes verificadas antes de atualizar os QR codes"
+      ],
+      "evidence": [],
+      "updatedAt": "2026-11-04"
+    },
+    {
       "id": "T-LOGO-20261103",
       "title": "Ampliar logo no cabeçalho",
       "responsavel": "nicolas-avila",
