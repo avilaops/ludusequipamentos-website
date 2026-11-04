@@ -2,16 +2,18 @@
 import Base from '../../layouts/Base.astro';
 import Card from '../../components/Card.astro';
 import Foto from '../../components/Foto.astro';
+import { Image } from 'astro:assets';
+import logoCore from '../../assets/marca/ludus-core.png';
 import { catalogoCore, gruposCore, produtosCore } from '../../data/core';
 ---
 
-<Base title="Ludus Core · Equipamentos nacionais" description="Conheça os 66 equipamentos nacionais Ludus Core. Explore por grupo corporal, confira fotos e medidas em milímetros e peça seu orçamento.">
+<Base title="Linha Core · Ludus Equipamentos" description="Conheça os 66 equipamentos da Linha Core. Explore por grupo corporal, confira fotos e medidas em milímetros e peça seu orçamento.">
   <section class="dark hero">
     <div class="wrap hero-grid">
       <div class="apresentacao">
-        <span class="kicker">Linha nacional</span>
-        <h1>Ludus <em>Core</em></h1>
-        <p class="lead">A base de uma academia completa. Equipamentos nacionais, organizados para você comparar e escolher.</p>
+        <span class="kicker">Linha Core</span>
+        <h1 class="marca-core"><Image src={logoCore} alt="Ludus Core" width={520} loading="eager" /></h1>
+        <p class="lead">A base de uma academia completa. Equipamentos organizados para você comparar e escolher.</p>
         <div class="acoes">
           <a class="btn" href="#equipamentos">Explorar equipamentos</a>
           <a class="btn ghost" href={catalogoCore} target="_blank" rel="noopener">Catálogo em PDF</a>
@@ -86,7 +88,8 @@ import { catalogoCore, gruposCore, produtosCore } from '../../data/core';
   .hero { padding-block: clamp(40px, 6vw, 80px); }
   .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
   .apresentacao { display: grid; gap: 22px; }
-  h1 em { color: #bda477; font-style: normal; }
+  .marca-core { width: min(100%, 460px); }
+  .marca-core :global(img) { width: 100%; height: auto; mix-blend-mode: screen; }
   .acoes, dl { display: flex; flex-wrap: wrap; gap: 12px; }
   dl { gap: 40px; border-top: 1px solid var(--dark-line); padding-top: 24px; }
   dt { font: 600 36px/1 var(--display); }

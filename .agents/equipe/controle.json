@@ -10,16 +10,35 @@
   ],
   "tasks": [
     {
+      "id": "T-MARCA-CORE-20261104",
+      "title": "Aplicar logo enviada e identificar as coleções como Linha Core e Linha Premium",
+      "responsavel": "nicolas-avila",
+      "status": "em-andamento",
+      "acceptance": [
+        "Logo LUDUS CORE com capacete na seção Core e catálogo",
+        "Remover nacional da apresentação pública da Core",
+        "Preservar 66 fichas, medidas, ausência de preços e destinos dos QR"
+      ],
+      "evidence": ["npm run check: zero erros"],
+      "updatedAt": "2026-11-04"
+    },
+    {
       "id": "T-CORE-20261104",
       "title": "Publicar a linha nacional Ludus Core e conectar o catálogo",
       "responsavel": "nicolas-avila",
-      "status": "em-andamento",
+      "status": "concluido",
       "acceptance": [
         "66 fichas nacionais sem preços, com fotos Ludus e medidas em mm",
         "Busca, sete grupos corporais e acesso pela home e menu",
         "URLs públicas permanentes verificadas antes de atualizar os QR codes"
       ],
-      "evidence": [],
+      "evidence": [
+        "PR #3 integrada: 74c91aa7868557ec8e9865f3e3fd9b1854c8f500",
+        "CI e deploy 41873189316 aprovados; npm run check sem erros; 7 testes aprovados",
+        "66 páginas públicas e 66 imagens HTTP 200; fichas sem preços",
+        "Busca sem acentos, filtros, limpeza e estado vazio verificados no navegador; 390 e 1440 px sem transbordamento",
+        "66 QR codes decodificados para as fichas públicas; PDF atualizado no mesmo ID do Drive em 2026-11-04"
+      ],
       "updatedAt": "2026-11-04"
     },
     {

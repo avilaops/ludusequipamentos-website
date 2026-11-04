@@ -29,6 +29,8 @@ test('publishes all 66 national products at permanent Core URLs without commerci
     for (const dimension of p.dim) assert.ok(page.includes(`${dimension} mm`), p.code);
     assert.doesNotMatch(page, /R\$|NF CHEIA|"offers"|"price"|Cores disponíveis|60 cm|\/simulador\/\?add=/i);
     assert.match(page, /Vista superior esquemática/);
+    assert.doesNotMatch(page, /naciona(?:l|is)/i);
+    assert.match(page, /ludus-core[^"']*\.png/);
     assert.equal(Object.hasOwn(p, 'price'), false);
   }
 });
@@ -36,6 +38,9 @@ test('publishes all 66 national products at permanent Core URLs without commerci
 test('exposes Core from the home and keeps the original Premium catalog independent', () => {
   assert.match(read('index.html'), /href="\/core\/"/);
   assert.match(read('loja/index.html'), /Ludus Premium/);
+  assert.match(read('loja/index.html'), /Linha Premium/);
+  assert.doesNotMatch(read('core/index.html'), /naciona(?:l|is)/i);
+  assert.match(read('core/index.html'), /alt="Ludus Core"/);
   assert.doesNotMatch(read('loja/index.html'), /data-linha="Ludus Core"/);
   assert.match(read('core/ld-wh001/index.html'), /900 mm/);
   assert.match(read('core/ld-wh001/index.html'), /1,20 m²/);

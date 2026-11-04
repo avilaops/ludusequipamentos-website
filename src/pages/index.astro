@@ -4,6 +4,8 @@ import Card from '../components/Card.astro';
 import Foto from '../components/Foto.astro';
 import PlantaKit from '../components/PlantaKit.astro';
 import Contato from '../components/Contato.astro';
+import { Image } from 'astro:assets';
+import logoCore from '../assets/marca/ludus-core.png';
 import { empresa, kits, linhas, porCodigo, produtos, whatsapp } from '../data/site';
 
 const wa = whatsapp('Olá! Vim pelo site da Ludus e quero um orçamento.');
@@ -26,7 +28,7 @@ const slugs = Object.fromEntries(produtos.map((p) => [p.code, p.slug]));
   <section class="hero dark">
     <div class="wrap hero-grid">
       <div class="hero-txt">
-        <span class="kicker">Ludus Premium · Equipamentos de musculação</span>
+        <span class="kicker">Linha Premium · Equipamentos de musculação</span>
         <h1>Força profissional, <em>do projeto à entrega.</em></h1>
         <p class="lead">
           Você escolhe os equipamentos e monta a planta da sua academia em escala. A Ludus entrega, monta e deixa pronto para o primeiro treino.
@@ -51,8 +53,9 @@ const slugs = Object.fromEntries(produtos.map((p) => [p.code, p.slug]));
   <section class="sec">
     <div class="wrap">
       <div class="sec-head">
-        <span class="kicker">Conheça também a linha nacional</span>
-        <h2>Ludus Core</h2>
+        <span class="kicker">Conheça também</span>
+        <h2>Linha Core</h2>
+        <Image src={logoCore} alt="Ludus Core" width={320} style="width:min(100%,320px);height:auto;border-radius:12px" />
         <p class="lead">66 equipamentos em sete grupos corporais. Compare fotos, fichas técnicas e medidas para compor sua academia.</p>
         <div class="cta"><a class="btn" href="/core/">Explorar Ludus Core</a></div>
       </div>
@@ -62,7 +65,7 @@ const slugs = Object.fromEntries(produtos.map((p) => [p.code, p.slug]));
   <section class="sec">
     <div class="wrap">
       <div class="sec-head rv">
-        <span class="kicker">Linhas</span>
+        <span class="kicker">Séries da Linha Premium</span>
         <h2>Tudo para uma sala completa</h2>
         <p class="lead">Três linhas que se combinam: do corpo inteiro na bateria de pesos à área de peso livre.</p>
       </div>
