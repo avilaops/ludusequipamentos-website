@@ -89,7 +89,7 @@ import { catalogoCore, gruposCore, produtosCore } from '../../data/core';
   .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
   .apresentacao { display: grid; gap: 22px; }
   .marca-core { width: min(100%, 460px); }
-  .marca-core :global(img) { width: 100%; height: auto; mix-blend-mode: screen; }
+  .marca-core :global(img) { width: 100%; height: auto; filter: url(#core-logo-alpha); }
   .acoes, dl { display: flex; flex-wrap: wrap; gap: 12px; }
   dl { gap: 40px; border-top: 1px solid var(--dark-line); padding-top: 24px; }
   dt { font: 600 36px/1 var(--display); }

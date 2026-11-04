@@ -13,13 +13,21 @@
       "id": "T-MARCA-CORE-20261104",
       "title": "Aplicar logo enviada e identificar as coleções como Linha Core e Linha Premium",
       "responsavel": "nicolas-avila",
-      "status": "em-andamento",
+      "status": "concluido",
       "acceptance": [
         "Logo LUDUS CORE com capacete na seção Core e catálogo",
         "Remover nacional da apresentação pública da Core",
         "Preservar 66 fichas, medidas, ausência de preços e destinos dos QR"
       ],
-      "evidence": ["npm run check: zero erros"],
+      "evidence": [
+        "PR #4 integrada: 8f5def3a4d8711a6e1a7178870f1b56fa6224bc9",
+        "npm run check: zero erros; npm test: 7 aprovados e 166 páginas",
+        "Publicação manual do build validado em 2026-11-04; CI 41877901835 aguardava executor",
+        "SHA256 do pacote local/remoto: e579d07b6cb29639759d6789651fd278d91a56daf62d4e891269d56a668543de",
+        "Backup: /var/www/ludus-backup-20261104T173128Z",
+        "69 páginas públicas verificadas: home, coleções e 66 fichas; logo Core e remoção de nacional confirmadas",
+        "PDF de 79 páginas atualizado no mesmo link; 66 QR codes decodificados para o site"
+      ],
       "updatedAt": "2026-11-04"
     },
     {
