@@ -73,6 +73,7 @@ h3 { font-size: 26px; }
 .foot a { text-decoration: none; display: block; padding: 4px 0; }
 .foot a:hover { color: #fff; }
 .foot .fine { border-top: 1px solid var(--dark-line); margin-top: 36px; padding-top: 18px; font-size: 13px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; }
+.foot .developer-credit { margin-left: auto; padding: 0; font-size: 12px; }
 @media (max-width: 760px) { .foot .cols { grid-template-columns: 1fr; } }
 
 /* palco da foto */
