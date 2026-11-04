@@ -10,6 +10,15 @@
   ],
   "tasks": [
     {
+      "id": "T-CATALOGOS-REVISAO-PRETO-20261104",
+      "title": "Publicar catálogos revisados com equipamentos pretos e área de treino",
+      "responsavel": "nicolas-avila",
+      "status": "em-andamento",
+      "acceptance": ["66 Core e 91 Premium sem preços", "Logos escuras nas páginas claras e fotos preservadas", "Área de treino identificada como estimativa", "PDFs e capas publicados nos mesmos links"],
+      "evidence": ["157 QR codes decodificados e URLs de produtos verificadas", "Core 79 páginas e Premium 106 páginas", "avx-tools 0.3.0 com nove testes aprovados"],
+      "updatedAt": "2026-11-04"
+    },
+    {
       "id": "T-IDENTIDADE-LINHAS-20261104",
       "title": "Usar Core como referência visual com logo Premium e comparação das linhas",
       "responsavel": "nicolas-avila",
