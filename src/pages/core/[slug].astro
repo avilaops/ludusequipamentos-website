@@ -1,9 +1,8 @@
 ---
-import type { ImageMetadata } from 'astro';
-import { getImage } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import Card from '../../components/Card.astro';
 import Foto from '../../components/Foto.astro';
+import SelecionarProduto from '../../components/SelecionarProduto.astro';
 import { areaNominal, catalogoCore, gruposCore, produtosCore } from '../../data/core';
 import { fmt, whatsapp, type Produto } from '../../data/site';
 
@@ -15,8 +14,7 @@ const [profundidade, largura, altura] = p.dim;
 const grupo = gruposCore.find((g) => g.nome === p.grupo_muscular)!;
 const relacionados = produtosCore.filter((item) => item.code !== p.code && item.grupo_muscular === p.grupo_muscular).slice(0, 4);
 const wa = whatsapp(`Olá! Conheci o ${p.nome} (${p.code}), da linha Ludus Core, e gostaria de um orçamento.`);
-const fotos = import.meta.glob<{ default: ImageMetadata }>('../../assets/core/*.webp', { eager: true });
-const og = await getImage({ src: fotos[`../../assets/core/${p.code}.webp`].default, width: 1200, format: 'jpg' });
+const og = { src: `/midias/produtos/${p.code}` };
 const escala = Math.min(250 / largura, 230 / profundidade);
 const desenho = { largura: largura * escala, profundidade: profundidade * escala };
 const x = (380 - desenho.largura) / 2;
@@ -37,22 +35,25 @@ const jsonLd = {
       <div class="stage foto"><Foto code={p.code} alt={`${p.nome} ${p.code}, Ludus Core`} size="full" eager /></div>
       <div class="info">
         <span class="kicker">Linha Core</span><span class="code">{p.code}</span>
-        <h1>{p.nome}</h1><p class="lead">{p.grupo_muscular}</p>
+        <h1 data-catalog-field="nome">{p.nome}</h1><p class="lead" data-catalog-field="grupo_muscular">{p.grupo_muscular}</p>
         <table class="ficha"><caption>Ficha técnica</caption><tbody>
-          <tr><th scope="row">Altura</th><td>{altura} mm</td></tr>
-          <tr><th scope="row">Largura</th><td>{largura} mm</td></tr>
-          <tr><th scope="row">Profundidade</th><td>{profundidade} mm</td></tr>
-          <tr><th scope="row">Peso do equipamento</th><td>{p.peso}</td></tr>
-          {p.bateria && <tr><th scope="row">Bateria de pesos</th><td>{p.bateria}</td></tr>}
-          <tr><th scope="row">Área nominal (L × P)</th><td>{fmt(areaNominal(p), 2)} m²</td></tr>
+          <tr><th scope="row">Altura</th><td data-catalog-field="altura">{altura} mm</td></tr>
+          <tr><th scope="row">Largura</th><td data-catalog-field="largura">{largura} mm</td></tr>
+          <tr><th scope="row">Profundidade</th><td data-catalog-field="profundidade">{profundidade} mm</td></tr>
+          <tr><th scope="row">Peso do equipamento</th><td data-catalog-field="peso">{p.peso || 'Consultar'}</td></tr>
+          <tr><th scope="row">Bateria de pesos</th><td data-catalog-field="bateria">{p.bateria || 'Consultar'}</td></tr>
+          <tr><th scope="row">Área nominal (L × P)</th><td data-catalog-field="nominal">{fmt(areaNominal(p), 2)} m²</td></tr>
+          <tr><th scope="row">Área de treino estimada</th><td data-catalog-field="area">{fmt((profundidade / 1000 + 1.2) * (largura / 1000 + 1.2), 2)} m²</td></tr>
         </tbody></table>
         <a class="btn wa" href={wa} target="_blank" rel="noopener" data-wa={p.code}>Pedir orçamento deste modelo</a>
+        <SelecionarProduto code={p.code} />
+        <p class="nota">Foto apresentada em preto. Acabamentos e prazo sob consulta no orçamento.</p>
         <a class="catalogo" href={catalogoCore} target="_blank" rel="noopener">Abrir catálogo Ludus Core em PDF →</a>
       </div>
     </div>
     <section class="espaco">
-      <div><span class="kicker">Para planejar seu espaço</span><h2>Dimensões em planta</h2><p class="lead">Largura de {largura} mm e profundidade de {profundidade} mm. A área nominal deste equipamento é de {fmt(areaNominal(p), 2)} m².</p><p class="nota">O desenho representa o envelope dimensional, não o contorno da máquina. Considere também o espaço de uso, os acessos e a circulação no projeto.</p></div>
-      <figure>
+      <div><span class="kicker">Para planejar seu espaço</span><h2>Dimensões em planta</h2><p class="lead">Largura de <span data-catalog-field="largura">{largura} mm</span> e profundidade de <span data-catalog-field="profundidade">{profundidade} mm</span>. Área nominal: <span data-catalog-field="nominal">{fmt(areaNominal(p), 2)} m²</span>.</p><p class="nota">O desenho representa o envelope dimensional, não o contorno da máquina. A área de treino estimada acrescenta 600 mm em cada lado para estudo preliminar. Confirme os afastamentos de operação e circulação no projeto; não é especificação do fabricante.</p></div>
+      <figure data-catalog-plan data-catalog-dim={JSON.stringify(p.dim)}>
         <svg viewBox="0 0 400 350" role="img" aria-labelledby="planta-titulo planta-desc">
           <title id="planta-titulo">Planta dimensional de {p.nome}</title>
           <desc id="planta-desc">Retângulo proporcional de {largura} mm de largura por {profundidade} mm de profundidade.</desc>

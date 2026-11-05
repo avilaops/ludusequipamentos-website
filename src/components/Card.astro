@@ -29,6 +29,6 @@ const { p, href = urlProduto(p) } = Astro.props;
   </div>
 </a>
 
-<style>
-  .colecao { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+<style is:global>
+  .card .colecao { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 </style>

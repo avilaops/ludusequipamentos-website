@@ -5,8 +5,8 @@ interface Props { atual?: Produto['colecao']; }
 const { atual } = Astro.props;
 ---
 <nav class="colecoes" aria-label="Selecionar linha de equipamentos">
-  <a href="/loja/" aria-current={!atual ? 'page' : undefined}>Todas as linhas <span>{selecionarColecao().length}</span></a>
-  {colecoes.map((colecao) => <a href={colecao.href} aria-current={atual === colecao.id ? 'page' : undefined}>{colecao.nome} <span>{selecionarColecao(colecao.id).length}</span></a>)}
+  <a href="/loja/" aria-current={!atual ? 'page' : undefined}>Todas as linhas <span data-catalog-count="all">{selecionarColecao().length}</span></a>
+  {colecoes.map((colecao) => <a href={colecao.href} aria-current={atual === colecao.id ? 'page' : undefined}>{colecao.nome} <span data-catalog-count={colecao.id}>{selecionarColecao(colecao.id).length}</span></a>)}
 </nav>
 <style>
   .colecoes { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }

@@ -10,6 +10,15 @@
   ],
   "tasks": [
     {
+      "id": "T-PUBLICACAO-R2-ERP-20261104",
+      "title": "Publicação explícita do ERP para R2 e orçamento com múltiplos produtos",
+      "responsavel": "nicolas-avila",
+      "status": "em-andamento",
+      "acceptance": ["Originais privados e derivados públicos no domínio ludusequipamentos.com", "Publicação revisada, sem preços, com proteção contra versão antiga", "Seleção de produtos e quantidades para orçamento", "Validação visual e publicação coordenada com ERP"],
+      "evidence": ["Fontes recuperadas em checkout independente após reorganização externa", "Desktop Commander confirmou manifesto de 157 produtos no servidor de aplicações", "Ativação do Worker e migração ainda pendentes"],
+      "updatedAt": "2026-11-04"
+    },
+    {
       "id": "T-CATALOGOS-REVISAO-PRETO-20261104",
       "title": "Publicar catálogos revisados com equipamentos pretos e área de treino",
       "responsavel": "nicolas-avila",
