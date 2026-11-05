@@ -14,7 +14,7 @@ export const selecionarColecao = (colecao?: Produto['colecao']) =>
   colecao ? catalogo.filter((produto) => produto.colecao === colecao) : catalogo;
 /** URLs de fichas preservadas: já constam nos QR codes dos catálogos. */
 export const urlProduto = (produto: Produto) =>
-  produto.colecao === 'core' ? `/core/${produto.slug}/` : `/loja/${produto.slug}/`;
+  produto.url ?? (produto.colecao === 'core' ? `/core/${produto.slug}/` : `/loja/${produto.slug}/`);
 
 /** Nomes equivalentes de navegação; as fichas técnicas preservam a classificação original. */
 const nomesDeGrupo: Record<string, string> = {

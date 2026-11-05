@@ -1,6 +1,7 @@
 import produtosJson from './produtos.json';
 
 export interface Produto {
+  url?: string;
   colecao: 'premium' | 'core';
   code: string;
   slug: string;

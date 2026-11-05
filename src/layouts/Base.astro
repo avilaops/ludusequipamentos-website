@@ -80,13 +80,14 @@ const org = {
           <a href="/simulador/" aria-current={path.startsWith('/simulador') ? 'page' : undefined}>Simulador</a>
           <a href="/kits/" aria-current={path.startsWith('/kits') ? 'page' : undefined}>Kits</a>
           <a href="/catalogos/" aria-current={path === '/catalogos/' ? 'page' : undefined}>Catálogos</a>
-          <a href="/#contato">Contato</a>
+          <a href="/orcamento/" aria-current={path === '/orcamento/' ? 'page' : undefined}>Minha seleção (<span data-orcamento-contagem>0</span>)</a>
           <a class="btn wa" href={wa} target="_blank" rel="noopener" data-wa="menu">Pedir orçamento</a>
         </nav>
       </div>
     </header>
 
     <main><slot /></main>
+    <script>import '../scripts/orcamento';</script>
 
     <footer class="foot">
       <div class="wrap">
