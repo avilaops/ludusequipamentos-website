@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Miniflare } from 'miniflare';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 import { validatePublication } from '../workers/catalog-media.mjs';
 
 const imageKey = 'ludus/catalogo/v1/core/LD-WH001/web.webp';
@@ -45,4 +46,30 @@ test('Worker: R2 real local, original privado, publicação explícita, replay e
     const newer = publication(); newer.id = '22222222-2222-4222-8222-222222222222'; newer.sequence = 2; assert.equal((await post(newer)).status, 200);
     assert.equal((await post(publication())).status, 409);
   } finally { await mf.dispose(); }
+});
+
+test('novas fotos são privadas, imutáveis e só entram no catálogo após publicação', async () => {
+  const token='isolated-upload-test-token-123456789';
+  const mf=new Miniflare({modules:true,scriptPath:fileURLToPath(new URL('../workers/catalog-media.mjs',import.meta.url)),compatibilityDate:'2026-07-30',r2Buckets:['MEDIA'],bindings:{PUBLISH_TOKEN:token}});
+  try {
+    const bucket=await mf.getR2Bucket('MEDIA');
+    await bucket.put('ludus/catalogo/v1/manifest.json',JSON.stringify(manifest));
+    const send=(path,init)=>mf.dispatchFetch('https://ludusequipamentos.com'+path,init);
+    const hash=value=>createHash('sha256').update(value).digest('hex');
+    const source='private-original-bytes', prefix=hash(source)+'/core/LD-WH001/';
+    const upload=(name,bytes,extra={})=>send('/midias/_upload/'+prefix+name,{method:'PUT',headers:{Authorization:`Bearer ${token}`,'Content-Type':name.endsWith('.png')?'image/png':'image/webp','X-Content-Sha256':hash(bytes),...extra},body:bytes});
+    assert.equal((await upload('source.png',source,{Authorization:''})).status,401);
+    assert.equal((await upload('source.png',source)).status,200);
+    assert.equal((await upload('web.webp','derivative')).status,200);
+    assert.equal((await upload('web.webp','derivative')).status,200);
+    assert.equal((await upload('web.webp','changed')).status,409);
+    assert.equal((await send('/midias/_private/uploads/'+prefix+'source.png')).status,401);
+    const pending=await send('/midias/produtos/LD-WH001'); assert.equal(pending.status,503);
+    const input=publication(); input.products[0].imageKey='ludus/catalogo/uploads/'+prefix+'source.png';
+    const publish=()=>send('/midias/_publish',{method:'POST',headers:{Authorization:`Bearer ${token}`},body:JSON.stringify(input)});
+    assert.equal((await publish()).status,422);
+    input.products[0].imageKey='ludus/catalogo/uploads/'+prefix+'web.webp';
+    assert.equal((await publish()).status,200);
+    assert.equal(await (await send('/midias/produtos/LD-WH001')).text(),'derivative');
+  } finally {await mf.dispose();}
 });
