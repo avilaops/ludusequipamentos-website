@@ -27,7 +27,12 @@ test('Worker: R2 real local, original privado, publicação explícita, replay e
     await bucket.put('ludus/catalogo/v1/manifest.json', JSON.stringify(manifest));
     await bucket.put(imageKey, 'webp-image', { httpMetadata: { contentType: 'image/webp' } });
     await bucket.put(sourceKey, 'private-original', { httpMetadata: { contentType: 'image/png' } });
+    for (const line of ['core','premium']) await bucket.put(`ludus/catalogos/comercial-2026-11-05/ludus-${line}.pdf`, '%PDF-test-catalog', {httpMetadata:{contentType:'application/pdf'}});
     const send = (path, init) => mf.dispatchFetch('https://ludusequipamentos.com'+path, init);
+    for (const line of ['core','premium']) {
+      const pdf=await send(`/catalogos/ludus-${line}.pdf`,{headers:{Range:'bytes=0-4'}});
+      assert.equal(pdf.status,206);assert.equal(pdf.headers.get('Content-Type'),'application/pdf');assert.equal(await pdf.text(),'%PDF-');
+    }
     assert.equal((await send('/midias/_private/core/LD-WH001/source.png')).status, 401);
     assert.equal((await send('/midias/core/LD-WH001/web.webp')).status, 503);
     const post = body => send('/midias/_publish', { method: 'POST', headers: { Authorization: `Bearer ${token}` }, body: JSON.stringify(body) });

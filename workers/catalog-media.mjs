@@ -169,7 +169,8 @@ export default {
         const prefix=versioned ? `ludus/catalogo/${versioned[1]}/` : ROOT;
         return PRIVATE.test(key) ? await serveObject(request,env,prefix+key,true) : failure(404,'Arquivo não encontrado');
       }
-      if (path==='/catalogos/ludus-core.pdf' || path==='/catalogos/ludus-premium.pdf') return await serveObject(request,env,'ludus/catalogos/'+(env.LIBRARY_VERSION === '2' && path.endsWith('premium.pdf') ? 'originais-2026-11-04/' : '2026-11-04/')+path.split('/').at(-1));
+      if (/^\/catalogos\/ludus-(core|premium)(-compacto)?\.pdf$/.test(path)) return await serveObject(request,env,'ludus/catalogos/comercial-2026-11-05/'+path.split('/').at(-1));
+      if (/^\/catalogos\/resumos\/(core\/grupo-0[1-7]|premium\/grupo-0[1-9])\.png$/.test(path)) return await serveObject(request,env,'ludus/catalogos/comercial-2026-11-05/'+path.slice('/catalogos/'.length));
       if (!path.startsWith('/midias/') && /\.[a-z0-9]+$/i.test(path)) return fetch(request);
       const current=await env.MEDIA.get(PUBLICATION);
       if (!current) return path.startsWith('/midias/') ? failure(503,'Catálogo indisponível') : fetch(request);

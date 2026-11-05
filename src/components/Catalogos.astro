@@ -10,7 +10,7 @@ const { principal = false } = Astro.props;
 const Heading = principal ? 'h1' : 'h2';
 const edicoes = [
   { id: 'core', nome: 'Core', origem: 'Fabricação nacional', quantidade: 66, paginas: 79, capa: capaCore, logo: logoCore, texto: 'A base para compor sua sala de musculação. Explore os modelos por grupo corporal e encontre os equipamentos para o seu espaço.' },
-  { id: 'premium', nome: 'Premium', origem: 'Linha importada', quantidade: 91, paginas: 106, capa: capaPremium, logo: logoPremium, texto: 'Amplie as possibilidades do seu projeto. Conheça as opções de peso livre articulado, bateria de pesos, bancos e suportes.' },
+  { id: 'premium', nome: 'Premium', origem: 'Linha importada', quantidade: 91, paginas: 107, capa: capaPremium, logo: logoPremium, texto: 'Amplie as possibilidades do seu projeto. Conheça as opções de peso livre articulado, bateria de pesos, bancos e suportes.' },
 ];
 ---
 <section class="catalogos dark" id="catalogos" aria-label="Catálogos Ludus">
@@ -32,6 +32,7 @@ const edicoes = [
           <p>{edicao.texto}</p>
           <ul aria-label={`Informações do catálogo ${edicao.nome}`}><li>{edicao.quantidade} equipamentos</li><li>{edicao.paginas} páginas</li><li>PDF completo</li></ul>
           <a class="btn" href={`/catalogos/ludus-${edicao.id}.pdf`} target="_blank" rel="noopener">Abrir catálogo {edicao.nome} ↗</a>
+          <a class="orcamento" href={`/catalogos/ludus-${edicao.id}-compacto.pdf`} target="_blank" rel="noopener">Versão leve para compartilhar no WhatsApp ↗</a>
           <a class="orcamento" href={whatsapp(`Olá! Vi o catálogo Ludus ${edicao.nome} e quero montar uma seleção de equipamentos para orçamento.`)} target="_blank" rel="noopener">Pedir orçamento da Linha {edicao.nome} →</a>
         </div>
       </article>)}
