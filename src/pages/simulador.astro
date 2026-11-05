@@ -1,13 +1,10 @@
 ---
-import type { ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import logoPreta from '../assets/marca/ludus-preta.png';
 import { empresa, FOLGA, kits, linhas, produtos } from '../data/site';
 
-const fotos = import.meta.glob<{ default: ImageMetadata }>('../assets/produtos/*.jpg', { eager: true });
-const lista = await Promise.all(
-  produtos.map(async (p) => ({
+const lista = produtos.map((p) => ({
     code: p.code,
     nome: p.nome,
     linha: p.linha,
@@ -15,9 +12,8 @@ const lista = await Promise.all(
     slug: p.slug,
     c: p.dim[0] / 1000,
     l: p.dim[1] / 1000,
-    foto: (await getImage({ src: fotos[`../assets/produtos/${p.code}.jpg`].default, width: 120, format: 'webp' })).src,
-  }))
-);
+    foto: `/midias/produtos/${p.code}`,
+  }));
 const logoFolha = await getImage({ src: logoPreta, width: 360, format: 'png' });
 const dados = { produtos: lista, kits, folga: FOLGA, whatsapp: empresa.whatsappNumero };
 ---

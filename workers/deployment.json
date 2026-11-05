@@ -2,6 +2,7 @@
   "name": "ludus-catalog-media",
   "main_module": "catalog-media.mjs",
   "compatibility_date": "2026-11-04",
+  "keep_bindings": ["secret_text"],
   "bindings": [{ "type": "r2_bucket", "name": "MEDIA", "bucket_name": "ludus-equipamentos-midias" }, { "type": "plain_text", "name": "LIBRARY_VERSION", "text": "2" }],
   "observability": { "enabled": true, "head_sampling_rate": 1, "logs": { "enabled": true, "invocation_logs": true }, "traces": { "enabled": true, "head_sampling_rate": 0.1 } }
 }

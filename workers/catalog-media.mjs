@@ -3,6 +3,7 @@ const PUBLICATION = 'ludus/publications/current.json';
 const UUID = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
 const IMAGE = /^(core|premium)\/(LD-[A-Z0-9]+)\/(web\.webp|black\.png|thumbnail\.jpg)$/;
 const PRIVATE = /^(core|premium)\/(LD-[A-Z0-9]+)\/(source\.(?:png|jpg)|web\.webp|black\.png|thumbnail\.jpg)$/;
+const UPLOAD = /^([0-9a-f]{64})\/(core|premium)\/(LD-[A-Z0-9]+)\/(source\.(?:jpg|png|webp)|web\.webp|thumbnail\.webp)$/;
 const failure = (status, message) => Response.json({ title: message }, { status, headers: { 'Cache-Control': 'no-store' } });
 const escape = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const groupName = value => ({ Deltoides: 'Ombros', 'Abdômen': 'Abdômen e lombar', Multitrabalho: 'Multifuncionais' })[value] ?? value;
@@ -13,17 +14,18 @@ async function authorized(request, env) {
   const hashes = await Promise.all([request.headers.get('authorization') ?? '', `Bearer ${env.PUBLISH_TOKEN}`].map(s => crypto.subtle.digest('SHA-256', encoder.encode(s))));
   return crypto.subtle.timingSafeEqual(hashes[0], hashes[1]);
 }
-async function jsonBody(request) {
+async function bytesBody(request, limit = 1_000_000) {
   const reader = request.body?.getReader();
   let size = 0; const chunks = [];
-  if (reader) for (;;) { const { done, value } = await reader.read(); if (done) break; size += value.length; if (size > 1_000_000) { await reader.cancel(); throw new Error('body-limit'); } chunks.push(value); }
+  if (reader) for (;;) { const { done, value } = await reader.read(); if (done) break; size += value.length; if (size > limit) { await reader.cancel(); throw new Error('body-limit'); } chunks.push(value); }
   const joined = new Uint8Array(size); let offset = 0;
   for (const chunk of chunks) { joined.set(chunk, offset); offset += chunk.length; }
-  return JSON.parse(new TextDecoder().decode(joined));
+  return joined;
 }
+async function jsonBody(request) { return JSON.parse(new TextDecoder().decode(await bytesBody(request))); }
 
 /** Construct public fields explicitly, never leak prices or internal records. */
-export function validatePublication(value, manifest) {
+export function validatePublication(value, manifest, registered = []) {
   if (!UUID.test(value?.id) || !Number.isSafeInteger(value.sequence) || value.sequence < 1 || !Array.isArray(value.products) || !value.products.length || value.products.length > 1000) throw new Error('publication-invalid');
   const sources = new Map(manifest.products.map(p => [p.sku, p]));
   const codes = new Set(); const paths = new Set();
@@ -31,7 +33,7 @@ export function validatePublication(value, manifest) {
     const original = sources.get(p.code);
     if (!original || codes.has(p.code) || paths.has(p.url) || !['core', 'premium'].includes(p.colecao)
       || !/^\/(core|loja)\/[a-z0-9-]+\/$/.test(p.url) || !Array.isArray(p.dim) || p.dim.length !== 3 || p.dim.some(n => !Number.isInteger(n) || n < 1 || n > 50000)
-      || !original.assets.some(a => a.storage_key === p.imageKey && ['webp', 'black', 'thumbnail'].includes(a.variant))) throw new Error('product-invalid');
+      || ![...original.assets, ...registered.filter(a=>a.sku===p.code)].some(a => a.storage_key === p.imageKey && ['webp', 'black', 'thumbnail'].includes(a.variant))) throw new Error('product-invalid');
     for (const [key, max] of [['nome', 200], ['grupo_muscular', 80], ['linha', 80], ['descricao', 4000], ['peso', 80], ['bateria', 80]]) {
       if (typeof p[key] !== 'string' || p[key].length > max || /[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(p[key])) throw new Error('text-invalid');
     }
@@ -113,13 +115,43 @@ export default {
     const ROOT = env.LIBRARY_VERSION === '2' ? 'ludus/catalogo/v2/' : DEFAULT_ROOT;
     const path = new URL(request.url).pathname;
     try {
+      if (path.startsWith('/midias/_upload/')) {
+        if (request.method !== 'PUT') return failure(405,'Método não permitido');
+        if (!await authorized(request,env)) return failure(401,'Acesso não autorizado');
+        const suffix=path.slice('/midias/_upload/'.length), match=UPLOAD.exec(suffix);
+        if (!match) return failure(422,'Localizador inválido');
+        const manifestObject=await env.MEDIA.get(ROOT+'manifest.json');
+        if (!manifestObject || !(await manifestObject.json()).products.some(p=>p.sku===match[3])) return failure(422,'SKU não registrado');
+        const mime=match[4].endsWith('.jpg')?'image/jpeg':match[4].endsWith('.png')?'image/png':'image/webp';
+        if (request.headers.get('content-type')!==mime) return failure(415,'Tipo de imagem inválido');
+        let bytes; try { bytes=await bytesBody(request,10_000_000); } catch { return failure(413,'Imagem muito grande'); }
+        const sha=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),n=>n.toString(16).padStart(2,'0')).join('');
+        if (sha!==request.headers.get('x-content-sha256') || (match[4].startsWith('source.') && sha!==match[1])) return failure(422,'Hash divergente');
+        const key='ludus/catalogo/uploads/'+suffix;
+        const old=await env.MEDIA.head(key);
+        if (old) return old.customMetadata?.sha256===sha ? Response.json({stored:true}) : failure(409,'Versão imutável');
+        const variant=match[4].startsWith('source.')?'source':match[4]==='web.webp'?'webp':'thumbnail';
+        const saved=await env.MEDIA.put(key,bytes,{onlyIf:{etagDoesNotMatch:'*'},httpMetadata:{contentType:mime},customMetadata:{sha256:sha,sku:match[3],variant}});
+        return saved ? Response.json({stored:true}) : failure(409,'Envio concorrente; repita');
+      }
       if (path === '/midias/_publish') {
         if (request.method !== 'POST') return failure(405, 'Método não permitido');
         if (!await authorized(request,env)) return failure(401,'Acesso não autorizado');
         const manifestObject = await env.MEDIA.get(ROOT+'manifest.json');
         if (!manifestObject) return failure(503,'Biblioteca indisponível');
         let data;
-        try { data=validatePublication(await jsonBody(request),await manifestObject.json()); } catch { return failure(422,'Publicação inválida'); }
+        try {
+          const input=await jsonBody(request), registered=[];
+          if (!Array.isArray(input?.products) || input.products.length>1000) throw new Error('publication-invalid');
+          for (const p of input.products) {
+            const suffix=typeof p.imageKey==='string' && p.imageKey.startsWith('ludus/catalogo/uploads/') ? p.imageKey.slice('ludus/catalogo/uploads/'.length) : '';
+            const match=UPLOAD.exec(suffix);
+            if (!match || match[3]!==p.code || match[4].startsWith('source.')) continue;
+            const asset=await env.MEDIA.head(p.imageKey);
+            if (asset?.customMetadata?.sku===p.code && ['webp','thumbnail'].includes(asset.customMetadata.variant)) registered.push({sku:p.code,storage_key:p.imageKey,variant:asset.customMetadata.variant});
+          }
+          data=validatePublication(input,await manifestObject.json(),registered);
+        } catch { return failure(422,'Publicação inválida'); }
         const current=await env.MEDIA.get(PUBLICATION);
         const previous=current ? await current.json() : null;
         if (previous?.id===data.id) return Response.json({published:true,id:data.id});
@@ -131,12 +163,14 @@ export default {
       if (path.startsWith('/midias/_private/')) {
         if (!await authorized(request,env)) return failure(401,'Acesso não autorizado');
         const requested=path.slice('/midias/_private/'.length);
+        if (requested.startsWith('uploads/')) return UPLOAD.test(requested.slice(8)) ? await serveObject(request,env,'ludus/catalogo/'+requested,true) : failure(404,'Arquivo não encontrado');
         const versioned=/^(v[1-9][0-9]{0,5})\/(.+)$/.exec(requested);
         const key=versioned ? versioned[2] : requested;
         const prefix=versioned ? `ludus/catalogo/${versioned[1]}/` : ROOT;
         return PRIVATE.test(key) ? await serveObject(request,env,prefix+key,true) : failure(404,'Arquivo não encontrado');
       }
-      if (path==='/catalogos/ludus-core.pdf' || path==='/catalogos/ludus-premium.pdf') return await serveObject(request,env,'ludus/catalogos/'+(env.LIBRARY_VERSION === '2' && path.endsWith('premium.pdf') ? 'originais-2026-11-04/' : '2026-11-04/')+path.split('/').at(-1));
+      if (/^\/catalogos\/ludus-(core|premium)(-compacto)?\.pdf$/.test(path)) return await serveObject(request,env,'ludus/catalogos/comercial-2026-11-05/'+path.split('/').at(-1));
+      if (/^\/catalogos\/resumos\/(core\/grupo-0[1-7]|premium\/grupo-0[1-9])\.png$/.test(path)) return await serveObject(request,env,'ludus/catalogos/comercial-2026-11-05/'+path.slice('/catalogos/'.length));
       if (!path.startsWith('/midias/') && /\.[a-z0-9]+$/i.test(path)) return fetch(request);
       const current=await env.MEDIA.get(PUBLICATION);
       if (!current) return path.startsWith('/midias/') ? failure(503,'Catálogo indisponível') : fetch(request);

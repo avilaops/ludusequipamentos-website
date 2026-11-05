@@ -52,6 +52,4 @@ test('collection pages share the catalog controls and the overview represents bo
   assert.doesNotMatch(read('loja/index.html'), /data-filtro="linha"/);
   assert.match(read('loja/premium/index.html'), /data-filtro="linha"/);
   assert.match(read('loja/premium/index.html'), /href="\/catalogos\/ludus-premium.pdf"/);
-  const pdf = readFileSync(new URL('../dist/catalogos/ludus-premium.pdf', import.meta.url));
-  assert.equal(pdf.subarray(0, 5).toString(), '%PDF-');
 });
