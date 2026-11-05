@@ -1,5 +1,5 @@
 ---
-import { spec } from '../data/modelos';
+import { spec, specCore } from '../data/modelos';
 import { coresBraco, coresEstrutura } from '../data/site';
 
 interface Props {
@@ -8,9 +8,10 @@ interface Props {
   eager?: boolean;
   /** Mostra as amostras de cor do catálogo para trocar no modelo. */
   cores?: boolean;
+  colecao?: 'premium' | 'core';
 }
-const { code, eager = false, cores = false } = Astro.props;
-const dados = spec(code);
+const { code, eager = false, cores = false, colecao = 'premium' } = Astro.props;
+const dados = colecao === 'core' ? specCore(code) : spec(code);
 const paleta = cores
   ? {
       frame: { label: 'Estrutura', options: coresEstrutura },

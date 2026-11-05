@@ -3,6 +3,7 @@
  * planta em SVG e silhueta em planta. Lidos no build.
  */
 const BASE = '/node_modules/@avilaops/gerador-3d/catalogs/ludus';
+const CORE_BASE = '/node_modules/@avilaops/gerador-3d/catalogs/ludus-core';
 
 const specModules = import.meta.glob<Record<string, unknown>>(
   '/node_modules/@avilaops/gerador-3d/catalogs/ludus/specs/*.json',
@@ -16,6 +17,18 @@ const silhuetaModules = import.meta.glob<Silhueta>(
   '/node_modules/@avilaops/gerador-3d/catalogs/ludus/models/*/footprint.json',
   { eager: true, import: 'default' }
 );
+const coreSpecModules = import.meta.glob<Record<string, unknown>>(
+  '/node_modules/@avilaops/gerador-3d/catalogs/ludus-core/specs/*.json',
+  { eager: true, import: 'default' }
+);
+const corePlantaModules = import.meta.glob<string>(
+  '/node_modules/@avilaops/gerador-3d/catalogs/ludus-core/models/*/plan.svg',
+  { eager: true, query: '?raw', import: 'default' }
+);
+const coreSilhuetaModules = import.meta.glob<Silhueta>(
+  '/node_modules/@avilaops/gerador-3d/catalogs/ludus-core/models/*/footprint.json',
+  { eager: true, import: 'default' }
+);
 
 export interface Silhueta {
   bounds: { minX: number; maxX: number; minZ: number; maxZ: number };
@@ -26,6 +39,9 @@ export interface Silhueta {
 export const spec = (code: string) => specModules[`${BASE}/specs/${code}.json`];
 export const planta = (code: string) => plantaModules[`${BASE}/models/${code}/plan.svg`];
 export const silhueta = (code: string) => silhuetaModules[`${BASE}/models/${code}/footprint.json`];
+export const specCore = (code: string) => coreSpecModules[`${CORE_BASE}/specs/${code}.json`];
+export const plantaCore = (code: string) => corePlantaModules[`${CORE_BASE}/models/${code}/plan.svg`];
+export const silhuetaCore = (code: string) => coreSilhuetaModules[`${CORE_BASE}/models/${code}/footprint.json`];
 
 /** Polígonos da silhueta já girados (quartos de volta) e postos em (x, y). Frente do equipamento para baixo com rot = 0. */
 export function poligonos(code: string, x: number, y: number, rot: number): string {
