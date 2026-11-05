@@ -1,4 +1,4 @@
-const ROOT = 'ludus/catalogo/v1/';
+const DEFAULT_ROOT = 'ludus/catalogo/v1/';
 const PUBLICATION = 'ludus/publications/current.json';
 const UUID = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
 const IMAGE = /^(core|premium)\/(LD-[A-Z0-9]+)\/(web\.webp|black\.png|thumbnail\.jpg)$/;
@@ -110,6 +110,7 @@ async function website(request, publication) {
 
 export default {
   async fetch(request, env) {
+    const ROOT = env.LIBRARY_VERSION === '2' ? 'ludus/catalogo/v2/' : DEFAULT_ROOT;
     const path = new URL(request.url).pathname;
     try {
       if (path === '/midias/_publish') {
@@ -129,10 +130,13 @@ export default {
       }
       if (path.startsWith('/midias/_private/')) {
         if (!await authorized(request,env)) return failure(401,'Acesso não autorizado');
-        const key=path.slice('/midias/_private/'.length);
-        return PRIVATE.test(key) ? await serveObject(request,env,ROOT+key,true) : failure(404,'Arquivo não encontrado');
+        const requested=path.slice('/midias/_private/'.length);
+        const versioned=/^(v[1-9][0-9]{0,5})\/(.+)$/.exec(requested);
+        const key=versioned ? versioned[2] : requested;
+        const prefix=versioned ? `ludus/catalogo/${versioned[1]}/` : ROOT;
+        return PRIVATE.test(key) ? await serveObject(request,env,prefix+key,true) : failure(404,'Arquivo não encontrado');
       }
-      if (path==='/catalogos/ludus-core.pdf' || path==='/catalogos/ludus-premium.pdf') return await serveObject(request,env,'ludus/catalogos/2026-11-04/'+path.split('/').at(-1));
+      if (path==='/catalogos/ludus-core.pdf' || path==='/catalogos/ludus-premium.pdf') return await serveObject(request,env,'ludus/catalogos/'+(env.LIBRARY_VERSION === '2' && path.endsWith('premium.pdf') ? 'originais-2026-11-04/' : '2026-11-04/')+path.split('/').at(-1));
       if (!path.startsWith('/midias/') && /\.[a-z0-9]+$/i.test(path)) return fetch(request);
       const current=await env.MEDIA.get(PUBLICATION);
       if (!current) return path.startsWith('/midias/') ? failure(503,'Catálogo indisponível') : fetch(request);
