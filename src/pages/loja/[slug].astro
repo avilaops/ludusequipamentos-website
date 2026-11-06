@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Card from '../../components/Card.astro';
 import Foto from '../../components/Foto.astro';
 import SelecionarProduto from '../../components/SelecionarProduto.astro';
-import { areaTreino, coresBraco, coresEstrutura, empresa, fmt, FOLGA, produtos, whatsapp, type Produto } from '../../data/site';
+import { areaTreino, coresAnilheiro, coresBraco, coresEstrutura, empresa, fmt, FOLGA, produtos, whatsapp, type Produto } from '../../data/site';
 import { planta, plantaCore } from '../../data/modelos';
 import { musculos } from '../../data/musculos';
 
@@ -100,10 +100,16 @@ const jsonLd = {
         </div>
         {
           p.linha === 'Peso livre' && (
-            <div>
-              <h3>Braços</h3>
-              <ul>{coresBraco.map(([n, h]) => <li><i style={`background:${h}`}></i>{n}</li>)}</ul>
-            </div>
+            <>
+              <div>
+                <h3>Braços</h3>
+                <ul>{coresBraco.map(([n, h]) => <li><i style={`background:${h}`}></i>{n}</li>)}</ul>
+              </div>
+              <div>
+                <h3>Anilheiro</h3>
+                <ul>{coresAnilheiro.map(([n, h]) => <li><i style={`background:${h}`}></i>{n}</li>)}</ul>
+              </div>
+            </>
           )
         }
       </div>

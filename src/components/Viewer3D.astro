@@ -1,6 +1,6 @@
 ---
 import { spec, specCore } from '../data/modelos';
-import { coresBraco, coresEstrutura } from '../data/site';
+import { coresAnilheiro, coresBraco, coresEstrutura } from '../data/site';
 
 interface Props {
   code: string;
@@ -16,6 +16,7 @@ const paleta = cores
   ? {
       frame: { label: 'Estrutura', options: coresEstrutura },
       accent: { label: 'Braços', options: coresBraco },
+      plate: { label: 'Anilheiro', options: coresAnilheiro },
     }
   : null;
 ---

@@ -94,6 +94,16 @@ export const coresBraco = [
   ['Amarelo', '#e5c92c'],
   ['Azul', '#1f4ea5'],
 ] as const;
+/** Mesma cartela independente para anilheiros e suportes de carga. */
+export const coresAnilheiro = [
+  ['Preto', '#121212'],
+  ['Grafite', '#3a3b3d'],
+  ['Cinza', '#c8cacc'],
+  ['Vermelho', '#b8242a'],
+  ['Laranja', '#e2702a'],
+  ['Amarelo', '#e5c92c'],
+  ['Azul', '#1f4ea5'],
+] as const;
 
 /** Kit Studio: academia de 15 × 10 m, a mesma do catálogo. Posições em metros (canto superior esquerdo). */
 export interface ItemPlanta {
