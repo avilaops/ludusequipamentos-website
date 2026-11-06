@@ -8,6 +8,7 @@
  * quando ang = 0; o ângulo cresce no sentido horário, em graus.
  */
 import type * as TH from 'three';
+import { coresAnilheiro, coresBraco, coresEstrutura } from '../data/site';
 
 interface ProdutoSim {
   code: string;
@@ -27,6 +28,7 @@ interface Item {
   y: number;
   /** Giro em graus, sentido horário na planta. */
   ang: number;
+  colors?: Partial<Record<'frame' | 'accent' | 'plate', string>>;
 }
 type TipoObst = 'pilar' | 'porta' | 'bloco';
 interface Obst {
@@ -96,6 +98,12 @@ const FAIXA = 1.2;
 /** Distância máxima para o encaixe agir (m). */
 const ENCAIXE = 0.08;
 const NOME_OBST: Record<TipoObst, string> = { pilar: 'Pilar', porta: 'Porta', bloco: 'Área bloqueada' };
+const PALETAS = {
+  frame: { label: 'Estrutura', options: coresEstrutura },
+  accent: { label: 'Braços', options: coresBraco },
+  plate: { label: 'Anilheiro', options: coresAnilheiro },
+} as const;
+const HEX = /^#[0-9a-f]{6}$/i;
 
 const silhuetaUrls = import.meta.glob<string>(
   '/node_modules/@avilaops/gerador-3d/catalogs/ludus/models/*/footprint.json',
@@ -126,6 +134,34 @@ let modo: 'planta' | '3d' = 'planta';
 const itemSel = () => estado.itens.find((x) => x.id === selecionado);
 const obstSel = () => estado.obst.find((x) => x.id === selecionado);
 
+function renderCores(i: Item | undefined): void {
+  const host = $('sel-cores');
+  host.replaceChildren();
+  if (!i) return;
+  for (const [role, palette] of Object.entries(PALETAS) as [keyof typeof PALETAS, (typeof PALETAS)[keyof typeof PALETAS]][]) {
+    const label = document.createElement('span');
+    label.className = 'cor-label';
+    label.textContent = `${palette.label}:`;
+    host.append(label);
+    for (const [name, hex] of palette.options) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'cor';
+      button.title = name;
+      button.setAttribute('aria-label', `${palette.label}: ${name}`);
+      button.setAttribute('aria-pressed', String(i.colors?.[role] === hex));
+      button.style.background = hex;
+      button.onclick = () => {
+        i.colors = { ...(i.colors ?? {}), [role]: hex };
+        salvar();
+        renderCores(i);
+        cena?.recarregar(i.id);
+      };
+      host.append(button);
+    }
+  }
+}
+
 // ── estado: URL, armazenamento local e link compartilhável ──────────────────
 const b64 = (s: string) =>
   btoa(String.fromCharCode(...new TextEncoder().encode(s)))
@@ -148,7 +184,7 @@ const codificar = (e: Estado) =>
       w: e.w,
       d: e.d,
       ...(e.nome ? { n: e.nome } : {}),
-      i: e.itens.map((i) => [i.code, +i.x.toFixed(2), +i.y.toFixed(2), norm(i.ang)]),
+      i: e.itens.map((i) => [i.code, +i.x.toFixed(2), +i.y.toFixed(2), norm(i.ang), i.colors]),
       ...(e.obst.length
         ? { o: e.obst.map((o) => [o.t, +o.x.toFixed(2), +o.y.toFixed(2), +o.w.toFixed(2), +o.h.toFixed(2), o.lado]) }
         : {}),
@@ -170,6 +206,9 @@ function decodificar(s: string): Estado | null {
         y: num(t[2], d / 2),
         // No formato antigo o giro vinha em quartos de volta (0 a 3).
         ang: norm(num(t[3], 0) * (antigo ? 90 : 1)),
+        colors: t[4] && typeof t[4] === 'object'
+          ? Object.fromEntries(Object.entries(t[4] as Record<string, unknown>).filter(([role, value]) => role in PALETAS && typeof value === 'string' && HEX.test(value))) as Item['colors']
+          : undefined,
       }));
     const obst = (Array.isArray(o.o) ? (o.o as unknown[][]) : [])
       .filter((t) => Array.isArray(t) && ['pilar', 'porta', 'bloco'].includes(String(t[0])))
@@ -660,6 +699,7 @@ function selecionar(id: number | null) {
     $('sel-nome').textContent = `${p.nome} · ${i.code} · ${norm(i.ang)}°`;
     ($('b-ver') as HTMLAnchorElement).href = `/loja/${p.slug}/`;
   }
+  renderCores(i);
   if (o) {
     $('obst-nome').textContent = NOME_OBST[o.t];
     const ow = $('o-larg') as HTMLInputElement;
@@ -872,6 +912,8 @@ interface Cena {
   sincronizar(): void;
   /** Reposiciona o anel de seleção. */
   marcar(): void;
+  /** Recria um equipamento após alteração de cor. */
+  recarregar(id: number): void;
   parar(): void;
 }
 let cena: Cena | null = null;
@@ -996,7 +1038,11 @@ async function montarCena() {
     pendentes.add(i.id);
     delete host.dataset.pronto;
     try {
-      const eq = generateEquipment((await loader()) as never);
+      const raw = (await loader()) as Record<string, unknown>;
+      const eq = generateEquipment({
+        ...raw,
+        materials: { ...(raw.materials as Record<string, unknown> | undefined), ...(i.colors ?? {}) },
+      } as never);
       if (!vivo || !estado.itens.includes(i)) return eq.dispose();
       eq.object.userData.itemId = i.id;
       colocar(i, eq.object);
@@ -1161,6 +1207,16 @@ async function montarCena() {
   const eu: Cena = {
     sincronizar,
     marcar,
+    recarregar(id: number) {
+      const old = objs.get(id);
+      if (old) {
+        scene.remove(old.obj);
+        old.descarta();
+        objs.delete(id);
+      }
+      const item = estado.itens.find((entry) => entry.id === id);
+      if (item) void criar(item);
+    },
     parar() {
       vivo = false;
       cancelAnimationFrame(raf);
