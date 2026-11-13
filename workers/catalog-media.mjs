@@ -1,3 +1,4 @@
+async function fetchWebsite(request) { const url = new URL(request.url); url.hostname = "ludusequipamentos.pages.dev"; url.port = ""; return fetch(new Request(url, request)); }
 const DEFAULT_ROOT = 'ludus/catalogo/v1/';
 const PUBLICATION = 'ludus/publications/current.json';
 const UUID = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
@@ -71,7 +72,7 @@ function dimensionalPlan(p) {
 }
 
 async function website(request, publication) {
-  const origin = await fetch(request);
+  const origin = await fetchWebsite(request);
   if (!origin.ok || !origin.headers.get('content-type')?.includes('text/html')) return origin;
   const path = new URL(request.url).pathname;
   const products = publication.products;
@@ -171,9 +172,9 @@ export default {
       }
       if (/^\/catalogos\/ludus-(core|premium)(-compacto)?\.pdf$/.test(path)) return await serveObject(request,env,'ludus/catalogos/comercial-2026-11-05/'+path.split('/').at(-1));
       if (/^\/catalogos\/resumos\/(core\/grupo-0[1-7]|premium\/grupo-0[1-9])\.png$/.test(path)) return await serveObject(request,env,'ludus/catalogos/comercial-2026-11-05/'+path.slice('/catalogos/'.length));
-      if (!path.startsWith('/midias/') && /\.[a-z0-9]+$/i.test(path)) return fetch(request);
+      if (!path.startsWith('/midias/') && /\.[a-z0-9]+$/i.test(path)) return fetchWebsite(request);
       const current=await env.MEDIA.get(PUBLICATION);
-      if (!current) return path.startsWith('/midias/') ? failure(503,'Catálogo indisponível') : fetch(request);
+      if (!current) return path.startsWith('/midias/') ? failure(503,'Catálogo indisponível') : fetchWebsite(request);
       const publication=await current.json();
       if (/^\/(core|loja)\/[a-z0-9-]+\/$/.test(path) && !['/loja/core/','/loja/premium/'].includes(path) && !publication.products.some(p=>p.url===path)) return failure(404,'Equipamento não disponível no catálogo');
       if (path==='/midias/catalogo.json') return ['GET','HEAD'].includes(request.method) ? new Response(request.method==='HEAD'?null:JSON.stringify(publication),{headers:{'Content-Type':'application/json','Cache-Control':'public, max-age=30','X-Content-Type-Options':'nosniff'}}) : failure(405,'Método não permitido');
@@ -186,7 +187,7 @@ export default {
         if (!match || !publication.products.some(p=>p.code===match[2])) return failure(404,'Arquivo não encontrado');
         return await serveObject(request,env,ROOT+key);
       }
-      if (!['GET','HEAD'].includes(request.method)) return fetch(request);
+      if (!['GET','HEAD'].includes(request.method)) return fetchWebsite(request);
       return await website(request,publication);
     } catch {
       console.error(JSON.stringify({event:'catalog_gateway_failed',path}));

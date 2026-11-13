@@ -5,3 +5,7 @@ dist/
 .env*
 public/modelos/
 .modelos-tmp/
+
+out/
+pages-dist/
+.wrangler/
