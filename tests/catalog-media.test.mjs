@@ -10,6 +10,22 @@ const sourceKey = 'ludus/catalogo/v1/core/LD-WH001/source.png';
 const manifest = { products: [{ sku: 'LD-WH001', assets: [{ storage_key: imageKey, variant: 'webp' }, { storage_key: sourceKey, variant: 'source' }] }] };
 const publication = () => ({ id: '11111111-1111-4111-8111-111111111111', sequence: 1, products: [{ code: 'LD-WH001', nome: 'Agachamento <teste>', colecao: 'core', grupo_muscular: 'Pernas e glúteos', linha: 'Articulado', dim: [1200, 1000, 900], descricao: 'Descrição', peso: '', bateria: '', url: '/core/ld-wh001/', imageKey, price: '999.99' }] });
 
+test('redirecionamentos mantêm HTTPS e o domínio público, sem expor pages.dev', async () => {
+  const outbound=[];
+  const mf=new Miniflare({modules:true,scriptPath:fileURLToPath(new URL('../workers/catalog-media.mjs',import.meta.url)),compatibilityDate:'2026-07-30',r2Buckets:['MEDIA'],outboundService:request=>{
+    outbound.push(request.url);
+    return new Response(null,{status:301,headers:{Location:'https://ludusequipamentos.pages.dev/loja/'}});
+  }});
+  try {
+    const http=await mf.dispatchFetch('http://ludusequipamentos.com/loja?origem=teste',{redirect:'manual'});
+    assert.equal(http.status,308);assert.equal(http.headers.get('location'),'https://ludusequipamentos.com/loja?origem=teste');
+    assert.equal(outbound.length,0);
+    const page=await mf.dispatchFetch('https://ludusequipamentos.com/loja',{redirect:'manual'});
+    assert.equal(page.status,301);assert.equal(page.headers.get('location'),'https://ludusequipamentos.com/loja/');
+    assert.ok(outbound.every(url=>url.startsWith('https://ludusequipamentos.pages.dev/')));
+  } finally {await mf.dispose();}
+});
+
 test('publicação exclui preços e rejeita originais, SKU divergente e dimensões inválidas', () => {
   assert.equal('price' in validatePublication(publication(), manifest).products[0], false);
   for (const patch of [{ imageKey: sourceKey }, { code: 'LD-WH002' }, { dim: [0, 1000, 900] }, { url: '//evil.test/' }]) {

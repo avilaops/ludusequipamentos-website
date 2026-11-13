@@ -1,4 +1,22 @@
-async function fetchWebsite(request) { const url = new URL(request.url); url.hostname = "ludusequipamentos.pages.dev"; url.port = ""; return fetch(new Request(url, request)); }
+async function fetchWebsite(request) {
+  const url = new URL(request.url);
+  url.hostname = 'ludusequipamentos.pages.dev';
+  url.protocol = 'https:';
+  url.port = '';
+  const response = await fetch(new Request(url, request), { redirect: 'manual' });
+  const location = response.headers.get('location');
+  if (location) {
+    const target = new URL(location, url);
+    if (target.hostname === 'ludusequipamentos.pages.dev') {
+      target.hostname = new URL(request.url).hostname;
+      target.protocol = 'https:';
+      const headers = new Headers(response.headers);
+      headers.set('location', target.href);
+      return new Response(response.body, { status: response.status, headers });
+    }
+  }
+  return response;
+}
 const DEFAULT_ROOT = 'ludus/catalogo/v1/';
 const PUBLICATION = 'ludus/publications/current.json';
 const UUID = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
@@ -113,6 +131,8 @@ async function website(request, publication) {
 
 export default {
   async fetch(request, env) {
+    const url = new URL(request.url);
+    if (url.protocol !== 'https:') { url.protocol = 'https:'; return Response.redirect(url, 308); }
     const ROOT = env.LIBRARY_VERSION === '2' ? 'ludus/catalogo/v2/' : DEFAULT_ROOT;
     const path = new URL(request.url).pathname;
     try {
