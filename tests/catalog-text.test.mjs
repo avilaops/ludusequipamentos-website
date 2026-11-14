@@ -84,12 +84,12 @@ test('texto respeita noindex, erros e redirects do HTML e o fallback público se
     const send = () => mf.dispatchFetch('https://ludusequipamentos.com/core/equipamento-exemplo/index.mdx', { redirect: 'manual', headers: { 'If-None-Match': '*' } });
     assert.equal((await send()).status, 404);
     mode = 'meta'; assert.equal((await send()).status, 404);
-    mode = 'auth'; assert.equal((await send()).status, 401);
+    mode = 'auth'; assert.equal((await send()).status, 404);
     mode = 'partial'; assert.equal((await send()).status, 502);
     mode = 'conditional'; assert.equal((await send()).status, 502);
     mode = 'cookie'; assert.equal((await send()).status, 404);
     mode = 'large'; assert.equal((await send()).status, 413);
-    mode = 'redirect'; const redirect = await send(); assert.equal(redirect.status, 302); assert.equal(redirect.headers.get('location'), 'https://ludusequipamentos.com/loja/');
+    mode = 'redirect'; const redirect = await send(); assert.equal(redirect.status, 404); assert.equal(redirect.headers.get('location'), null);
     mode = 'not-html'; assert.equal((await send()).status, 404);
     mode = 'normal';
     await bucket.delete('ludus/publications/current.json');
@@ -126,5 +126,60 @@ test('coleção textual acompanha os produtos e os links da publicação corrent
     assert.match(body, /Equipamento exemplo atual/);
     assert.match(body, /https:\/\/ludusequipamentos.com\/core\/equipamento-exemplo\//);
     assert.doesNotMatch(body, /Equipamento retirado|999/);
+  } finally { await mf.dispose(); }
+});
+
+test('canonical de outro host ou de outro produto impede a cópia textual', async () => {
+  let canonical = 'https://outro.example/core/equipamento-exemplo/';
+  const mf = new Miniflare({ modules: true, script: workerScript, compatibilityDate: '2026-07-30', r2Buckets: ['MEDIA'], outboundService: () => new Response(page.replace('<head>', `<head><link rel="canonical" href="${canonical}">`), { headers: { 'Content-Type': 'text/html' } }) });
+  try {
+    const bucket = await mf.getR2Bucket('MEDIA');
+    await bucket.put('ludus/publications/current.json', JSON.stringify(publication()));
+    const send = () => mf.dispatchFetch('https://ludusequipamentos.com/core/equipamento-exemplo/index.mdx');
+    assert.equal((await send()).status, 404);
+    canonical = 'https://ludusequipamentos.com/core/outro-produto/';
+    assert.equal((await send()).status, 404);
+    canonical = 'https://ludusequipamentos.com/core/equipamento-exemplo/';
+    assert.equal((await send()).status, 200);
+  } finally { await mf.dispose(); }
+});
+
+test('redirect e autenticação não propagam Location, desafio ou HTML de erro', async () => {
+  let status = 302;
+  let challenge = false;
+  const mf = new Miniflare({ modules: true, script: workerScript, compatibilityDate: '2026-07-30', r2Buckets: ['MEDIA'], outboundService: () => new Response(status === 200 ? page : '<html>Erro privado fictício</html>', { status, headers: { 'Content-Type': 'text/html', Location: 'https://outro.example/entrar/', ETag: '"etag-privado"', ...(challenge ? { 'WWW-Authenticate': 'Basic realm="exemplo"' } : {}) } }) });
+  try {
+    const bucket = await mf.getR2Bucket('MEDIA');
+    await bucket.put('ludus/publications/current.json', JSON.stringify(publication()));
+    const send = method => mf.dispatchFetch('https://ludusequipamentos.com/core/equipamento-exemplo/index.mdx', { method, redirect: 'manual' });
+    for (const scenario of [{ status: 302, challenge: false, want: 404 }, { status: 401, challenge: true, want: 404 }, { status: 200, challenge: true, want: 404 }, { status: 404, challenge: false, want: 404 }, { status: 503, challenge: false, want: 503 }]) {
+      status = scenario.status; challenge = scenario.challenge;
+      for (const method of ['GET', 'HEAD']) {
+        const response = await send(method);
+        assert.equal(response.status, scenario.want);
+        assert.equal(await response.text(), '');
+        for (const name of ['location', 'www-authenticate', 'etag']) assert.equal(response.headers.get(name), null);
+        assert.equal(response.headers.get('cache-control'), 'no-store');
+        assert.equal(response.headers.get('x-robots-tag'), 'noindex');
+      }
+    }
+  } finally { await mf.dispose(); }
+});
+
+test('texto, HEAD e 304 anunciam o HTML canônico e o índice llms', async () => {
+  const mf = new Miniflare({ modules: true, script: workerScript, compatibilityDate: '2026-07-30', r2Buckets: ['MEDIA'], outboundService: () => new Response(page, { headers: { 'Content-Type': 'text/html' } }) });
+  try {
+    const bucket = await mf.getR2Bucket('MEDIA');
+    await bucket.put('ludus/publications/current.json', JSON.stringify(publication()));
+    const send = init => mf.dispatchFetch('https://ludusequipamentos.com/core/equipamento-exemplo/index.mdx', init);
+    const first = await send();
+    const expected = '<https://ludusequipamentos.com/core/equipamento-exemplo/>; rel="canonical"; type="text/html", <https://ludusequipamentos.com/llms.txt>; rel="describedby"; type="text/plain"';
+    assert.equal(first.headers.get('link'), expected);
+    await first.text();
+    const head = await send({ method: 'HEAD' });
+    assert.equal(head.headers.get('link'), expected);
+    const unchanged = await send({ headers: { 'If-None-Match': first.headers.get('etag') } });
+    assert.equal(unchanged.status, 304);
+    assert.equal(unchanged.headers.get('link'), expected);
   } finally { await mf.dispose(); }
 });

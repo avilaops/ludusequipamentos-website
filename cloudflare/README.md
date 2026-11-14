@@ -28,7 +28,10 @@ O manifesto e o índice estáticos não anunciam cópias de catálogo do build.
 
 • Retirada de produto retorna 404 também no texto. Atualizações entram na
 próxima requisição. Noindex, erros, autenticação da origem e redirecionamentos
-impedem a conversão. R2 sem publicação conserva o fallback HTML existente;
+impedem a conversão. Canonical de outro host ou produto também é recusado.
+Redirects e autenticação retornam 404, sem Location, desafio ou corpo da origem;
+404 de remoção e 5xx permanecem, sem corpo e com no-store.
+R2 sem publicação conserva o fallback HTML existente;
 erro de leitura conserva o erro do HTML. Nunca há fallback para MDX antigo.
 
 • A leitura HTML usa URL pública fixa e GET anônimo; não envia Cookie,
@@ -37,6 +40,8 @@ são recusadas. O corpo HTML é limitado a 2 MB. MDX/Markdown saem com MIME
 próprio, `noindex`, `nosniff` e cache privado sujeito a revalidação. O ETag
 inclui tenant, rota, formato e conteúdo, e só é comparado depois de conferir
 a publicação e o HTML atuais, inclusive em HEAD.
+O cabeçalho Link aponta para o HTML canônico e para `llms.txt`, inclusive em
+HEAD e 304.
 
 • `npm run build:catalog-worker` cria `.worker-build/catalog-media.mjs`.
 Os testes Miniflare usam o mesmo bundle, com R2 local e Pages simulado.

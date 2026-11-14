@@ -28,14 +28,10 @@ export async function catalogText(request, resolveHtml) {
   // GET anônimo e incondicional: HEAD/Range/ETag/cookies não alteram o HTML-base.
   const html = await resolveHtml(new Request(canonical, { headers: { Accept: 'text/html' } }));
   if (html.status === 304 || html.status === 206) { await html.body?.cancel(); return unavailable(502); }
-  if (html.status !== 200) {
-    const headers = new Headers(html.headers);
-    headers.delete('set-cookie');
-    headers.delete('etag');
-    headers.set('X-Robots-Tag', 'noindex');
-    headers.set('Cache-Control', 'no-store');
-    if (request.method === 'HEAD') await html.body?.cancel();
-    return new Response(request.method === 'HEAD' ? null : html.body, { status: html.status, headers });
+  if (html.status !== 200 || html.headers.has('www-authenticate')) {
+    await html.body?.cancel();
+    // Não propaga redirects, desafios ou corpos de erro da origem.
+    return unavailable(html.status === 404 || html.status >= 500 ? html.status : 404);
   }
   if (!/^text\/html(?:;|$)/i.test(html.headers.get('content-type') ?? '')
     || /\b(?:noindex|none)\b/i.test(html.headers.get('x-robots-tag') ?? '')
@@ -58,13 +54,14 @@ export async function catalogText(request, resolveHtml) {
   let offset = 0;
   for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
   const result = converterHtml(new TextDecoder().decode(bytes), { url: canonical, formato: format });
-  if (!result.indexavel) return unavailable(404);
+  if (!result.indexavel || result.metadados.canonical !== canonical) return unavailable(404);
   const body = result.conteudo;
   const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`ludus\n${canonical}\n${format}\n${body}`));
   const etag = '"' + Array.from(new Uint8Array(hash), n => n.toString(16).padStart(2, '0')).join('') + '"';
   const headers = headersForText();
   headers.set('Content-Type', `text/${format === 'md' ? 'markdown' : 'mdx'}; charset=utf-8`);
   headers.set('ETag', etag);
+  headers.set('Link', `<${canonical}>; rel="canonical"; type="text/html", <${ORIGIN}/llms.txt>; rel="describedby"; type="text/plain"`);
   const version = html.headers.get('x-ludus-catalog-version');
   if (version) headers.set('X-Ludus-Catalog-Version', version);
   // Esta comparação ocorre somente depois da publicação e do HTML atuais.
