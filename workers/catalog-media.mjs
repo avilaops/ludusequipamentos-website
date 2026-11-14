@@ -1,3 +1,5 @@
+import { catalogText } from './catalog-text.mjs';
+
 async function fetchWebsite(request) {
   const url = new URL(request.url);
   url.hostname = 'ludusequipamentos.pages.dev';
@@ -111,7 +113,10 @@ async function website(request, publication) {
       area:((p.dim[0]/1000+1.2)*(p.dim[1]/1000+1.2)).toLocaleString('pt-BR',{maximumFractionDigits:2})+' m²',
       nominal:(p.dim[0]*p.dim[1]/1e6).toLocaleString('pt-BR',{maximumFractionDigits:2})+' m²' };
     if (Object.hasOwn(values, field)) el.setInnerContent(values[field] || 'Consultar');
-  }}).on('head', { element(el) { el.append(`<script type="application/json" id="catalogo-publicado">${JSON.stringify(publication).replace(/</g, '\\u003c')}</script>`, { html:true }); } });
+  }}).on('head', { element(el) {
+    el.append(`<script type="application/json" id="catalogo-publicado">${JSON.stringify(publication).replace(/</g, '\\u003c')}</script>`, { html:true });
+    if (product || isCollection) el.append(`<link rel="alternate" type="text/markdown" href="${path}index.md"><link rel="alternate" type="text/mdx" href="${path}index.mdx">`, { html:true });
+  } });
   if (product) {
     rewriter.on('[data-catalog-plan]', { element(el) { if (el.getAttribute('data-catalog-dim') !== JSON.stringify(product.dim)) el.setInnerContent(dimensionalPlan(product), {html:true}); } });
     rewriter.on('title', { element(el) { el.setInnerContent(`${product.nome} ${product.code} · Ludus ${product.colecao === 'core' ? 'Core' : 'Premium'}`); } });
@@ -129,13 +134,15 @@ async function website(request, publication) {
   return new Response(transformed.body,{status:transformed.status,headers});
 }
 
-export default {
+const worker = {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.protocol !== 'https:') { url.protocol = 'https:'; return Response.redirect(url, 308); }
     const ROOT = env.LIBRARY_VERSION === '2' ? 'ludus/catalogo/v2/' : DEFAULT_ROOT;
     const path = new URL(request.url).pathname;
     try {
+      const text = await catalogText(request, htmlRequest => worker.fetch(htmlRequest, env));
+      if (text) return text;
       if (path.startsWith('/midias/_upload/')) {
         if (request.method !== 'PUT') return failure(405,'Método não permitido');
         if (!await authorized(request,env)) return failure(401,'Acesso não autorizado');
@@ -215,3 +222,5 @@ export default {
     }
   },
 };
+
+export default worker;

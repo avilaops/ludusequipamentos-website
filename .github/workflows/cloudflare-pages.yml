@@ -28,7 +28,10 @@ jobs:
           npm run check
           npm run modelos
           npm run build
+          npm run build:catalog-worker
           node --test tests/*.test.mjs
+      - name: Generate public MDX and Markdown
+        run: npm run text:static
       - name: Publish Pages
         if: github.event_name != 'pull_request'
         env:
