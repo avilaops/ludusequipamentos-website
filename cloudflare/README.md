@@ -8,26 +8,43 @@ Domínios e redirecionamento de www são configurados na zona Cloudflare. Não a
 
 O Worker `ludus-catalog-media` e o R2 continuam responsáveis por fotos, PDFs e catálogo. Preserve o segredo PUBLISH_TOKEN ao publicar o gateway.
 
-## MDX e Markdown na publicação
+## MDX e Markdown • páginas estáticas e catálogo publicado
 
-O workflow gera as versões textuais depois do build e da preparação de `dist`,
-antes de `Publish Pages`. O publicador usa o repositório público
-[avilaops/motor-web](https://github.com/avilaops/motor-web/tree/02fe995339970e77ba86505488451f8c67bdddc7)
-fixado no commit `02fe995339970e77ba86505488451f8c67bdddc7`. Suas dependências de produção
-são instaladas em `.publicacao-texto` com scripts de instalação desativados.
+O mesmo pacote público `@avilaops/publicacao-texto`, do repositório
+[avilaops/motor-web](https://github.com/avilaops/motor-web), é usado na geração
+estática e no Worker. O SHA completo está fixado em `package.json` e no lockfile.
 
-```sh
-node .publicacao-texto/bin/publicar-texto.mjs --diretorio dist --origem https://ludusequipamentos.com
-```
+• `npm run text:static` roda depois do build. Usa o motor do CLI para gerar os
+arquivos, manifesto, `llms.txt` e cabeçalhos das páginas estáticas em `dist`.
+Durante a geração, regras temporárias excluem `/core/*` e `/loja/*`; o bloco é
+retirado em `finally`, preservando os cabeçalhos manuais e a indexação HTML.
+O próprio motor remove cópias antigas de catálogo que reconhece como geradas.
 
-O mesmo artefato recebe `.md`, `.mdx`, `publicacao-texto.json`, os links de descoberta,
-a seção gerada em `llms.txt` e os cabeçalhos das cópias textuais em `_headers`.
-O conversor exclui rotas privadas, páginas de erro e conteúdo `noindex` ou `none`.
-Arquivos manuais são preservados; um shell sem conteúdo renderizado faz a geração
-falhar e impede a etapa de publicação.
+• No domínio público, `/core/<slug>/index.md`, `/loja/<slug>/index.mdx` e as
+variantes das coleções passam pelo Worker. Ele resolve primeiro o mesmo HTML
+público, incluindo a publicação atual do R2 e a reescrita dos campos. Depois
+converte a resposta. O HTML do catálogo anuncia os dois links alternativos.
+O manifesto e o índice estáticos não anunciam cópias de catálogo do build.
 
-Pull requests executam o build e a geração. A condição existente de `Publish Pages`
-continua impedindo deploy em eventos `pull_request`. Para atualizar o publicador,
-altere o commit fixado no workflow e valide o novo manifesto em CI.
-Para rollback, restaure o workflow anterior e use o artefato ou deploy anterior
-conforme o fluxo de publicação do projeto.
+• Retirada de produto retorna 404 também no texto. Atualizações entram na
+próxima requisição. Noindex, erros, autenticação da origem e redirecionamentos
+impedem a conversão. R2 sem publicação conserva o fallback HTML existente;
+erro de leitura conserva o erro do HTML. Nunca há fallback para MDX antigo.
+
+• A leitura HTML usa URL pública fixa e GET anônimo; não envia Cookie,
+Authorization, Range ou condicionais do visitante. URLs textuais com query
+são recusadas. O corpo HTML é limitado a 2 MB. MDX/Markdown saem com MIME
+próprio, `noindex`, `nosniff` e cache privado sujeito a revalidação. O ETag
+inclui tenant, rota, formato e conteúdo, e só é comparado depois de conferir
+a publicação e o HTML atuais, inclusive em HEAD.
+
+• `npm run build:catalog-worker` cria `.worker-build/catalog-media.mjs`.
+Os testes Miniflare usam o mesmo bundle, com R2 local e Pages simulado.
+O CI valida o bundle, o site, os testes e a geração estática; PR não publica.
+
+A publicação do Worker `ludus-catalog-media` é uma ação separada e revisada.
+Antes de liberar estas URLs, publique o bundle aprovado preservando os mesmos
+bindings, compatibilidade, rotas, R2 e segredos existentes. Depois publique o
+artefato Pages aprovado e confira as URLs no domínio público. Este workflow
+continua publicando somente Pages; não muda ERP, R2, servidor ou backend.
+Para rollback, restaure a versão anterior do Worker e o deploy Pages compatível.

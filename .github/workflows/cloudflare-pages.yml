@@ -28,19 +28,10 @@ jobs:
           npm run check
           npm run modelos
           npm run build
+          npm run build:catalog-worker
           node --test tests/*.test.mjs
-      - name: Check out text publisher
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
-        with:
-          repository: avilaops/motor-web
-          ref: 02fe995339970e77ba86505488451f8c67bdddc7
-          path: .publicacao-texto
-          persist-credentials: false
-      - name: Install text publisher
-        working-directory: .publicacao-texto
-        run: npm ci --ignore-scripts --omit=dev
       - name: Generate public MDX and Markdown
-        run: node .publicacao-texto/bin/publicar-texto.mjs --diretorio dist --origem https://ludusequipamentos.com
+        run: npm run text:static
       - name: Publish Pages
         if: github.event_name != 'pull_request'
         env:

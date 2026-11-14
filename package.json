@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "build:catalog-worker": "node scripts/build-catalog-worker.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "test": "astro build && node --test tests/*.test.mjs",
+    "text:static": "node scripts/publish-static-text.mjs",
     "deploy": "bash scripts/deploy.sh",
     "modelos": "bash scripts/modelos.sh"
   },
@@ -19,6 +21,7 @@
     "@astrojs/check": "^0.9.10",
     "@astrojs/sitemap": "^3.7.4",
     "@avilaops/gerador-3d": "github:avilaops/gerador-3d#ee94140",
+    "@avilaops/publicacao-texto": "github:avilaops/motor-web#5d8cf306ceded156ab2a46ce1cfd29608e67496f",
     "@fontsource/barlow": "^5.3.0",
     "@fontsource/barlow-condensed": "^5.3.0",
     "astro": "^5.18.2",
@@ -30,6 +33,7 @@
   "devDependencies": {
     "@napi-rs/canvas": "^1.0.10",
     "@types/three": "^0.149.0",
+    "esbuild": "0.27.7",
     "gltf-validator": "^2.0.0-dev.3.10",
     "miniflare": "4.20260730.0",
     "vite-node": "^6.0.0"

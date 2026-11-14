@@ -9,3 +9,4 @@ public/modelos/
 out/
 pages-dist/
 .wrangler/
+.worker-build/

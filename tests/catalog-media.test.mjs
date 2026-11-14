@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Miniflare } from 'miniflare';
-import { fileURLToPath } from 'node:url';
+import { workerScript } from './helpers/catalog-worker.mjs';
 import { createHash } from 'node:crypto';
 import { validatePublication } from '../workers/catalog-media.mjs';
 
@@ -12,7 +12,7 @@ const publication = () => ({ id: '11111111-1111-4111-8111-111111111111', sequenc
 
 test('redirecionamentos mantêm HTTPS e o domínio público, sem expor pages.dev', async () => {
   const outbound=[];
-  const mf=new Miniflare({modules:true,scriptPath:fileURLToPath(new URL('../workers/catalog-media.mjs',import.meta.url)),compatibilityDate:'2026-07-30',r2Buckets:['MEDIA'],outboundService:request=>{
+  const mf=new Miniflare({modules:true,script:workerScript,compatibilityDate:'2026-07-30',r2Buckets:['MEDIA'],outboundService:request=>{
     outbound.push(request.url);
     return new Response(null,{status:301,headers:{Location:'https://ludusequipamentos.pages.dev/loja/'}});
   }});
@@ -36,7 +36,7 @@ test('publicação exclui preços e rejeita originais, SKU divergente e dimensõ
 
 test('Worker: R2 real local, original privado, publicação explícita, replay e HTML seguro', async () => {
   const token = 'test-only-not-a-real-credential-123456789';
-  const mf = new Miniflare({ modules: true, scriptPath: fileURLToPath(new URL('../workers/catalog-media.mjs', import.meta.url)), compatibilityDate: '2026-07-30', r2Buckets: ['MEDIA'], bindings: { PUBLISH_TOKEN: token },
+  const mf = new Miniflare({ modules: true, script: workerScript, compatibilityDate: '2026-07-30', r2Buckets: ['MEDIA'], bindings: { PUBLISH_TOKEN: token },
     outboundService: () => new Response('<html><head><title>Antigo</title></head><body><h1 data-catalog-field="nome">Antigo</h1><div id="grade"></div><div data-filtro="grupo"></div><span id="conta"></span></body></html>', { headers: { 'Content-Type': 'text/html' } }) });
   try {
     const bucket = await mf.getR2Bucket('MEDIA');
@@ -71,7 +71,7 @@ test('Worker: R2 real local, original privado, publicação explícita, replay e
 
 test('novas fotos são privadas, imutáveis e só entram no catálogo após publicação', async () => {
   const token='isolated-upload-test-token-123456789';
-  const mf=new Miniflare({modules:true,scriptPath:fileURLToPath(new URL('../workers/catalog-media.mjs',import.meta.url)),compatibilityDate:'2026-07-30',r2Buckets:['MEDIA'],bindings:{PUBLISH_TOKEN:token}});
+  const mf=new Miniflare({modules:true,script:workerScript,compatibilityDate:'2026-07-30',r2Buckets:['MEDIA'],bindings:{PUBLISH_TOKEN:token}});
   try {
     const bucket=await mf.getR2Bucket('MEDIA');
     await bucket.put('ludus/catalogo/v1/manifest.json',JSON.stringify(manifest));
