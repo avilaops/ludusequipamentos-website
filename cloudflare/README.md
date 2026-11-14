@@ -1,5 +1,39 @@
 # Cloudflare Pages
 
+## Descoberta pública • ARD e WebMCP
+
+Depois de `npm run text:static`, o workflow usa o mesmo pacote central para
+gerar a descoberta sobre `dist`, o diretório enviado ao Pages:
+
+```sh
+node node_modules/@avilaops/publicacao-texto/bin/publicar-descoberta.mjs --diretorio dist --origem https://ludusequipamentos.com --excluir-prefixo /core/ --excluir-prefixo /loja/
+```
+
+Os prefixos excluídos acompanham o contrato do wrapper textual existente:
+o catálogo e os produtos são resolvidos pelo Worker e pela publicação atual do R2.
+Páginas sob `/core/` e `/loja/` não entram no catálogo estático nem recebem
+injeção WebMCP do gerador. Isso evita anunciar produtos do build que possam ter
+sido retirados. Não se relaxam filtros de publicação ou a conversão dinâmica.
+
+Nas demais páginas públicas e indexáveis, o gerador central emite
+`/.well-known/ard.json`, `/ai-catalog.json`, o link `rel="ard"` e o adaptador
+leve de leitura do DOM e links públicos. Ele não envia formulários nem executa
+transações. Browsers sem a API preservam o comportamento existente, sem polyfill.
+Não há biblioteca de cliente duplicada neste repositório.
+
+A dependência `@avilaops/publicacao-texto` e o lockfile usam o commit revisado
+`d5067bbbe3522f459367af3b58b4298324801f82`, com o CLI e as exclusões de prefixo.
+O CI deve validar o bundle do Worker,
+o site, os testes existentes, as versões textuais e a descoberta. Nenhum desses
+builds ou testes foi executado localmente nesta preparação.
+
+Confira JSON/recursos anunciados, ausência de catálogo antigo e áreas privadas,
+HTML público preservado e funcionamento com e sem WebMCP. Mantenha os checks,
+retries, saídas, condição de deploy em pull requests, bindings, R2 e publicação
+separada do Worker. Não alterar DNS, robots, consentimento ou medição.
+Para rollback, restaure juntos o workflow, a dependência e o lockfile anteriores
+e publique o artefato Pages compatível; não reverta a publicação atual do R2.
+
 Projeto: `ludusequipamentos`. Saída pública: `dist`. Fonte: este repositório.
 
 O workflow `.github/workflows/cloudflare-pages.yml` publica cada push na main. O segredo `CLOUDFLARE_API_TOKEN` tem somente acesso ao Pages da conta Avila Ops.

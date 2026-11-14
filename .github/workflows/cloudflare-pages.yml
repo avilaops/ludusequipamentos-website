@@ -32,6 +32,8 @@ jobs:
           node --test tests/*.test.mjs
       - name: Generate public MDX and Markdown
         run: npm run text:static
+      - name: Generate public discovery and WebMCP
+        run: node node_modules/@avilaops/publicacao-texto/bin/publicar-descoberta.mjs --diretorio dist --origem https://ludusequipamentos.com --excluir-prefixo /core/ --excluir-prefixo /loja/
       - name: Publish Pages
         if: github.event_name != 'pull_request'
         env:
