@@ -34,6 +34,7 @@ const org = {
   telephone: `+${empresa.whatsappNumero}`,
   address: empresa.endereco,
   url: Astro.site?.href,
+  image: new URL(logoInstitucional.src, Astro.site).href,
 };
 ---
 
