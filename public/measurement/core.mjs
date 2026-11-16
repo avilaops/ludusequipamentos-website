@@ -29,6 +29,10 @@ export function resolveRoute(config, rawUrl) {
     }
   }
   if (!MATCH_ID.test(site.measurementId || '')) return null;
+  if (Array.isArray(site.publicPaths)) {
+    const canonicalPath = path => path.replace(/\/+$/, '') || '/';
+    if (!site.publicPaths.some(path => canonicalPath(path) === canonicalPath(url.pathname))) return null;
+  }
   let operation = publicOverride ? 'institutional' : site.operation;
   if (operation === 'saas' || operation === 'platform') {
     if (site.applicationPrefixes?.some(prefix => matches(url.pathname, prefix))) {

@@ -231,6 +231,7 @@
       "domain": "ludusequipamentos.com",
       "consentAdapter": "manual",
       "gatewayPath": "/avmetrics/",
+      "publicPaths": [],
       "operation": "institutional",
       "aliases": [
         "www.ludusequipamentos.com"

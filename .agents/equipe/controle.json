@@ -22,6 +22,8 @@
       ],
       "evidence": [
         "Quatro testes de integração da CMP aprovados após reprodução RED",
+        "Revisão final: caminhos desconhecidos excluídos por inventário de 169 páginas gerado no build; recuperação de configuração após 503 reproduzida RED e confirmada GREEN em Chromium",
+        "Astro check sem erros, avisos ou hints; build e 33 testes aprovados após correções. Integração local com GTM publicado validada com resposta 204 local, sem enviar ao Google",
         "Build, revisão e publicação ainda pendentes; não comprova coleta em produção"
       ],
       "updatedAt": "2026-11-16"

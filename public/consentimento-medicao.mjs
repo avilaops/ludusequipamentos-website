@@ -9,8 +9,8 @@ export function installLudusConsent({ window: win, document: doc, loadRuntime } 
   try { choice = win.localStorage.getItem('ludus-cookies'); } catch { /* Session-only preferences. */ }
   if (!['sim', 'nao'].includes(choice)) choice = null;
   const load = loadRuntime || (async () => {
-    await import('./measurement/entry.mjs');
-    return win.__avilaMeasurement;
+    const { startMeasurement } = await import('./measurement/bootstrap.mjs');
+    return startMeasurement({ consentAdapter: 'manual' });
   });
   function sync() {
     if (choice !== 'sim') { runtime?.setConsent(false); return Promise.resolve(); }
