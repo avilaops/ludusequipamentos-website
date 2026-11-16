@@ -25,7 +25,6 @@ const logo = await getImage({ src: isCore ? logoCore : logoRetangular, width: 48
 const logoInstitucional = await getImage({ src: logoRetangular, width: 480, format: 'png' });
 const wa = whatsapp('Olá! Vim pelo site da Ludus e quero um orçamento.');
 const indexar = import.meta.env.PUBLIC_INDEXAR !== '0';
-const gtm = import.meta.env.PUBLIC_GTM_ID ?? '';
 const org = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -116,6 +115,7 @@ const org = {
           <span>© {new Date().getFullYear()} {empresa.nome}</span>
           <span>{empresa.razaoSocial} · CNPJ {empresa.cnpj} · IE {empresa.inscricaoEstadual}</span>
           <span>{empresa.endereco}</span>
+          <button type="button" data-cookies-manage hidden>Preferências de cookies</button>
           <a class="developer-credit" href="https://avilaops.com" lang="en" target="_blank" rel="noopener">Developed by avilaops.com</a>
         </div>
       </div>
@@ -129,42 +129,7 @@ const org = {
       </div>
     </div>
 
-    <script is:inline define:vars={{ gtm }}>
-      // Eventos do site ficam em window.dataLayer. O Tag Manager só é carregado com um
-      // ID configurado (PUBLIC_GTM_ID) e depois do aceite de cookies.
-      window.dataLayer = window.dataLayer || [];
-      window.ludusEvento = (evento, dados) => window.dataLayer.push({ event: evento, ...(dados || {}) });
-      const carregar = () => {
-        if (!gtm || window.__gtm) return;
-        window.__gtm = true;
-        window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
-        const s = document.createElement('script');
-        s.async = true;
-        s.src = 'https://www.googletagmanager.com/gtm.js?id=' + gtm;
-        document.head.appendChild(s);
-      };
-      let escolha = null;
-      try { escolha = localStorage.getItem('ludus-cookies'); } catch {}
-      const aviso = document.getElementById('cookies');
-      if (escolha === 'sim') carregar();
-      else if (!escolha && gtm) aviso.hidden = false;
-      aviso.querySelectorAll('[data-cookies]').forEach((b) =>
-        b.addEventListener('click', () => {
-          try { localStorage.setItem('ludus-cookies', b.dataset.cookies); } catch {}
-          aviso.hidden = true;
-          if (b.dataset.cookies === 'sim') carregar();
-        })
-      );
-      document.addEventListener('click', (ev) => {
-        const a = ev.target.closest && ev.target.closest('[data-wa]');
-        if (a) window.ludusEvento('clique_whatsapp', { origem: a.dataset.wa });
-      });
-      document.addEventListener('ludus:3d', (ev) => {
-        const art = ev.target.closest && ev.target.closest('[data-code]');
-        window.ludusEvento('interacao_3d', { codigo: art ? art.dataset.code : '' });
-      });
-      if (new URLSearchParams(location.search).get('origem') === 'catalogo') window.ludusEvento('visita_qr', { pagina: location.pathname });
-    </script>
+    <script is:inline type="module" src="/consentimento-medicao.mjs"></script>
 
     <script>
       const btn = document.querySelector<HTMLButtonElement>('.menu-btn');
