@@ -53,7 +53,7 @@ Astro (saída estática), TypeScript, Three.js via gerador 3D, fontes Barlow e B
 
 | Variável | Para quê |
 | --- | --- |
-| `PUBLIC_GTM_ID` | ID do Google Tag Manager. Sem ele nada de medição é carregado e o aviso de cookies não aparece. Os eventos (`clique_whatsapp`, `interacao_3d`, `visita_qr`, `envio_formulario`, `abrir_ar`) já vão para `window.dataLayer`. |
+| Medição gerenciada | GTM Institucionais `GTM-MMTBHNRN` e GA4 próprio `G-HV13SD6KZW`, com configuração em `public/measurement/`. Reutiliza `ludus-cookies`; somente após aceite. O rodapé permite recusar ou aceitar novamente. `PUBLIC_GTM_ID` não controla esta integração. |
 | `PUBLIC_LEAD_ENDPOINT` | Endereço que recebe o formulário (multipart, com a planta). Sem ele o formulário abre o WhatsApp com os dados preenchidos. |
 | `PUBLIC_INDEXAR=0` | Coloca noindex em todas as páginas (para ambientes de teste). Sem a variável, o site é indexado. |
 | `SITE_URL` | Endereço público usado em canonical, og:url e sitemap. Padrão: `https://ludusequipamentos.com`. |
@@ -66,7 +66,7 @@ O workflow `.github/workflows/ci.yml` checa e faz o build a cada push. Ele publi
 
 ## Pendências conhecidas
 
-- Destino dos leads do formulário (`PUBLIC_LEAD_ENDPOINT`) e ID do Tag Manager.
+- Destino dos leads do formulário (`PUBLIC_LEAD_ENDPOINT`). A medição de formulário enviado exige resposta HTTP de sucesso; a abertura do WhatsApp representa apenas intenção de contato.
 - AR não testado em aparelho real.
 - Kits de 300 e 600 m² são composição sugerida, a validar com a Ludus.
 - Cadastrar ludusequipamentos.com no Search Console e enviar o sitemap.

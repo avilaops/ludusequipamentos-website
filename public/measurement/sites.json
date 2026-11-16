@@ -1,0 +1,606 @@
+{
+  "schemaVersion": 1,
+  "account": {
+    "ga4": "398473876",
+    "gtm": "6362126826"
+  },
+  "operations": {
+    "institutional": {
+      "name": "Avila • Institucionais",
+      "id": "GTM-MMTBHNRN"
+    },
+    "ecommerce": {
+      "name": "Avila • E-commerce",
+      "id": "GTM-M6JQNNMS"
+    },
+    "platform": {
+      "name": "Avila • Plataforma de e-commerce",
+      "id": "GTM-KLP5RSCZ"
+    },
+    "saas": {
+      "name": "Avila • SaaS",
+      "id": "GTM-NQSKDVVG"
+    }
+  },
+  "sites": [
+    {
+      "category": "ecommerce",
+      "status": "Em configuração",
+      "domain": "beretarodas.com",
+      "operation": "ecommerce",
+      "aliases": [
+        "www.beretarodas.com"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "verified-storefront-source",
+      "measurementId": "G-9E0JTVJDPC",
+      "property": "properties/564394458",
+      "stream": "properties/564394458/dataStreams/16344177068",
+      "privatePrefixes": [
+        "/pedido",
+        "/conta",
+        "/checkout"
+      ],
+      "gatewayPath": "/avmetrics/"
+    },
+    {
+      "category": "ecommerce",
+      "status": "Não informado",
+      "domain": "domiriodistribuidora.com.br",
+      "operation": "ecommerce",
+      "aliases": [
+        "www.domiriodistribuidora.com.br"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "verified-storefront-source",
+      "measurementId": "G-0R7C944TPX",
+      "property": "properties/564373618",
+      "stream": "properties/564373618/dataStreams/16344179919",
+      "privatePrefixes": [
+        "/pedido",
+        "/conta",
+        "/checkout"
+      ],
+      "gatewayPath": "/avmetrics/"
+    },
+    {
+      "category": "ecommerce",
+      "status": "Não informado",
+      "domain": "mrgcaixastermicas.com.br",
+      "operation": "ecommerce",
+      "aliases": [
+        "www.mrgcaixastermicas.com.br"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "verified-storefront-source",
+      "measurementId": "G-P05NP64GPK",
+      "property": "properties/564371475",
+      "stream": "properties/564371475/dataStreams/16344190180",
+      "privatePrefixes": [
+        "/pedido",
+        "/conta",
+        "/checkout"
+      ],
+      "gatewayPath": "/avmetrics/"
+    },
+    {
+      "category": "ecommerce",
+      "status": "Não informado",
+      "domain": "pkvedacoes.com.br",
+      "operation": "ecommerce",
+      "aliases": [
+        "www.pkvedacoes.com.br"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "verified-storefront-source",
+      "measurementId": "G-GD3XEE5XRK",
+      "property": "properties/564385969",
+      "stream": "properties/564385969/dataStreams/16344208699",
+      "privatePrefixes": [
+        "/pedido",
+        "/conta",
+        "/checkout"
+      ]
+    },
+    {
+      "category": "ecommerce",
+      "status": "Publicado",
+      "domain": "vedashow.com.br",
+      "operation": "ecommerce",
+      "aliases": [
+        "www.vedashow.com.br"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "verified-storefront-source",
+      "measurementId": "G-N7Y6R9XVS4",
+      "property": "properties/564405214",
+      "stream": "properties/564405214/dataStreams/16344261970",
+      "privatePrefixes": [
+        "/pedido",
+        "/conta",
+        "/checkout"
+      ],
+      "gatewayPath": "/avmetrics/"
+    },
+    {
+      "category": "ecommerce",
+      "status": "Publicado",
+      "domain": "vinhosimperial.com",
+      "operation": "ecommerce",
+      "aliases": [
+        "www.vinhosimperial.com"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "verified-storefront-source",
+      "measurementId": "G-BGKBPQCNBQ",
+      "property": "properties/564398509",
+      "stream": "properties/564398509/dataStreams/16344228481",
+      "privatePrefixes": [
+        "/pedido",
+        "/conta",
+        "/checkout"
+      ],
+      "gatewayPath": "/avmetrics/"
+    },
+    {
+      "category": "institucional",
+      "status": "Publicado",
+      "domain": "avilaops.com",
+      "operation": "institutional",
+      "aliases": [
+        "www.avilaops.com"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-1RDXYS7THH",
+      "property": "properties/564383925",
+      "stream": "properties/564383925/dataStreams/16344267120",
+      "consentAdapter": "zaraz",
+      "gatewayPath": "/avmetrics/"
+    },
+    {
+      "category": "institucional",
+      "status": "Publicado",
+      "domain": "avilatransportes.com.br",
+      "operation": "institutional",
+      "aliases": [
+        "www.avilatransportes.com.br"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-VFFFVNQWYD",
+      "property": "properties/564359970",
+      "stream": "properties/564359970/dataStreams/16344266952"
+    },
+    {
+      "category": "institucional",
+      "status": "Publicado",
+      "domain": "brasamineira.com.br",
+      "operation": "institutional",
+      "aliases": [
+        "www.brasamineira.com.br"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-H38G7232GK",
+      "property": "properties/564398823",
+      "stream": "properties/564398823/dataStreams/16344258524"
+    },
+    {
+      "category": "institucional",
+      "status": "Publicado",
+      "domain": "cifrainssdeobras.com.br",
+      "operation": "institutional",
+      "aliases": [
+        "www.cifrainssdeobras.com.br"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-4BWJR3WMMR",
+      "property": "properties/564399733",
+      "stream": "properties/564399733/dataStreams/16344277464"
+    },
+    {
+      "category": "institucional",
+      "status": "Não informado",
+      "domain": "comandeiro.com.br",
+      "operation": "institutional",
+      "aliases": [
+        "www.comandeiro.com.br"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-8TEMG79FDL",
+      "property": "properties/564378821",
+      "stream": "properties/564378821/dataStreams/16344228490"
+    },
+    {
+      "category": "institucional",
+      "status": "Publicado",
+      "domain": "ludusequipamentos.com",
+      "consentAdapter": "manual",
+      "gatewayPath": "/avmetrics/",
+      "publicPaths": [],
+      "operation": "institutional",
+      "aliases": [
+        "www.ludusequipamentos.com"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-HV13SD6KZW",
+      "property": "properties/564398113",
+      "stream": "properties/564398113/dataStreams/16344285013"
+    },
+    {
+      "category": "institucional",
+      "status": "Não informado",
+      "domain": "maprojetos.com.br",
+      "operation": "institutional",
+      "aliases": [
+        "www.maprojetos.com.br"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-H0RQ7WFD1Y",
+      "property": "properties/564382752",
+      "stream": "properties/564382752/dataStreams/16344284229"
+    },
+    {
+      "category": "institucional",
+      "status": "Publicado",
+      "domain": "marciopietrobom.com.br",
+      "operation": "institutional",
+      "aliases": [
+        "www.marciopietrobom.com.br"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-9MMK5ZPLQW",
+      "property": "properties/564391991",
+      "stream": "properties/564391991/dataStreams/16344270194"
+    },
+    {
+      "category": "institucional",
+      "status": "Não informado",
+      "domain": "mellotransportesriopreto.com.br",
+      "operation": "institutional",
+      "aliases": [
+        "www.mellotransportesriopreto.com.br"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-HKPYTDTX0L",
+      "property": "properties/564370432",
+      "stream": "properties/564370432/dataStreams/16344179930"
+    },
+    {
+      "category": "institucional",
+      "status": "Publicado",
+      "domain": "partsagricola.com.br",
+      "operation": "institutional",
+      "aliases": [
+        "www.partsagricola.com.br"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-LBPBXRM790",
+      "property": "properties/564398166",
+      "stream": "properties/564398166/dataStreams/16344257912"
+    },
+    {
+      "category": "institucional",
+      "status": "Não informado",
+      "domain": "seteeseteengenharia.com.br",
+      "operation": "institutional",
+      "aliases": [
+        "www.seteeseteengenharia.com.br"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-0XXYSQSLRE",
+      "property": "properties/564371476",
+      "stream": "properties/564371476/dataStreams/16344277582"
+    },
+    {
+      "category": "institucional / vendas",
+      "status": "Não informado",
+      "domain": "raramulher.com.br",
+      "operation": "institutional",
+      "aliases": [
+        "www.raramulher.com.br"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-G8Y0FDYHZS",
+      "property": "properties/564399631",
+      "stream": "properties/564399631/dataStreams/16344267882"
+    },
+    {
+      "category": "plataforma - ecommerce",
+      "status": "Publicado",
+      "domain": "lojas.avilaops.com",
+      "operation": "platform",
+      "aliases": [],
+      "applicationPrefixes": [
+        "/painel"
+      ],
+      "publicPrefixes": [
+        "/",
+        "/blog",
+        "/ajuda",
+        "/developers",
+        "/marca",
+        "/criar",
+        "/entrar",
+        "/termos-comerciais"
+      ],
+      "routeStatus": "verified-source-proxy-and-public-html",
+      "measurementId": "G-TPH4PY7RVN",
+      "property": "properties/564384638",
+      "stream": "properties/564384638/dataStreams/16344256396",
+      "publicLocations": [
+        {
+          "hostname": "avilaops.com",
+          "prefixes": [
+            "/lojas",
+            "/en/lojas"
+          ]
+        }
+      ],
+      "gatewayPath": "/avmetrics/"
+    },
+    {
+      "category": "redirecionamento",
+      "status": "Não informado",
+      "domain": "ludusequipamentos.com.br",
+      "operation": "redirect",
+      "aliases": [
+        "www.ludusequipamentos.com.br"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory"
+    },
+    {
+      "category": "redirecionamento",
+      "status": "Não informado",
+      "domain": "vinhosimperial.com.br",
+      "operation": "redirect",
+      "aliases": [
+        "www.vinhosimperial.com.br"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory"
+    },
+    {
+      "category": "saas",
+      "status": "Não informado",
+      "domain": "app.avilaops.com",
+      "operation": "saas",
+      "aliases": [],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-H07BNVLXQC",
+      "property": "properties/564367276",
+      "stream": "properties/564367276/dataStreams/16344203462"
+    },
+    {
+      "category": "saas",
+      "status": "Publicado",
+      "domain": "arxisbim.com.br",
+      "operation": "saas",
+      "aliases": [
+        "www.arxisbim.com.br"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-9XNF190KV3",
+      "property": "properties/564358155",
+      "stream": "properties/564358155/dataStreams/16344306795"
+    },
+    {
+      "category": "saas",
+      "status": "Não informado",
+      "domain": "cms.avilaops.com",
+      "operation": "saas",
+      "aliases": [],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-6H17Z6GW0F",
+      "property": "properties/564375190",
+      "stream": "properties/564375190/dataStreams/16344299702",
+      "publicLocations": [
+        {
+          "hostname": "avilaops.com",
+          "prefixes": [
+            "/cms",
+            "/en/cms"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "saas",
+      "status": "Publicado",
+      "domain": "conta.avilaops.com",
+      "operation": "saas",
+      "aliases": [],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-4ML2SD8MQD",
+      "property": "properties/564394459",
+      "stream": "properties/564394459/dataStreams/16344301083"
+    },
+    {
+      "category": "saas",
+      "status": "Publicado",
+      "domain": "contrato.avilaops.com",
+      "operation": "saas",
+      "aliases": [],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-LN9QPRLPRY",
+      "property": "properties/564370711",
+      "stream": "properties/564370711/dataStreams/16344085797"
+    },
+    {
+      "category": "saas",
+      "status": "Não informado",
+      "domain": "crm.avilaops.com",
+      "operation": "saas",
+      "aliases": [],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-H8WNWY4KDX",
+      "property": "properties/564391012",
+      "stream": "properties/564391012/dataStreams/16344246836",
+      "publicLocations": [
+        {
+          "hostname": "avilaops.com",
+          "prefixes": [
+            "/crm",
+            "/en/crm"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "saas",
+      "status": "Não informado",
+      "domain": "engops.avilaops.com",
+      "operation": "saas",
+      "aliases": [],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-R0KTKLT0W9",
+      "property": "properties/564391992",
+      "stream": "properties/564391992/dataStreams/16344254135",
+      "publicLocations": [
+        {
+          "hostname": "avilaops.com",
+          "prefixes": [
+            "/engops",
+            "/en/engops"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "saas",
+      "status": "Publicado",
+      "domain": "erp.avilaops.com",
+      "operation": "saas",
+      "aliases": [],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-MF4X1T1D7F",
+      "property": "properties/564312046",
+      "stream": "properties/564312046/dataStreams/16344289038",
+      "publicLocations": [
+        {
+          "hostname": "avilaops.com",
+          "prefixes": [
+            "/erp",
+            "/en/erp"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "saas",
+      "status": "Não informado",
+      "domain": "mail.avilaops.com",
+      "operation": "saas",
+      "aliases": [],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-B4SL3FH4KV",
+      "property": "properties/564370434",
+      "stream": "properties/564370434/dataStreams/16344305656",
+      "publicLocations": [
+        {
+          "hostname": "avilaops.com",
+          "prefixes": [
+            "/mail",
+            "/en/mail"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "saas",
+      "status": "Publicado",
+      "domain": "saudepet.app.br",
+      "operation": "saas",
+      "aliases": [
+        "www.saudepet.app.br"
+      ],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-5EX4HBPD8W",
+      "property": "properties/564326561",
+      "stream": "properties/564326561/dataStreams/16344292040"
+    },
+    {
+      "category": "saas",
+      "status": "Publicado",
+      "domain": "tms.avilaops.com",
+      "operation": "saas",
+      "aliases": [],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory",
+      "measurementId": "G-FWPCJY448E",
+      "property": "properties/564385238",
+      "stream": "properties/564385238/dataStreams/16344321336",
+      "publicLocations": [
+        {
+          "hostname": "avilaops.com",
+          "prefixes": [
+            "/tms",
+            "/en/tms"
+          ]
+        }
+      ]
+    },
+    {
+      "category": "sso",
+      "status": "Não informado",
+      "domain": "auth.avilaops.com",
+      "operation": "sso",
+      "aliases": [],
+      "applicationPrefixes": [],
+      "publicPrefixes": [],
+      "routeStatus": "pending-inventory"
+    }
+  ]
+}
