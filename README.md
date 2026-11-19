@@ -14,7 +14,7 @@ Publicado em https://ludusequipamentos.com, na pasta exclusiva `/var/www/luduseq
 | `/core/` | Compatibilidade: encaminha à coleção `/loja/core/`, preservando busca, grupo e âncora |
 | `/core/ld-wh001/` a `/core/ld-wh066/` | Fichas nacionais com foto, medidas em mm, área nominal, planta dimensional esquemática e orçamento. URLs permanentes para o catálogo |
 | `/kits/` e `/kits/<id>/` | Academias de 150, 300 e 600 m² com planta e lista |
-| `/simulador/` | Planta em escala com arrastar, giro livre e encaixe, obstáculos, sugestão de layout, edição no 3D, projetos salvos, PDF e PNG, link compartilhável e pedido de orçamento |
+| `/simulador/` | Planta em escala, com Premium e Core, com arrastar, giro livre e encaixe, obstáculos, sugestão de layout, edição no 3D, projetos salvos, PDF e PNG, link compartilhável e pedido de orçamento |
 
 Links antigos do QR (`/?id=LD-B004`) redirecionam para a página do equipamento.
 
@@ -41,7 +41,7 @@ Links antigos do QR (`/?id=LD-B004`) redirecionam para a página do equipamento.
 - `src/assets/produtos/<código>.jpg`: fotos do catálogo.
 - `src/data/core.json`: dados nacionais aprovados, sem preços; dimensões na ordem `[profundidade, largura, altura]`, em mm. Grupos e endereço do PDF em `src/data/core.ts`.
 - `src/assets/core/<código>.webp`: 66 fotos nacionais com a marca Ludus. Para reimportar as fotos aprovadas: `node scripts/importar-fotos-core.mjs <pasta-tratadas>`.
-- A linha Core tem fichas próprias: não herda cores, modelos 3D nem folgas de circulação da Premium. A área nominal é largura × profundidade.
+- A linha Core tem fichas próprias: não herda cores nem folgas de circulação da Premium, e a ficha não mostra 3D. A área nominal é largura × profundidade. Os 66 modelos Core (`catalogs/ludus-core` do gerador 3D, ainda `needs_review`) entram só no simulador, em planta e em 3D, com o filtro "Ludus Core"; a sugestão automática de layout segue só com a Premium.
 - `src/data/site.ts`: dados públicos confirmados da empresa, linhas, cores e o Kit Studio. Informações ainda não fornecidas pela Ludus não são exibidas.
 - Modelos 3D, plantas e silhuetas: pacote `@avilaops/gerador-3d` (repositório `avilaops/gerador-3d`), fixado por commit no `package.json`. Para atualizar os modelos, troque o commit e rode `npm install`.
 

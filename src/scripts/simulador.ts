@@ -11,6 +11,7 @@ import type * as TH from 'three';
 
 interface ProdutoSim {
   code: string;
+  colecao: 'premium' | 'core';
   nome: string;
   linha: string;
   grupo: string;
@@ -98,11 +99,11 @@ const ENCAIXE = 0.08;
 const NOME_OBST: Record<TipoObst, string> = { pilar: 'Pilar', porta: 'Porta', bloco: 'Área bloqueada' };
 
 const silhuetaUrls = import.meta.glob<string>(
-  '/node_modules/@avilaops/gerador-3d/catalogs/ludus/models/*/footprint.json',
+  '/node_modules/@avilaops/gerador-3d/catalogs/{ludus,ludus-core}/models/*/footprint.json',
   { eager: true, query: '?url', import: 'default' }
 );
 const specLoaders = import.meta.glob<Record<string, unknown>>(
-  '/node_modules/@avilaops/gerador-3d/catalogs/ludus/specs/*.json',
+  '/node_modules/@avilaops/gerador-3d/catalogs/{ludus,ludus-core}/specs/*.json',
   { import: 'default' }
 );
 const silhuetas = new Map<string, Silhueta>();
@@ -658,7 +659,7 @@ function selecionar(id: number | null) {
   if (i) {
     const p = P.get(i.code)!;
     $('sel-nome').textContent = `${p.nome} · ${i.code} · ${norm(i.ang)}°`;
-    ($('b-ver') as HTMLAnchorElement).href = `/loja/${p.slug}/`;
+    ($('b-ver') as HTMLAnchorElement).href = p.colecao === 'core' ? `/core/${p.slug}/` : `/loja/${p.slug}/`;
   }
   if (o) {
     $('obst-nome').textContent = NOME_OBST[o.t];
@@ -1278,8 +1279,9 @@ function escolher(perfil: Perfil, n: number): string[] {
     const k = PRIMEIROS.indexOf(c);
     return k < 0 ? 999 : k;
   };
+  // A sugestão automática continua só com a Premium: os grupos do Core têm outra classificação.
   const maquinas = dados.produtos
-    .filter((p) => p.grupo !== 'Acessórios')
+    .filter((p) => p.colecao === 'premium' && p.grupo !== 'Acessórios')
     .sort((a, b) => ordem(a.code) - ordem(b.code));
   const lista: string[] = [];
   const usos = new Map<string, number>();

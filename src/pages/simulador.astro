@@ -3,9 +3,12 @@ import { getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import logoPreta from '../assets/marca/ludus-preta.png';
 import { empresa, FOLGA, kits, linhas, produtos } from '../data/site';
+import { produtosCore } from '../data/core';
 
-const lista = produtos.map((p) => ({
+// Premium primeiro, Core depois; o código identifica o equipamento nas duas linhas.
+const lista = [...produtos, ...produtosCore].map((p) => ({
     code: p.code,
+    colecao: p.colecao,
     nome: p.nome,
     linha: p.linha,
     grupo: p.grupo_muscular,
@@ -51,6 +54,7 @@ const dados = { produtos: lista, kits, folga: FOLGA, whatsapp: empresa.whatsappN
         <div class="chips" id="linhas">
           <button type="button" class="chip sm" data-v="" aria-pressed="true">Todos</button>
           {linhas.map((l) => <button type="button" class="chip sm" data-v={l.id} aria-pressed="false">{l.titulo}</button>)}
+          <button type="button" class="chip sm" data-v="Ludus Core" aria-pressed="false">Ludus Core</button>
         </div>
         <ul id="lista"></ul>
       </aside>

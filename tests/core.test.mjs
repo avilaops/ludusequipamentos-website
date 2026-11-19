@@ -49,3 +49,17 @@ test('exposes Core from the home and keeps the original Premium catalog independ
   assert.match(read('core/ld-wh001/index.html'), /1,20 m²/);
   assert.match(read('core/ld-wh024/index.html'), /200 kg/);
 });
+
+test('simulator offers all 66 Core products in plan and 3D, with their specs and silhouettes bundled', () => {
+  const simulator = read('simulador/index.html');
+  const assets = readdirSync(new URL('../dist/_astro/', import.meta.url));
+  assert.match(simulator, /data-v="Ludus Core"/);
+  for (const p of products) {
+    assert.ok(simulator.includes(`"code":"${p.code}"`), p.code);
+    assert.ok(simulator.includes(`"slug":"${p.slug}"`), p.code);
+    assert.ok(assets.some((file) => file.startsWith(`${p.code}.`)), `spec ${p.code}`);
+  }
+  assert.equal(assets.filter((file) => /^LD-WH\d{3}\./.test(file)).length, 66);
+  // Product pages keep 3D out: it lives only in the simulator.
+  assert.doesNotMatch(read('core/ld-wh001/index.html'), /data-modo="3d"|Ver em 3D|\/simulador\/\?add=/i);
+});
