@@ -14,3 +14,18 @@ O manifesto existente controla os SKUs e os derivados permitidos. Os originais e
 6. Conferir no navegador as duas linhas, filtros, fichas e orçamento.
 
 Não ativar as referências `/midias/` sem o Worker e a primeira publicação disponíveis. Não apagar o espelho de recuperação antes da validação de download e hash no R2. Upload de novas versões e regeneração dos PDFs ainda exigem o fluxo avx-tools; esta implementação seleciona variantes já registradas.
+
+## Linha Cardio
+
+O Worker reconhece a coleção `cardio` (URLs `/cardio/<código>/` e `/loja/cardio/`, imagens em `cardio/<código>/…`). Ele foi feito para dois estados:
+
+- **Cardio fora da publicação** (hoje): `/loja/cardio/` e `/cardio/<código>/` passam para as páginas estáticas do site, o contador do Cardio fica com o número do build e o restante do catálogo não muda. As fotos saem do próprio site (`public/fotos-cardio/`).
+- **Cardio publicado**: o Worker passa a montar a coleção a partir da publicação, serve `/midias/produtos/<código>` e rotula as fichas como "Ludus Cardio". Nesse caso, trocar `fotoCardio` em `src/data/cardio.ts` para `/midias/produtos/<código>`.
+
+Para ativar, nesta ordem:
+
+1. **Implantar o código do Worker.** Rode `CLOUDFLARE_TOKEN=… node scripts/implantar-worker.mjs` (ensaio: compara o pacote com o Worker implantado e não grava) e, se o diff for só o do Cardio, repita com `--aplicar`. O script usa a API "Replace Worker Script Content", que troca só o código e não mexe em bindings nem no segredo `PUBLISH_TOKEN`. Sem isso, o site novo faria `/loja/cardio/` responder 404 e mostraria o contador do Cardio como 0.
+2. **Publicar o site** (`npm run deploy`), só depois do passo 1.
+3. **Levar as fotos ao R2 (opcional, para ficar igual ao Core e à Premium).** Cadastrar os 28 SKUs no manifesto, enviar `web.webp` de cada um por `/midias/_upload/…` e publicar por `/midias/_publish` com `colecao: "cardio"` e `url: "/cardio/<código>/"`. Exige o `PUBLISH_TOKEN`.
+
+O ERP hoje cadastra esses itens como coleção `premium`. Para o Cardio não ser sobrescrito como Premium numa próxima publicação do ERP, a coleção do ERP precisa passar a ser `cardio`.

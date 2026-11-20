@@ -20,7 +20,8 @@ const { title, description, image, jsonLd } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const path = Astro.url.pathname;
 const isCore = path.startsWith('/core/') || path.startsWith('/loja/core/');
-const isPremium = path.startsWith('/loja/') && path !== '/loja/' && !isCore;
+const isCardio = path.startsWith('/cardio/') || path.startsWith('/loja/cardio/');
+const isPremium = path.startsWith('/loja/') && path !== '/loja/' && !isCore && !isCardio;
 const logo = await getImage({ src: isCore ? logoCore : logoRetangular, width: 480, format: 'png' });
 const logoInstitucional = await getImage({ src: logoRetangular, width: 480, format: 'png' });
 const wa = whatsapp('Olá! Vim pelo site da Ludus e quero um orçamento.');
@@ -84,6 +85,7 @@ const org = {
         <nav id="menu">
           <a href="/loja/premium/" aria-current={isPremium ? 'page' : undefined}>Linha Premium</a>
           <a href="/loja/core/" aria-current={isCore ? 'page' : undefined}>Linha Core</a>
+          <a href="/loja/cardio/" aria-current={isCardio ? 'page' : undefined}>Linha Cardio</a>
           <a href="/simulador/" aria-current={path.startsWith('/simulador') ? 'page' : undefined}>Simulador</a>
           <a href="/kits/" aria-current={path.startsWith('/kits') ? 'page' : undefined}>Kits</a>
           <a href="/catalogos/" aria-current={path === '/catalogos/' ? 'page' : undefined}>Catálogos</a>
@@ -107,6 +109,7 @@ const org = {
             <h4>Site</h4>
             <a href="/loja/premium/">Linha Premium</a>
             <a href="/loja/core/">Linha Core</a>
+            <a href="/loja/cardio/">Linha Cardio</a>
             <a href="/catalogos/">Catálogos em PDF</a>
             <a href="/simulador/">Simulador de academia</a>
             <a href="/kits/">Kits prontos</a>

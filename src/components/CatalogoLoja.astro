@@ -6,20 +6,25 @@ import Foto from './Foto.astro';
 import { linhas, whatsapp, type Produto } from '../data/site';
 import { grupoCatalogo, selecionarColecao, urlProduto } from '../data/catalogo';
 import { catalogoCore } from '../data/core';
+import { gruposCardio, produtosCardio } from '../data/cardio';
 import { Image } from 'astro:assets';
 import logoCore from '../assets/marca/ludus-core.png';
 import logoPremium from '../assets/marca/ludus-premium.png';
 interface Props { colecao?: Produto['colecao']; }
 const { colecao } = Astro.props;
 const produtos = selecionarColecao(colecao);
-const ordemGrupos = ['Pernas e glúteos', 'Peitoral', 'Costas', 'Ombros', 'Braços', 'Panturrilha', 'Abdômen e lombar', 'Multifuncionais', 'Acessórios'];
+// Grupos musculares (Core e Premium) e tipos de equipamento (Cardio).
+const ordemGrupos = ['Pernas e glúteos', 'Peitoral', 'Costas', 'Ombros', 'Braços', 'Panturrilha', 'Abdômen e lombar', 'Multifuncionais', 'Acessórios', ...gruposCardio.map((g) => g.nome)];
 const grupos = ordemGrupos.filter((grupo) => produtos.some((p) => grupoCatalogo(p) === grupo));
-const titulo = colecao === 'premium' ? 'Linha Premium' : colecao === 'core' ? 'Linha Core' : 'Nossas linhas';
-const resumo = colecao ? `${produtos.length} equipamentos da ${titulo}.` : `${produtos.length} equipamentos das linhas Core e Premium.`;
-const destaque = colecao ? produtos.find((p) => p.code === (colecao === 'core' ? 'LD-WH002' : 'LD-A030')) : undefined;
+const titulo = colecao === 'premium' ? 'Linha Premium' : colecao === 'core' ? 'Linha Core' : colecao === 'cardio' ? 'Linha Cardio' : 'Nossas linhas';
+const resumo = colecao ? `${produtos.length} equipamentos da ${titulo}.` : `${produtos.length} equipamentos das linhas Core, Premium e Cardio.`;
+const destaque = colecao ? produtos.find((p) => p.code === (colecao === 'core' ? 'LD-WH002' : colecao === 'cardio' ? 'LD-C003' : 'LD-A030')) : undefined;
 const apresentacao = colecao === 'core'
   ? 'A linha de fabricação nacional da Ludus. Equipamentos para compor sua sala de musculação, organizados por grupo corporal.'
-  : 'A linha de equipamentos importados da Ludus. Explore modelos de peso livre articulado, bateria de pesos, bancos e suportes.';
+  : colecao === 'cardio'
+    ? 'A linha de cardio da Ludus. Esteiras, bicicletas, elípticos e simulador de escada para a área aeróbica da sua academia.'
+    : 'A linha de equipamentos importados da Ludus. Explore modelos de peso livre articulado, bateria de pesos, bancos e suportes.';
+const rotuloGrupo = colecao === 'cardio' ? 'Tipo de equipamento' : 'Grupo muscular';
 ---
 
 <Base
@@ -30,8 +35,8 @@ const apresentacao = colecao === 'core'
     <div class:list={['wrap apresentacao', { 'com-destaque': destaque }]}>
       <div>
         <span class="kicker">Ludus Equipamentos</span>
-        <h1 class="titulo">{colecao ? <Image src={colecao === 'core' ? logoCore : logoPremium} alt={colecao === 'core' ? 'Ludus Core' : 'Ludus Premium'} width={720} loading="eager" /> : titulo}</h1>
-        <p class="lead">{colecao ? apresentacao : 'Duas linhas, uma escolha para cada projeto. Conheça a Core e a Premium e compare os equipamentos para montar sua academia.'}</p>
+        <h1 class="titulo">{colecao === 'core' || colecao === 'premium' ? <Image src={colecao === 'core' ? logoCore : logoPremium} alt={colecao === 'core' ? 'Ludus Core' : 'Ludus Premium'} width={720} loading="eager" /> : colecao === 'cardio' ? 'Ludus Cardio' : titulo}</h1>
+        <p class="lead">{colecao ? apresentacao : 'Três linhas, uma escolha para cada projeto. Conheça a Core, a Premium e a Cardio e compare os equipamentos para montar sua academia.'}</p>
       <div class="acoes">
         <a class="btn" href="#equipamentos">Explorar equipamentos</a>
         {colecao === 'core' && <a class="pdf" href={catalogoCore} target="_blank" rel="noopener">Catálogo Core em PDF ↗</a>}
@@ -47,11 +52,12 @@ const apresentacao = colecao === 'core'
     </div>
   </section>
 
-  <section class="wrap comparacao" id="comparar-linhas" aria-label="Compare Core e Premium">
-    <div><span class="kicker">Escolha sua linha</span><h2>Core ou Premium?</h2><p>Comece pela origem e pelos modelos disponíveis. Para definir a composição da academia, compare as fichas e converse com a Ludus.</p></div>
+  <section class="wrap comparacao" id="comparar-linhas" aria-label="Compare as linhas Core, Premium e Cardio">
+    <div><span class="kicker">Escolha sua linha</span><h2>Core, Premium ou Cardio?</h2><p>Comece pela origem e pelos modelos disponíveis. Para definir a composição da academia, compare as fichas e converse com a Ludus.</p></div>
     <a href="/loja/core/" class="opcao"><h3>Ludus Core</h3><strong>Fabricação nacional</strong><p>66 equipamentos em sete grupos corporais, com fotos e dimensões para planejar seu espaço.</p><span>Explorar Core →</span></a>
     <a href="/loja/premium/" class="opcao"><h3>Ludus Premium</h3><strong>Linha importada</strong><p>91 equipamentos, entre peso livre articulado, bateria de pesos, bancos e suportes.</p><span>Explorar Premium →</span></a>
-    <a class="ajuda" href={whatsapp('Olá! Quero ajuda para escolher entre as linhas Core e Premium para minha academia.')} target="_blank" rel="noopener">Precisa de ajuda para escolher? Fale com a Ludus ↗</a>
+    <a href="/loja/cardio/" class="opcao"><h3>Ludus Cardio</h3><strong>Esteiras, bicicletas e elípticos</strong><p>{produtosCardio.length} equipamentos de cardio, com dimensões e ficha técnica para planejar a área aeróbica.</p><span>Explorar Cardio →</span></a>
+    <a class="ajuda" href={whatsapp('Olá! Quero ajuda para escolher entre as linhas Core, Premium e Cardio para minha academia.')} target="_blank" rel="noopener">Precisa de ajuda para escolher? Fale com a Ludus ↗</a>
   </section>
 
   <section class="wrap corpo" id="equipamentos">
@@ -66,7 +72,7 @@ const apresentacao = colecao === 'core'
         </div>
       </div>}
       <div class="grupo">
-        <span class="rot">Grupo muscular</span>
+        <span class="rot">{rotuloGrupo}</span>
         <div class="chips" data-filtro="grupo">
           <button class="chip" data-v="" aria-pressed="true">Todos</button>
           {grupos.map((g) => <button class="chip" data-v={g} aria-pressed="false">{g}</button>)}
@@ -156,7 +162,7 @@ const apresentacao = colecao === 'core'
   .destaque img { width: 100%; height: 340px; object-fit: contain; }
   .destaque span { display: grid; gap: 6px; margin-top: 16px; font-size: 15px; }
   .destaque strong { font-weight: 600; }
-  .comparacao { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 24px; padding-block: 40px; scroll-margin-top: 100px; }
+  .comparacao { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 24px; padding-block: 40px; scroll-margin-top: 100px; }
   .comparacao h2 { font-size: 36px; margin-block: 10px 16px; }
   .comparacao p { color: var(--muted); font-size: 17px; }
   .opcao { display: grid; gap: 12px; padding: 24px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); text-decoration: none; }

@@ -1,8 +1,9 @@
-import { catalogo, urlProduto } from '../data/catalogo';
+import { catalogo, fotoUrl, urlProduto } from '../data/catalogo';
 import { whatsapp } from '../data/site';
 import { chaveOrcamento, lerSelecao } from './orcamento-modelo';
 
 const produtos = new Map(catalogo.map(p => [p.code, p]));
+const NOME_COLECAO = { premium: 'Premium', core: 'Core', cardio: 'Cardio' } as const;
 // The edge inserts the reviewed ERP publication into this page; local data is the offline fallback.
 try {
   const publication = JSON.parse(document.getElementById('catalogo-publicado')?.textContent ?? 'null');
@@ -39,10 +40,10 @@ function atualizar() {
   for (const item of itens) {
     const p = produtos.get(item.code)!;
     const row = document.createElement('div'); row.className = 'orcamento-item';
-    const img = document.createElement('img'); img.src = `/midias/produtos/${p.code}`; img.alt = p.nome;
+    const img = document.createElement('img'); img.src = fotoUrl(p); img.alt = p.nome;
     const description = document.createElement('div');
     const link = document.createElement('a'); link.href = urlProduto(p); link.textContent = p.nome;
-    const detail = document.createElement('small'); detail.textContent = `${p.code} · Ludus ${p.colecao === 'core' ? 'Core' : 'Premium'}`;
+    const detail = document.createElement('small'); detail.textContent = `${p.code} · Ludus ${NOME_COLECAO[p.colecao]}`;
     description.append(link, detail);
     const label = document.createElement('label'); label.textContent = 'Quantidade';
     const quantity = document.createElement('input'); quantity.type = 'number'; quantity.min = '1'; quantity.max = '99'; quantity.value = String(item.quantidade); quantity.setAttribute('aria-label', `Quantidade de ${p.nome}`);
@@ -62,7 +63,7 @@ document.querySelectorAll<HTMLButtonElement>('[data-orcamento-add]').forEach(but
 }));
 function mensagem() {
   const notes = (document.getElementById('orcamento-observacoes') as HTMLTextAreaElement | null)?.value.trim() ?? '';
-  return ['Olá! Quero uma proposta da Ludus para:', ...itens.map(item => { const p = produtos.get(item.code)!; return `${item.quantidade} × ${p.nome} (${p.code}) — ${p.colecao === 'core' ? 'Core' : 'Premium'}`; }), ...(notes ? ['', notes] : [])].join('\n');
+  return ['Olá! Quero uma proposta da Ludus para:', ...itens.map(item => { const p = produtos.get(item.code)!; return `${item.quantidade} × ${p.nome} (${p.code}) — ${NOME_COLECAO[p.colecao]}`; }), ...(notes ? ['', notes] : [])].join('\n');
 }
 document.getElementById('orcamento-enviar')?.addEventListener('click', () => {
   const url = whatsapp(mensagem());

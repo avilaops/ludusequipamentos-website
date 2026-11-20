@@ -6,15 +6,15 @@
 const RAIZ = '/node_modules/@avilaops/gerador-3d/catalogs';
 
 const specModules = import.meta.glob<Record<string, unknown>>(
-  '/node_modules/@avilaops/gerador-3d/catalogs/{ludus,ludus-core}/specs/*.json',
+  '/node_modules/@avilaops/gerador-3d/catalogs/{ludus,ludus-core,ludus-cardio}/specs/*.json',
   { eager: true, import: 'default' }
 );
 const plantaModules = import.meta.glob<string>(
-  '/node_modules/@avilaops/gerador-3d/catalogs/{ludus,ludus-core}/models/*/plan.svg',
+  '/node_modules/@avilaops/gerador-3d/catalogs/{ludus,ludus-core,ludus-cardio}/models/*/plan.svg',
   { eager: true, query: '?raw', import: 'default' }
 );
 const silhuetaModules = import.meta.glob<Silhueta>(
-  '/node_modules/@avilaops/gerador-3d/catalogs/{ludus,ludus-core}/models/*/footprint.json',
+  '/node_modules/@avilaops/gerador-3d/catalogs/{ludus,ludus-core,ludus-cardio}/models/*/footprint.json',
   { eager: true, import: 'default' }
 );
 

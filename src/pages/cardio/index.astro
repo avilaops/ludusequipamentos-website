@@ -1,0 +1,11 @@
+---
+// Fichas /cardio/<codigo>/ são permanentes; a coleção fica na loja.
+---
+<!doctype html>
+<html lang="pt-BR">
+  <head><meta charset="utf-8" /><title>Linha Cardio · Ludus Equipamentos</title><link rel="canonical" href={new URL('/loja/cardio/', Astro.site)} /><meta name="robots" content="noindex" /></head>
+  <body>
+    <p><a href="/loja/cardio/">Abrir a Linha Cardio</a></p>
+    <script is:inline>location.replace('/loja/cardio/' + location.search + location.hash);</script>
+  </body>
+</html>
