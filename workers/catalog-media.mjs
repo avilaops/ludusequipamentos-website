@@ -22,11 +22,12 @@ async function fetchWebsite(request) {
 const DEFAULT_ROOT = 'ludus/catalogo/v1/';
 const PUBLICATION = 'ludus/publications/current.json';
 const UUID = /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i;
-const IMAGE = /^(core|premium)\/(LD-[A-Z0-9]+)\/(web\.webp|black\.png|thumbnail\.jpg)$/;
-const PRIVATE = /^(core|premium)\/(LD-[A-Z0-9]+)\/(source\.(?:png|jpg)|web\.webp|black\.png|thumbnail\.jpg)$/;
-const UPLOAD = /^([0-9a-f]{64})\/(core|premium)\/(LD-[A-Z0-9]+)\/(source\.(?:jpg|png|webp)|web\.webp|thumbnail\.webp)$/;
+const IMAGE = /^(core|premium|cardio)\/(LD-[A-Z0-9]+)\/(web\.webp|black\.png|thumbnail\.jpg)$/;
+const PRIVATE = /^(core|premium|cardio)\/(LD-[A-Z0-9]+)\/(source\.(?:png|jpg)|web\.webp|black\.png|thumbnail\.jpg)$/;
+const UPLOAD = /^([0-9a-f]{64})\/(core|premium|cardio)\/(LD-[A-Z0-9]+)\/(source\.(?:jpg|png|webp)|web\.webp|thumbnail\.webp)$/;
 const failure = (status, message) => Response.json({ title: message }, { status, headers: { 'Cache-Control': 'no-store' } });
 const escape = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+const LINHA = { core: 'Core', premium: 'Premium', cardio: 'Cardio' };
 const groupName = value => ({ Deltoides: 'Ombros', 'Abdômen': 'Abdômen e lombar', Multitrabalho: 'Multifuncionais' })[value] ?? value;
 
 async function authorized(request, env) {
@@ -52,8 +53,8 @@ export function validatePublication(value, manifest, registered = []) {
   const codes = new Set(); const paths = new Set();
   const products = value.products.map(p => {
     const original = sources.get(p.code);
-    if (!original || codes.has(p.code) || paths.has(p.url) || !['core', 'premium'].includes(p.colecao)
-      || !/^\/(core|loja)\/[a-z0-9-]+\/$/.test(p.url) || !Array.isArray(p.dim) || p.dim.length !== 3 || p.dim.some(n => !Number.isInteger(n) || n < 1 || n > 50000)
+    if (!original || codes.has(p.code) || paths.has(p.url) || !['core', 'premium', 'cardio'].includes(p.colecao)
+      || !/^\/(core|loja|cardio)\/[a-z0-9-]+\/$/.test(p.url) || !Array.isArray(p.dim) || p.dim.length !== 3 || p.dim.some(n => !Number.isInteger(n) || n < 1 || n > 50000)
       || ![...original.assets, ...registered.filter(a=>a.sku===p.code)].some(a => a.storage_key === p.imageKey && ['webp', 'black', 'thumbnail'].includes(a.variant))) throw new Error('product-invalid');
     for (const [key, max] of [['nome', 200], ['grupo_muscular', 80], ['linha', 80], ['descricao', 4000], ['peso', 80], ['bateria', 80]]) {
       if (typeof p[key] !== 'string' || p[key].length > max || /[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(p[key])) throw new Error('text-invalid');
@@ -80,7 +81,7 @@ async function serveObject(request, env, key, privateFile = false) {
 }
 
 function card(p) {
-  return `<a class="card" href="${escape(p.url)}" data-linha="${escape(p.linha)}" data-colecao="${p.colecao}" data-grupo="${escape(groupName(p.grupo_muscular))}" data-busca="${escape(`${p.code} ${p.nome}`.toLowerCase())}"><div class="stage"><img src="/midias/produtos/${p.code}" alt="${escape(p.nome)}" width="800" height="600" loading="lazy" /></div><div class="txt"><span class="colecao">Linha ${p.colecao === 'core' ? 'Core' : 'Premium'}</span><span class="code">${p.code}</span><span class="name">${escape(p.nome)}</span><span class="meta">${escape(groupName(p.grupo_muscular))}</span></div></a>`;
+  return `<a class="card" href="${escape(p.url)}" data-linha="${escape(p.linha)}" data-colecao="${p.colecao}" data-grupo="${escape(groupName(p.grupo_muscular))}" data-busca="${escape(`${p.code} ${p.nome}`.toLowerCase())}"><div class="stage"><img src="/midias/produtos/${p.code}" alt="${escape(p.nome)}" width="800" height="600" loading="lazy" /></div><div class="txt"><span class="colecao">Linha ${LINHA[p.colecao] ?? 'Premium'}</span><span class="code">${p.code}</span><span class="name">${escape(p.nome)}</span><span class="meta">${escape(groupName(p.grupo_muscular))}</span></div></a>`;
 }
 
 function dimensionalPlan(p) {
@@ -97,11 +98,13 @@ async function website(request, publication) {
   const path = new URL(request.url).pathname;
   const products = publication.products;
   const product = products.find(p => p.url === path);
-  const collection = path === '/loja/core/' ? 'core' : path === '/loja/premium/' ? 'premium' : null;
-  const isCollection = ['/loja/', '/loja/core/', '/loja/premium/'].includes(path);
   const core = products.filter(p => p.colecao === 'core');
   const premium = products.filter(p => p.colecao === 'premium');
-  const balanced = Array.from({length: Math.max(core.length, premium.length)}, (_, i) => [core[i], premium[i]]).flat().filter(Boolean);
+  const cardio = products.filter(p => p.colecao === 'cardio');
+  // Enquanto o Cardio não estiver na publicação, a página estática do site vale como está.
+  const collection = path === '/loja/core/' ? 'core' : path === '/loja/premium/' ? 'premium' : path === '/loja/cardio/' && cardio.length ? 'cardio' : null;
+  const isCollection = ['/loja/', '/loja/core/', '/loja/premium/'].includes(path) || (path === '/loja/cardio/' && cardio.length > 0);
+  const balanced = [...Array.from({length: Math.max(core.length, premium.length)}, (_, i) => [core[i], premium[i]]).flat().filter(Boolean), ...cardio];
   const selected = collection ? products.filter(p => p.colecao === collection) : balanced;
   const byCode = new Map(products.map(p => [p.code, p]));
   const rewriter = new HTMLRewriter().on('[data-catalog-field]', { element(el) {
@@ -119,12 +122,13 @@ async function website(request, publication) {
   } });
   if (product) {
     rewriter.on('[data-catalog-plan]', { element(el) { if (el.getAttribute('data-catalog-dim') !== JSON.stringify(product.dim)) el.setInnerContent(dimensionalPlan(product), {html:true}); } });
-    rewriter.on('title', { element(el) { el.setInnerContent(`${product.nome} ${product.code} · Ludus ${product.colecao === 'core' ? 'Core' : 'Premium'}`); } });
+    rewriter.on('title', { element(el) { el.setInnerContent(`${product.nome} ${product.code} · Ludus ${LINHA[product.colecao] ?? 'Premium'}`); } });
     rewriter.on('meta[name="description"]', { element(el) { el.setAttribute('content', product.descricao.slice(0,160)); } });
-    rewriter.on('script[type="application/ld+json"]', { element(el) { el.setInnerContent(JSON.stringify({ '@context':'https://schema.org', '@type':'Product', name:product.nome, sku:product.code, description:product.descricao, image:`https://ludusequipamentos.com/midias/produtos/${product.code}`, url:`https://ludusequipamentos.com${product.url}`, brand:{'@type':'Brand', name:product.colecao === 'core' ? 'Ludus Core' : 'Ludus Premium'} }).replace(/</g,'\\u003c'), {html:true}); } });
+    rewriter.on('script[type="application/ld+json"]', { element(el) { el.setInnerContent(JSON.stringify({ '@context':'https://schema.org', '@type':'Product', name:product.nome, sku:product.code, description:product.descricao, image:`https://ludusequipamentos.com/midias/produtos/${product.code}`, url:`https://ludusequipamentos.com${product.url}`, brand:{'@type':'Brand', name:`Ludus ${LINHA[product.colecao] ?? 'Premium'}`} }).replace(/</g,'\\u003c'), {html:true}); } });
   }
   if (isCollection) {
-    rewriter.on('[data-catalog-count]', { element(el) { const line=el.getAttribute('data-catalog-count'); el.setInnerContent(String(line==='all' ? products.length : products.filter(p=>p.colecao===line).length)); } });
+    // Cardio ainda fora da publicação: o contador do Cardio fica com o número do build.
+    rewriter.on('[data-catalog-count]', { element(el) { const line=el.getAttribute('data-catalog-count'); if (!cardio.length && line==='cardio') return;  el.setInnerContent(String(line==='all' ? products.length : products.filter(p=>p.colecao===line).length)); } });
     rewriter.on('#grade', { element(el) { el.setInnerContent(selected.map(card).join(''), { html:true }); } });
     rewriter.on('#conta', { element(el) { el.setInnerContent(`${selected.length} equipamentos`); } });
     rewriter.on('[data-filtro="grupo"]', { element(el) { el.setInnerContent('<button class="chip" data-v="" aria-pressed="true">Todos</button>'+[...new Set(selected.map(p=>groupName(p.grupo_muscular)))].map(g=>`<button class="chip" data-v="${escape(g)}" aria-pressed="false">${escape(g)}</button>`).join(''),{html:true}); } });
@@ -203,7 +207,7 @@ const worker = {
       const current=await env.MEDIA.get(PUBLICATION);
       if (!current) return path.startsWith('/midias/') ? failure(503,'Catálogo indisponível') : fetchWebsite(request);
       const publication=await current.json();
-      if (/^\/(core|loja)\/[a-z0-9-]+\/$/.test(path) && !['/loja/core/','/loja/premium/'].includes(path) && !publication.products.some(p=>p.url===path)) return failure(404,'Equipamento não disponível no catálogo');
+      if (/^\/(core|loja)\/[a-z0-9-]+\/$/.test(path) && !['/loja/core/','/loja/premium/','/loja/cardio/'].includes(path) && !publication.products.some(p=>p.url===path)) return failure(404,'Equipamento não disponível no catálogo');
       if (path==='/midias/catalogo.json') return ['GET','HEAD'].includes(request.method) ? new Response(request.method==='HEAD'?null:JSON.stringify(publication),{headers:{'Content-Type':'application/json','Cache-Control':'public, max-age=30','X-Content-Type-Options':'nosniff'}}) : failure(405,'Método não permitido');
       if (path.startsWith('/midias/produtos/')) {
         const p=publication.products.find(p=>p.code===path.slice('/midias/produtos/'.length));
