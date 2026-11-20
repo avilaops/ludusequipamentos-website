@@ -24,7 +24,7 @@ O Worker reconhece a coleção `cardio` (URLs `/cardio/<código>/` e `/loja/card
 
 Para ativar, nesta ordem:
 
-1. **Implantar o código do Worker.** Gere o pacote com `node scripts/build-catalog-worker.mjs` (saída em `.worker-build/catalog-media.mjs`) e substitua só o código de `ludus-catalog-media` (API "Replace Worker Script Content", que não mexe em bindings nem no segredo `PUBLISH_TOKEN`). Sem isso, o site novo faria `/loja/cardio/` responder 404 e mostraria o contador do Cardio como 0.
+1. **Implantar o código do Worker.** Rode `CLOUDFLARE_TOKEN=… node scripts/implantar-worker.mjs` (ensaio: compara o pacote com o Worker implantado e não grava) e, se o diff for só o do Cardio, repita com `--aplicar`. O script usa a API "Replace Worker Script Content", que troca só o código e não mexe em bindings nem no segredo `PUBLISH_TOKEN`. Sem isso, o site novo faria `/loja/cardio/` responder 404 e mostraria o contador do Cardio como 0.
 2. **Publicar o site** (`npm run deploy`), só depois do passo 1.
 3. **Levar as fotos ao R2 (opcional, para ficar igual ao Core e à Premium).** Cadastrar os 28 SKUs no manifesto, enviar `web.webp` de cada um por `/midias/_upload/…` e publicar por `/midias/_publish` com `colecao: "cardio"` e `url: "/cardio/<código>/"`. Exige o `PUBLISH_TOKEN`.
 
