@@ -112,7 +112,13 @@ const pedidos = new Map<string, Promise<void>>();
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const svg = document.getElementById('planta') as unknown as SVGSVGElement;
 const palco = $('palco');
-const fmt = (n: number, d = 0) => n.toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d });
+// `toLocaleString` com opções recria o formatador a cada chamada; um por número de casas basta.
+const formatadores = new Map<number, Intl.NumberFormat>();
+const fmt = (n: number, d = 0) => {
+  let f = formatadores.get(d);
+  if (!f) formatadores.set(d, (f = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d })));
+  return f.format(n);
+};
 const num = (v: unknown, padrao: number) => (typeof v === 'number' && Number.isFinite(v) ? v : padrao);
 const limitar = (v: number, a: number, b: number) => Math.min(Math.max(v, a), Math.max(a, b));
 const norm = (a: number) => ((Math.round(a) % 360) + 360) % 360;
@@ -1210,24 +1216,17 @@ function trocarModo(novo: 'planta' | '3d') {
 
 // ── lista de equipamentos ───────────────────────────────────────────────────
 let filtroLinha = '';
+// A lista vem pronta no HTML (`simulador.astro`); aqui só se filtra e se trata o clique.
 function listar() {
   const q = ($('q') as HTMLInputElement).value.trim().toLowerCase();
-  const ul = $('lista');
-  ul.replaceChildren(
-    ...dados.produtos
-      .filter((p) => (!filtroLinha || p.linha === filtroLinha) && (!q || `${p.code} ${p.nome}`.toLowerCase().includes(q)))
-      .map((p) => {
-        const li = document.createElement('li');
-        const b = document.createElement('button');
-        b.type = 'button';
-        b.setAttribute('aria-label', `Adicionar ${p.nome} (${p.code})`);
-        b.innerHTML = `<img src="${p.foto}" alt="" loading="lazy" width="52" height="52" /><span><b>${p.nome}</b><small>${p.code} · ${fmt(p.l, 2)} × ${fmt(p.c, 2)} m</small></span><span class="mais" aria-hidden="true">+</span>`;
-        b.onclick = () => adicionar(p.code);
-        li.append(b);
-        return li;
-      })
-  );
+  for (const li of $('lista').children as HTMLCollectionOf<HTMLElement>) {
+    li.hidden = !((!filtroLinha || li.dataset.linha === filtroLinha) && (!q || li.dataset.busca!.includes(q)));
+  }
 }
+$('lista').addEventListener('click', (e) => {
+  const code = (e.target as Element).closest<HTMLElement>('li')?.dataset.code;
+  if (code) adicionar(code);
+});
 
 // ── sugestão automática de layout ───────────────────────────────────────────
 interface Perfil {
@@ -1814,7 +1813,6 @@ try {
 } catch {
   salvo = null;
 }
-listar();
 listarProjetos();
 carregar(doHash ?? (kit ? doKit(kit) : salvo) ?? estado);
 const add = params.get('add');
