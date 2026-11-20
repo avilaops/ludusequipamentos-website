@@ -1,0 +1,583 @@
+[
+  {
+    "code": "LD-C001",
+    "slug": "ld-c001",
+    "nome": "Simulador de Escada PRO A4001P",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Simulador de escada",
+    "dim": [
+      1510,
+      840,
+      2250
+    ],
+    "peso": "240 kg",
+    "bateria": null,
+    "descricao": "Simulador de Escada PRO A4001P da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Alimentação / potência": "220 V / 300 W",
+      "Outras especificações": "Pé-direito mínimo: 3 m · Degrau: L552 × P250 × A205 mm · Cadência: 0–150 degraus/min",
+      "Recursos": "Carregamento sem fio",
+      "Níveis de esforço": "1–15"
+    }
+  },
+  {
+    "code": "LD-C002",
+    "slug": "ld-c002",
+    "nome": "Esteira Ergométrica PRO X8600PS",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Esteiras",
+    "dim": [
+      2180,
+      910,
+      1780
+    ],
+    "peso": "210 kg",
+    "bateria": null,
+    "descricao": "Esteira Ergométrica PRO X8600PS da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Alimentação / potência": "3 HP / 2200 W / AC",
+      "Inclinação": "0–15°",
+      "Velocidade": "1–20 km/h",
+      "Console": "Display LED",
+      "Tela de entretenimento": "LCD 23,8\"",
+      "Recursos": "Carregamento sem fio"
+    }
+  },
+  {
+    "code": "LD-C003",
+    "slug": "ld-c003",
+    "nome": "Esteira Ergométrica PRO X8600",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Esteiras",
+    "dim": [
+      2180,
+      920,
+      1460
+    ],
+    "peso": "196 kg",
+    "bateria": null,
+    "descricao": "Esteira Ergométrica PRO X8600 da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Alimentação / potência": "3 HP / 2200 W / AC",
+      "Inclinação": "0–15°",
+      "Velocidade": "1–20 km/h",
+      "Console": "Display LED"
+    }
+  },
+  {
+    "code": "LD-C004",
+    "slug": "ld-c004",
+    "nome": "Esteira Ergométrica PRO X8500S",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Esteiras",
+    "dim": [
+      2130,
+      890,
+      1580
+    ],
+    "peso": "230 kg",
+    "bateria": null,
+    "descricao": "Esteira Ergométrica PRO X8500S da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Alimentação / potência": "3 HP / 2200 W / AC",
+      "Inclinação": "0–15°",
+      "Velocidade": "1–20 km/h",
+      "Console": "Display LED",
+      "Tela de entretenimento": "LCD 23,8\"",
+      "Recursos": "Carregamento sem fio"
+    }
+  },
+  {
+    "code": "LD-C005",
+    "slug": "ld-c005",
+    "nome": "Esteira Ergométrica PRO X8500",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Esteiras",
+    "dim": [
+      2130,
+      890,
+      1580
+    ],
+    "peso": "230 kg",
+    "bateria": null,
+    "descricao": "Esteira Ergométrica PRO X8500 da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Alimentação / potência": "3 HP / 2200 W / AC",
+      "Inclinação": "0–15°",
+      "Velocidade": "1–20 km/h",
+      "Console": "Display LED"
+    }
+  },
+  {
+    "code": "LD-C006",
+    "slug": "ld-c006",
+    "nome": "Esteira Ergométrica PRO X8900P",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Esteiras",
+    "dim": [
+      2600,
+      1000,
+      1850
+    ],
+    "peso": "384 kg",
+    "bateria": null,
+    "descricao": "Esteira Ergométrica PRO X8900P da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Alimentação / potência": "3 HP / 2200 W / AC",
+      "Inclinação": "0–15°",
+      "Velocidade": "1–20 km/h",
+      "Console": "Tela LED touch",
+      "Recursos": "Carregamento sem fio"
+    }
+  },
+  {
+    "code": "LD-C007",
+    "slug": "ld-c007",
+    "nome": "Esteira Ergométrica PRO X7300",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Esteiras",
+    "dim": [
+      2140,
+      910,
+      1445
+    ],
+    "peso": "200 kg",
+    "bateria": null,
+    "descricao": "Esteira Ergométrica PRO X7300 da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Alimentação / potência": "3 HP / 2200 W / AC",
+      "Inclinação": "0–15°",
+      "Velocidade": "1–20 km/h",
+      "Console": "Display LED",
+      "Recursos": "Carregamento sem fio"
+    }
+  },
+  {
+    "code": "LD-C008",
+    "slug": "ld-c008",
+    "nome": "Esteira Curva PRO A7000",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Esteiras",
+    "dim": [
+      1840,
+      900,
+      1651
+    ],
+    "peso": "138 kg",
+    "bateria": null,
+    "descricao": "Esteira Curva PRO A7000 da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Alimentação / potência": "Não motorizada (autopropelida)",
+      "Console": "Display LED"
+    }
+  },
+  {
+    "code": "LD-C009",
+    "slug": "ld-c009",
+    "nome": "Bicicleta Vertical PRO M5200S",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Bicicletas verticais",
+    "dim": [
+      1180,
+      630,
+      1630
+    ],
+    "peso": "95 kg",
+    "bateria": null,
+    "descricao": "Bicicleta Vertical PRO M5200S da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Alimentação / potência": "Autogeradora (sem tomada)",
+      "Resistência": "20 níveis",
+      "Console": "Display LED",
+      "Tela de entretenimento": "LCD 23,8\"",
+      "Recursos": "Carregamento sem fio"
+    }
+  },
+  {
+    "code": "LD-C010",
+    "slug": "ld-c010",
+    "nome": "Bicicleta Horizontal PRO M5100S",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Bicicletas horizontais",
+    "dim": [
+      1600,
+      615,
+      1600
+    ],
+    "peso": "100 kg",
+    "bateria": null,
+    "descricao": "Bicicleta Horizontal PRO M5100S da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Alimentação / potência": "Autogeradora (sem tomada)",
+      "Resistência": "20 níveis",
+      "Console": "Display LED",
+      "Tela de entretenimento": "LCD 23,8\"",
+      "Recursos": "Carregamento sem fio"
+    }
+  },
+  {
+    "code": "LD-C011",
+    "slug": "ld-c011",
+    "nome": "Bicicleta Vertical PRO A5200S",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Bicicletas verticais",
+    "dim": [
+      1210,
+      630,
+      1740
+    ],
+    "peso": "75 kg",
+    "bateria": null,
+    "descricao": "Bicicleta Vertical PRO A5200S da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Alimentação / potência": "Autogeradora (sem tomada)",
+      "Resistência": "20 níveis",
+      "Console": "Display LED",
+      "Tela de entretenimento": "LCD 23,8\"",
+      "Recursos": "Carregamento sem fio"
+    }
+  },
+  {
+    "code": "LD-C012",
+    "slug": "ld-c012",
+    "nome": "Bicicleta Vertical PRO A5200",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Bicicletas verticais",
+    "dim": [
+      1210,
+      630,
+      1540
+    ],
+    "peso": "75 kg",
+    "bateria": null,
+    "descricao": "Bicicleta Vertical PRO A5200 da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Alimentação / potência": "Autogeradora (sem tomada)",
+      "Resistência": "20 níveis",
+      "Console": "Display LED"
+    }
+  },
+  {
+    "code": "LD-C013",
+    "slug": "ld-c013",
+    "nome": "Bicicleta Horizontal PRO A5100S",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Bicicletas horizontais",
+    "dim": [
+      1755,
+      650,
+      1600
+    ],
+    "peso": "108 kg",
+    "bateria": null,
+    "descricao": "Bicicleta Horizontal PRO A5100S da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Alimentação / potência": "Autogeradora (sem tomada)",
+      "Resistência": "20 níveis",
+      "Console": "Display LED",
+      "Tela de entretenimento": "LCD 23,8\"",
+      "Recursos": "Carregamento sem fio"
+    }
+  },
+  {
+    "code": "LD-C014",
+    "slug": "ld-c014",
+    "nome": "Bicicleta Horizontal PRO A5100",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Bicicletas horizontais",
+    "dim": [
+      1755,
+      650,
+      1400
+    ],
+    "peso": "108 kg",
+    "bateria": null,
+    "descricao": "Bicicleta Horizontal PRO A5100 da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Alimentação / potência": "Autogeradora (sem tomada)",
+      "Resistência": "20 níveis",
+      "Console": "Display LED"
+    }
+  },
+  {
+    "code": "LD-C015",
+    "slug": "ld-c015",
+    "nome": "Bicicleta Vertical PRO X9107S",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Bicicletas verticais",
+    "dim": [
+      1190,
+      600,
+      1570
+    ],
+    "peso": "72 kg",
+    "bateria": null,
+    "descricao": "Bicicleta Vertical PRO X9107S da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Alimentação / potência": "Autogeradora (sem tomada)",
+      "Resistência": "20 níveis",
+      "Console": "Display LED",
+      "Tela de entretenimento": "LCD 23,8\"",
+      "Recursos": "Carregamento sem fio"
+    }
+  },
+  {
+    "code": "LD-C016",
+    "slug": "ld-c016",
+    "nome": "Bicicleta Vertical PRO X9107",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Bicicletas verticais",
+    "dim": [
+      1190,
+      600,
+      1370
+    ],
+    "peso": "72 kg",
+    "bateria": null,
+    "descricao": "Bicicleta Vertical PRO X9107 da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Alimentação / potência": "Autogeradora (sem tomada)",
+      "Resistência": "20 níveis",
+      "Console": "Display LED"
+    }
+  },
+  {
+    "code": "LD-C017",
+    "slug": "ld-c017",
+    "nome": "Bicicleta Horizontal PRO X9109S",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Bicicletas horizontais",
+    "dim": [
+      1630,
+      610,
+      1500
+    ],
+    "peso": "100 kg",
+    "bateria": null,
+    "descricao": "Bicicleta Horizontal PRO X9109S da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Alimentação / potência": "Autogeradora (sem tomada)",
+      "Resistência": "20 níveis",
+      "Console": "Display LED",
+      "Tela de entretenimento": "LCD 23,8\"",
+      "Recursos": "Carregamento sem fio"
+    }
+  },
+  {
+    "code": "LD-C018",
+    "slug": "ld-c018",
+    "nome": "Bicicleta Horizontal PRO X9109",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Bicicletas horizontais",
+    "dim": [
+      1630,
+      610,
+      1300
+    ],
+    "peso": "100 kg",
+    "bateria": null,
+    "descricao": "Bicicleta Horizontal PRO X9109 da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Alimentação / potência": "Autogeradora (sem tomada)",
+      "Resistência": "20 níveis",
+      "Console": "Display LED"
+    }
+  },
+  {
+    "code": "LD-C019",
+    "slug": "ld-c019",
+    "nome": "Bicicleta Spinning PRO S300",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Bicicletas de spinning",
+    "dim": [
+      1260,
+      500,
+      1000
+    ],
+    "peso": "42 kg",
+    "bateria": null,
+    "descricao": "Bicicleta Spinning PRO S300 da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Resistência": "Freio magnético",
+      "Volante de inércia": "4 kg · alumínio",
+      "Console": "Display opcional"
+    }
+  },
+  {
+    "code": "LD-C020",
+    "slug": "ld-c020",
+    "nome": "Bicicleta Spinning PRO S210",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Bicicletas de spinning",
+    "dim": [
+      1200,
+      500,
+      1030
+    ],
+    "peso": "55 kg",
+    "bateria": null,
+    "descricao": "Bicicleta Spinning PRO S210 da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Resistência": "Freio magnético",
+      "Volante de inércia": "14 kg · ferro fundido",
+      "Console": "Display opcional"
+    }
+  },
+  {
+    "code": "LD-C021",
+    "slug": "ld-c021",
+    "nome": "Bicicleta Spinning PRO X962A",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Bicicletas de spinning",
+    "dim": [
+      1160,
+      630,
+      1130
+    ],
+    "peso": "75 kg",
+    "bateria": null,
+    "descricao": "Bicicleta Spinning PRO X962A da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Resistência": "Freio magnético",
+      "Volante de inércia": "14 kg · ferro fundido",
+      "Console": "Não disponível"
+    }
+  },
+  {
+    "code": "LD-C022",
+    "slug": "ld-c022",
+    "nome": "Elíptico PRO M5300S",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Elípticos",
+    "dim": [
+      2120,
+      800,
+      1800
+    ],
+    "peso": "135 kg",
+    "bateria": null,
+    "descricao": "Elíptico PRO M5300S da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Inclinação": "Fixa",
+      "Console": "Display LED",
+      "Tela de entretenimento": "LCD 23,8\"",
+      "Recursos": "Carregamento sem fio"
+    }
+  },
+  {
+    "code": "LD-C023",
+    "slug": "ld-c023",
+    "nome": "Elíptico PRO X9300S",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Elípticos",
+    "dim": [
+      2180,
+      746,
+      1780
+    ],
+    "peso": "135 kg",
+    "bateria": null,
+    "descricao": "Elíptico PRO X9300S da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Inclinação": "Fixa",
+      "Console": "Display LED",
+      "Tela de entretenimento": "LCD 23,8\"",
+      "Recursos": "Carregamento sem fio"
+    }
+  },
+  {
+    "code": "LD-C024",
+    "slug": "ld-c024",
+    "nome": "Elíptico PRO X9300",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Elípticos",
+    "dim": [
+      2180,
+      746,
+      1780
+    ],
+    "peso": "135 kg",
+    "bateria": null,
+    "descricao": "Elíptico PRO X9300 da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Inclinação": "Fixa",
+      "Console": "Display LED"
+    }
+  },
+  {
+    "code": "LD-C025",
+    "slug": "ld-c025",
+    "nome": "Elíptico PRO X9201",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Elípticos",
+    "dim": [
+      2270,
+      800,
+      1830
+    ],
+    "peso": "174 kg",
+    "bateria": null,
+    "descricao": "Elíptico PRO X9201 da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Inclinação": "Fixa",
+      "Console": "Display LED"
+    }
+  },
+  {
+    "code": "LD-C026",
+    "slug": "ld-c026",
+    "nome": "Elíptico PRO X9200",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Elípticos",
+    "dim": [
+      2270,
+      800,
+      1830
+    ],
+    "peso": "175 kg",
+    "bateria": null,
+    "descricao": "Elíptico PRO X9200 da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Inclinação": "13–35° (ajustável)",
+      "Console": "Display LED"
+    }
+  },
+  {
+    "code": "LD-C027",
+    "slug": "ld-c027",
+    "nome": "PMT – Elíptico PRO de Movimento Adaptativo X9101",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Elípticos",
+    "dim": [
+      1980,
+      900,
+      1860
+    ],
+    "peso": "227 kg",
+    "bateria": null,
+    "descricao": "PMT – Elíptico PRO de Movimento Adaptativo X9101 da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Console": "Display LED",
+      "Outras especificações": "Comprimento da passada: 0–91 cm · Altura da passada: 17 cm"
+    }
+  },
+  {
+    "code": "LD-C028",
+    "slug": "ld-c028",
+    "nome": "PMT – Elíptico PRO de Movimento Adaptativo X9100",
+    "linha": "Ludus Cardio",
+    "grupo_muscular": "Elípticos",
+    "dim": [
+      1980,
+      900,
+      1860
+    ],
+    "peso": "234 kg",
+    "bateria": null,
+    "descricao": "PMT – Elíptico PRO de Movimento Adaptativo X9100 da Linha Cardio. Confira as dimensões e a ficha técnica para planejar sua academia.",
+    "ficha": {
+      "Console": "Display LED",
+      "Outras especificações": "Comprimento da passada: 0–91 cm · Altura da passada: 17–25 cm"
+    }
+  }
+]

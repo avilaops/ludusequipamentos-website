@@ -1,4 +1,5 @@
 ---
+import { cardioComFoto } from '../data/cardio';
 
 interface Props {
   code: string;
@@ -8,6 +9,14 @@ interface Props {
   eager?: boolean;
 }
 const { code, alt, size = 'card', eager = false } = Astro.props;
+// Linha Cardio sem foto no R2 ainda: espaço neutro, em vez de uma imagem quebrada.
+const semFoto = code.startsWith('LD-C') && !cardioComFoto.has(code);
 ---
 
-<img src={`/midias/produtos/${code}`} alt={alt} width={size === 'card' ? 800 : 1536} height={size === 'card' ? 600 : 1152} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} decoding="async" />
+{semFoto
+  ? <div class="sem-foto" role="img" aria-label={`${alt}: foto em breve`} style={`aspect-ratio:${size === 'card' ? '4 / 3' : '4 / 3'}`}><span>Foto em breve</span></div>
+  : <img src={`/midias/produtos/${code}`} alt={alt} width={size === 'card' ? 800 : 1536} height={size === 'card' ? 600 : 1152} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} decoding="async" />}
+
+<style>
+  .sem-foto { display: grid; place-items: center; width: 100%; background: var(--stage, #f3f2ee); color: var(--muted, #6b6a66); font-size: 14px; letter-spacing: .04em; }
+</style>

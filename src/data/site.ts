@@ -2,7 +2,7 @@ import produtosJson from './produtos.json';
 
 export interface Produto {
   url?: string;
-  colecao: 'premium' | 'core';
+  colecao: 'premium' | 'core' | 'cardio';
   code: string;
   slug: string;
   nome: string;

@@ -32,8 +32,8 @@ test('home Core identity links to its collection without a duplicate text headin
   const home = read('index.html');
   assert.match(home, /<a href="\/loja\/core\/" aria-label="Explorar a Linha Core"[^>]*><img/);
   assert.doesNotMatch(home, /<h2[^>]*>Linha Core<\/h2>/);
-  assert.match(home, /<dt\b[^>]*>157<\/dt>/);
-  assert.match(home, /<dt\b[^>]*>2<\/dt>/);
+  assert.match(home, /<dt\b[^>]*>185<\/dt>/); // 91 Premium + 66 Core + 28 Cardio
+  assert.match(home, /<dt\b[^>]*>3<\/dt>/);
 });
 
 test('collection pages share the catalog controls and the overview represents both lines immediately', () => {

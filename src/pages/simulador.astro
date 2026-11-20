@@ -4,9 +4,10 @@ import Base from '../layouts/Base.astro';
 import logoPreta from '../assets/marca/ludus-preta.png';
 import { empresa, FOLGA, kits, linhas, produtos } from '../data/site';
 import { produtosCore } from '../data/core';
+import { cardioComFoto, produtosCardio } from '../data/cardio';
 
-// Premium primeiro, Core depois; o código identifica o equipamento nas duas linhas.
-const lista = [...produtos, ...produtosCore].map((p) => ({
+// Premium primeiro, depois Core e Cardio; o código identifica o equipamento em cada linha.
+const lista = [...produtos, ...produtosCore, ...produtosCardio].map((p) => ({
     code: p.code,
     colecao: p.colecao,
     nome: p.nome,
@@ -58,13 +59,16 @@ const dados = { produtos: lista, kits, folga: FOLGA, whatsapp: empresa.whatsappN
           <button type="button" class="chip sm" data-v="" aria-pressed="true">Todos</button>
           {linhas.map((l) => <button type="button" class="chip sm" data-v={l.id} aria-pressed="false">{l.titulo}</button>)}
           <button type="button" class="chip sm" data-v="Ludus Core" aria-pressed="false">Ludus Core</button>
+          <button type="button" class="chip sm" data-v="Ludus Cardio" aria-pressed="false">Ludus Cardio</button>
         </div>
         <ul id="lista">
           {
             lista.map((p) => (
               <li data-code={p.code} data-linha={p.linha} data-busca={`${p.code} ${p.nome}`.toLowerCase()}>
                 <button type="button" aria-label={`Adicionar ${p.nome} (${p.code})`}>
-                  <img src={p.foto} alt="" loading="lazy" decoding="async" width="52" height="52" />
+                  {p.code.startsWith('LD-C') && !cardioComFoto.has(p.code)
+                    ? <span class="sem-foto-mini" aria-hidden="true"></span>
+                    : <img src={p.foto} alt="" loading="lazy" decoding="async" width="52" height="52" />}
                   <span>
                     <b>{p.nome}</b>
                     <small>{p.code} · {medida.format(p.l)} × {medida.format(p.c)} m</small>
@@ -219,6 +223,7 @@ const dados = { produtos: lista, kits, folga: FOLGA, whatsapp: empresa.whatsappN
   .cat :global(#lista li) { content-visibility: auto; contain-intrinsic-size: auto 60px; }
   .cat :global(li button) { display: grid; grid-template-columns: 52px 1fr auto; gap: 10px; align-items: center; width: 100%; text-align: left; background: none; border: 1px solid transparent; border-radius: 12px; padding: 4px 8px 4px 4px; cursor: pointer; font: inherit; color: inherit; }
   .cat :global(li button:hover) { border-color: var(--line); background: var(--bg); }
+  .cat :global(.sem-foto-mini) { display: block; width: 52px; height: 52px; background: var(--stage); border-radius: 10px; }
   .cat :global(li img) { width: 52px; height: 52px; object-fit: contain; background: var(--stage); border-radius: 10px; mix-blend-mode: multiply; }
   .cat :global(li b) { display: block; font-weight: 600; font-size: 14px; line-height: 1.2; }
   .cat :global(li small) { color: var(--muted); font-size: 12px; }

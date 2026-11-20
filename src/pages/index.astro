@@ -5,7 +5,7 @@ import Foto from '../components/Foto.astro';
 import PlantaKit from '../components/PlantaKit.astro';
 import Contato from '../components/Contato.astro';
 import Catalogos from '../components/Catalogos.astro';
-import { catalogo } from '../data/catalogo';
+import { catalogo, colecoes } from '../data/catalogo';
 import { empresa, kits, linhas, porCodigo, produtos, whatsapp } from '../data/site';
 
 const wa = whatsapp('Olá! Vim pelo site da Ludus e quero um orçamento.');
@@ -17,7 +17,7 @@ const slugs = Object.fromEntries(produtos.map((p) => [p.code, p.slug]));
 
 <Base
   title="Ludus Equipamentos · Musculação profissional, do projeto à entrega"
-  description={`${catalogo.length} equipamentos das linhas Core e Premium. Conheça os catálogos Ludus e peça o orçamento pelo WhatsApp.`}
+  description={`${catalogo.length} equipamentos das linhas Core, Premium e Cardio. Conheça os catálogos Ludus e peça o orçamento pelo WhatsApp.`}
 >
   <!-- Links antigos do QR (/?id=LD-B004) levam à página do equipamento. -->
   <script is:inline define:vars={{ slugs }}>
@@ -28,7 +28,7 @@ const slugs = Object.fromEntries(produtos.map((p) => [p.code, p.slug]));
   <section class="hero dark">
     <div class="wrap hero-grid">
       <div class="hero-txt">
-        <span class="kicker">Ludus Equipamentos · Core e Premium</span>
+        <span class="kicker">Ludus Equipamentos · Core, Premium e Cardio</span>
         <h1>Força profissional, <em>do projeto à entrega.</em></h1>
         <p class="lead">
           Você escolhe os equipamentos e monta a planta da sua academia em escala. A Ludus entrega, monta e deixa pronto para o primeiro treino.
@@ -36,10 +36,11 @@ const slugs = Object.fromEntries(produtos.map((p) => [p.code, p.slug]));
         <div class="cta">
           <a class="btn" href="/loja/core/">Explorar Linha Core</a>
           <a class="btn" href="/loja/premium/">Explorar Linha Premium</a>
+          <a class="btn" href="/loja/cardio/">Explorar Linha Cardio</a>
         </div>
         <dl class="stats">
           <div><dt>{catalogo.length}</dt><dd>equipamentos</dd></div>
-          <div><dt>2</dt><dd>linhas</dd></div>
+          <div><dt>{colecoes.length}</dt><dd>linhas</dd></div>
           <div><dt>1:1</dt><dd>planta em escala</dd></div>
         </dl>
       </div>
