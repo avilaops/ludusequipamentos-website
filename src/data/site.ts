@@ -30,6 +30,8 @@ export const empresa = {
   whatsappNumero: '5517996495696',
   email: 'comercial@ludusequipamentos.com.br',
   endereco: 'R. Oswaldo Guirão Peron, 4473 - Votuporanga, SP, 15508-514',
+  /** Mesmo endereço, separado nos campos que o schema.org (PostalAddress) pede. */
+  enderecoPostal: { rua: 'R. Oswaldo Guirão Peron, 4473', cidade: 'Votuporanga', estado: 'SP', cep: '15508-514', pais: 'BR' },
   cnpj: '66.058.955/0001-08' as string | null,
   inscricaoEstadual: '718.319.130.117' as string | null,
 };

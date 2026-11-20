@@ -31,7 +31,14 @@ const org = {
   name: empresa.nome,
   email: empresa.email,
   telephone: `+${empresa.whatsappNumero}`,
-  address: empresa.endereco,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: empresa.enderecoPostal.rua,
+    addressLocality: empresa.enderecoPostal.cidade,
+    addressRegion: empresa.enderecoPostal.estado,
+    postalCode: empresa.enderecoPostal.cep,
+    addressCountry: empresa.enderecoPostal.pais,
+  },
   url: Astro.site?.href,
   image: new URL(logoInstitucional.src, Astro.site).href,
 };
