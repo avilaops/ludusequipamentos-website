@@ -1,5 +1,5 @@
 ---
-import { cardioComFoto } from '../data/cardio';
+import { cardioComFoto, fotoCardio } from '../data/cardio';
 
 interface Props {
   code: string;
@@ -9,13 +9,15 @@ interface Props {
   eager?: boolean;
 }
 const { code, alt, size = 'card', eager = false } = Astro.props;
-// Linha Cardio sem foto no R2 ainda: espaço neutro, em vez de uma imagem quebrada.
-const semFoto = code.startsWith('LD-C') && !cardioComFoto.has(code);
+const cardio = code.startsWith('LD-C');
+// Linha Cardio sem foto: espaço neutro, em vez de uma imagem quebrada.
+const semFoto = cardio && !cardioComFoto.has(code);
+const src = cardio ? fotoCardio(code) : `/midias/produtos/${code}`;
 ---
 
 {semFoto
-  ? <div class="sem-foto" role="img" aria-label={`${alt}: foto em breve`} style={`aspect-ratio:${size === 'card' ? '4 / 3' : '4 / 3'}`}><span>Foto em breve</span></div>
-  : <img src={`/midias/produtos/${code}`} alt={alt} width={size === 'card' ? 800 : 1536} height={size === 'card' ? 600 : 1152} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} decoding="async" />}
+  ? <div class="sem-foto" role="img" aria-label={`${alt}: foto em breve`} style="aspect-ratio:4 / 3"><span>Foto em breve</span></div>
+  : <img src={src} alt={alt} width={size === 'card' ? 800 : 1536} height={size === 'card' ? 600 : 1152} loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} decoding="async" />}
 
 <style>
   .sem-foto { display: grid; place-items: center; width: 100%; background: var(--stage, #f3f2ee); color: var(--muted, #6b6a66); font-size: 14px; letter-spacing: .04em; }

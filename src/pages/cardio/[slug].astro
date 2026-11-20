@@ -6,6 +6,7 @@ import SelecionarProduto from '../../components/SelecionarProduto.astro';
 import { areaNominal } from '../../data/core';
 import { cardioComFoto, gruposCardio, produtosCardio, type ProdutoCardio } from '../../data/cardio';
 import { fmt, whatsapp } from '../../data/site';
+import { fotoUrl } from '../../data/catalogo';
 
 export function getStaticPaths() {
   return produtosCardio.map((p) => ({ params: { slug: p.slug }, props: { p } }));
@@ -16,7 +17,7 @@ const grupo = gruposCardio.find((g) => g.nome === p.grupo_muscular)!;
 const relacionados = produtosCardio.filter((item) => item.code !== p.code && item.grupo_muscular === p.grupo_muscular).slice(0, 4);
 const wa = whatsapp(`Olá! Conheci o ${p.nome} (${p.code}), da linha Ludus Cardio, e gostaria de um orçamento.`);
 const comFoto = cardioComFoto.has(p.code);
-const og = { src: `/midias/produtos/${p.code}` };
+const og = { src: fotoUrl(p) };
 const fichaTecnica = Object.entries(p.ficha);
 const escala = Math.min(250 / largura, 230 / profundidade);
 const desenho = { largura: largura * escala, profundidade: profundidade * escala };

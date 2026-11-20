@@ -1,4 +1,4 @@
-import { catalogo, urlProduto } from '../data/catalogo';
+import { catalogo, fotoUrl, urlProduto } from '../data/catalogo';
 import { whatsapp } from '../data/site';
 import { chaveOrcamento, lerSelecao } from './orcamento-modelo';
 
@@ -40,7 +40,7 @@ function atualizar() {
   for (const item of itens) {
     const p = produtos.get(item.code)!;
     const row = document.createElement('div'); row.className = 'orcamento-item';
-    const img = document.createElement('img'); img.src = `/midias/produtos/${p.code}`; img.alt = p.nome;
+    const img = document.createElement('img'); img.src = fotoUrl(p); img.alt = p.nome;
     const description = document.createElement('div');
     const link = document.createElement('a'); link.href = urlProduto(p); link.textContent = p.nome;
     const detail = document.createElement('small'); detail.textContent = `${p.code} · Ludus ${NOME_COLECAO[p.colecao]}`;

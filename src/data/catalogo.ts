@@ -1,6 +1,6 @@
 import { produtos, type Produto } from './site';
 import { produtosCore } from './core';
-import { produtosCardio } from './cardio';
+import { fotoCardio, produtosCardio } from './cardio';
 
 export const colecoes = [
   { id: 'premium', nome: 'Linha Premium', href: '/loja/premium/' },
@@ -17,6 +17,8 @@ export const catalogo: Produto[] = [
 ];
 export const selecionarColecao = (colecao?: Produto['colecao']) =>
   colecao ? catalogo.filter((produto) => produto.colecao === colecao) : catalogo;
+/** Foto do produto: Core e Premium vêm do R2 pelo Worker; o Cardio sai com o próprio site (ver `cardio.ts`). */
+export const fotoUrl = (produto: Produto) => (produto.colecao === 'cardio' ? fotoCardio(produto.code) : `/midias/produtos/${produto.code}`);
 /** URLs de fichas preservadas: já constam nos QR codes dos catálogos. */
 export const urlProduto = (produto: Produto) =>
   produto.url ?? (produto.colecao === 'core' ? `/core/${produto.slug}/` : produto.colecao === 'cardio' ? `/cardio/${produto.slug}/` : `/loja/${produto.slug}/`);

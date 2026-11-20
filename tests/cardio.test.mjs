@@ -45,10 +45,21 @@ test('legacy /cardio/ forwards to the collection', () => {
   assert.match(read('cardio/index.html'), /location\.replace\('\/loja\/cardio\/' \+ location\.search \+ location\.hash\)/);
 });
 
-test('Cardio products without a photo in R2 show a neutral placeholder, never a broken photo path or 3D outside the simulator', () => {
+test('every Cardio product shows its processed photo from the site, never a broken path or a placeholder', async () => {
+  const sharp = (await import('sharp')).default;
   const html = read('loja/cardio/index.html');
+  assert.doesNotMatch(html, /Foto em breve/);
   assert.doesNotMatch(html, /src="\/midias\/produtos\/LD-C/);
-  assert.equal((html.match(/Foto em breve/g) ?? []).length, 28 + 1); // 28 cards + the featured product
+  assert.equal((html.match(/src="\/fotos-cardio\/LD-C\d{3}\.webp"/g) ?? []).length, 28 + 1); // 28 cards + the featured product
+  for (const p of products) {
+    const file = new URL(`../dist/fotos-cardio/${p.code}.webp`, import.meta.url);
+    assert.ok(existsSync(file), p.code);
+    const meta = await sharp(file.pathname.replace(/^\/([A-Za-z]:)/, '$1')).metadata();
+    assert.deepEqual([meta.format, meta.width, meta.height], ['webp', 1536, 1024], p.code);
+    const ficha = read(`cardio/${p.slug}/index.html`);
+    assert.match(ficha, new RegExp(`/fotos-cardio/${p.code}\\.webp`), p.code);
+    assert.match(ficha, /property="og:image"/);
+  }
   assert.doesNotMatch(html, /modelo 3D/i);
 });
 

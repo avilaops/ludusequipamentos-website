@@ -5,6 +5,7 @@ import logoPreta from '../assets/marca/ludus-preta.png';
 import { empresa, FOLGA, kits, linhas, produtos } from '../data/site';
 import { produtosCore } from '../data/core';
 import { cardioComFoto, produtosCardio } from '../data/cardio';
+import { fotoUrl } from '../data/catalogo';
 
 // Premium primeiro, depois Core e Cardio; o código identifica o equipamento em cada linha.
 const lista = [...produtos, ...produtosCore, ...produtosCardio].map((p) => ({
@@ -16,7 +17,7 @@ const lista = [...produtos, ...produtosCore, ...produtosCardio].map((p) => ({
     slug: p.slug,
     c: p.dim[0] / 1000,
     l: p.dim[1] / 1000,
-    foto: `/midias/produtos/${p.code}`,
+    foto: fotoUrl(p),
   }));
 // A lista de equipamentos sai pronta no HTML: sem isso ela nascia vazia, o script a enchia e a página
 // "pulava" (CLS), e o navegador gastava a carga criando 150 itens com innerHTML.

@@ -18,7 +18,9 @@ export const gruposCardio = [
   { nome: 'Simulador de escada', slug: 'simulador-de-escada' },
 ];
 /**
- * Códigos Cardio cuja foto já está no R2 (`/midias/produtos/<código>`). Enquanto o código não estiver aqui,
- * o site mostra a miniatura do modelo 3D no lugar da foto, para não exibir imagem quebrada.
+ * Códigos Cardio com foto publicada. As fotos tratadas (produto recortado em fundo branco, 1536 × 1024) estão em
+ * `public/fotos-cardio/<código>.webp` e saem com o próprio site. Quando forem para o R2 (`/midias/produtos/<código>`,
+ * como as do Core e da Premium), basta trocar `fotoCardio` por esse caminho. Código fora do conjunto mostra "Foto em breve".
  */
-export const cardioComFoto = new Set<string>();
+export const cardioComFoto = new Set(produtosCardio.map((p) => p.code));
+export const fotoCardio = (code: string) => `/fotos-cardio/${code}.webp`;
